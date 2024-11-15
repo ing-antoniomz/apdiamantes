@@ -1,0 +1,43 @@
+# Ignorar el archivo .env de configuración de entorno
+.env
+
+# Ignorar directorios de la cache del framework
+/bootstrap/cache/*
+!bootstrap/cache/.gitignore
+
+# Ignorar la carpeta de logs
+/storage/logs/*
+!storage/logs/.gitignore
+
+# Ignorar la carpeta de framework dentro de storage
+/storage/framework/*
+!storage/framework/.gitignore
+!storage/framework/cache
+!storage/framework/sessions
+!storage/framework/testing
+!storage/framework/views
+
+# Ignorar la carpeta de ficheros subidos y generados
+/public/storage
+/storage/app/public
+
+# Ignorar los archivos de Composer y NPM
+/vendor
+/node_modules
+
+# Ignorar archivos de cache y configuraciones de IDEs
+.idea
+*.phpunit.result.cache
+.phpunit.result.cache
+.phpstorm.meta.php
+/.vscode
+
+# Ignorar los archivos de depuración y otros ficheros temporales
+*.log
+*.cache
+*.tmp
+*.temp
+
+# Ignorar configuraciones del sistema operativo y de editores
+.DS_Store
+Thumbs.db
