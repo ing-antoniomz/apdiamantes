@@ -1,0 +1,33 @@
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./resources/assets/core/js/custom/utilities/modals/share-earn.js":
+/*!************************************************************************!*\
+  !*** ./resources/assets/core/js/custom/utilities/modals/share-earn.js ***!
+  \************************************************************************/
+/***/ (() => {
+
+eval("\n\n// Class definition\nvar KTModalShareEarn = function () {\n  // Private functions\n  var handleForm = function handleForm() {\n    var button = document.querySelector('#kt_share_earn_link_copy_button');\n    var input = document.querySelector('#kt_share_earn_link_input');\n    var clipboard = new ClipboardJS(button);\n    if (!clipboard) {\n      return;\n    }\n\n    //  Copy text to clipboard. For more info check the plugin's documentation: https://clipboardjs.com/\n    clipboard.on('success', function (e) {\n      var buttonCaption = button.innerHTML;\n      //Add bgcolor\n      input.classList.add('bg-success');\n      input.classList.add('text-inverse-success');\n      button.innerHTML = 'Copied!';\n      setTimeout(function () {\n        button.innerHTML = buttonCaption;\n\n        // Remove bgcolor\n        input.classList.remove('bg-success');\n        input.classList.remove('text-inverse-success');\n      }, 3000); // 3seconds\n\n      e.clearSelection();\n    });\n  };\n\n  // Public methods\n  return {\n    init: function init() {\n      handleForm();\n    }\n  };\n}();\n\n// On document ready\nKTUtil.onDOMContentLoaded(function () {\n  KTModalShareEarn.init();\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9yZXNvdXJjZXMvYXNzZXRzL2NvcmUvanMvY3VzdG9tL3V0aWxpdGllcy9tb2RhbHMvc2hhcmUtZWFybi5qcyIsIm1hcHBpbmdzIjoiQUFBYTs7QUFFYjtBQUNBLElBQUlBLGdCQUFnQixHQUFHLFlBQVk7RUFDL0I7RUFDQSxJQUFJQyxVQUFVLEdBQUcsU0FBYkEsVUFBVUEsQ0FBQSxFQUFjO0lBQ3hCLElBQUlDLE1BQU0sR0FBR0MsUUFBUSxDQUFDQyxhQUFhLENBQUMsaUNBQWlDLENBQUM7SUFDdEUsSUFBSUMsS0FBSyxHQUFHRixRQUFRLENBQUNDLGFBQWEsQ0FBQywyQkFBMkIsQ0FBQztJQUMvRCxJQUFJRSxTQUFTLEdBQUcsSUFBSUMsV0FBVyxDQUFDTCxNQUFNLENBQUM7SUFFdkMsSUFBSSxDQUFDSSxTQUFTLEVBQUU7TUFDWjtJQUNKOztJQUVBO0lBQ0FBLFNBQVMsQ0FBQ0UsRUFBRSxDQUFDLFNBQVMsRUFBRSxVQUFTQyxDQUFDLEVBQUU7TUFDaEMsSUFBSUMsYUFBYSxHQUFHUixNQUFNLENBQUNTLFNBQVM7TUFDcEM7TUFDQU4sS0FBSyxDQUFDTyxTQUFTLENBQUNDLEdBQUcsQ0FBQyxZQUFZLENBQUM7TUFDakNSLEtBQUssQ0FBQ08sU0FBUyxDQUFDQyxHQUFHLENBQUMsc0JBQXNCLENBQUM7TUFFM0NYLE1BQU0sQ0FBQ1MsU0FBUyxHQUFHLFNBQVM7TUFFNUJHLFVBQVUsQ0FBQyxZQUFXO1FBQ2xCWixNQUFNLENBQUNTLFNBQVMsR0FBR0QsYUFBYTs7UUFFaEM7UUFDQUwsS0FBSyxDQUFDTyxTQUFTLENBQUNHLE1BQU0sQ0FBQyxZQUFZLENBQUM7UUFDcENWLEtBQUssQ0FBQ08sU0FBUyxDQUFDRyxNQUFNLENBQUMsc0JBQXNCLENBQUM7TUFDbEQsQ0FBQyxFQUFFLElBQUksQ0FBQyxDQUFDLENBQUU7O01BRVhOLENBQUMsQ0FBQ08sY0FBYyxDQUFDLENBQUM7SUFDdEIsQ0FBQyxDQUFDO0VBQ04sQ0FBQzs7RUFFRDtFQUNBLE9BQU87SUFDSEMsSUFBSSxFQUFFLFNBQU5BLElBQUlBLENBQUEsRUFBYztNQUNkaEIsVUFBVSxDQUFDLENBQUM7SUFDaEI7RUFDSixDQUFDO0FBQ0wsQ0FBQyxDQUFDLENBQUM7O0FBRUg7QUFDQWlCLE1BQU0sQ0FBQ0Msa0JBQWtCLENBQUMsWUFBVztFQUNqQ25CLGdCQUFnQixDQUFDaUIsSUFBSSxDQUFDLENBQUM7QUFDM0IsQ0FBQyxDQUFDIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vLy4vcmVzb3VyY2VzL2Fzc2V0cy9jb3JlL2pzL2N1c3RvbS91dGlsaXRpZXMvbW9kYWxzL3NoYXJlLWVhcm4uanM/YzUwNyJdLCJzb3VyY2VzQ29udGVudCI6WyJcInVzZSBzdHJpY3RcIjtcblxuLy8gQ2xhc3MgZGVmaW5pdGlvblxudmFyIEtUTW9kYWxTaGFyZUVhcm4gPSBmdW5jdGlvbiAoKSB7XG4gICAgLy8gUHJpdmF0ZSBmdW5jdGlvbnNcbiAgICB2YXIgaGFuZGxlRm9ybSA9IGZ1bmN0aW9uKCkge1xuICAgICAgICB2YXIgYnV0dG9uID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcignI2t0X3NoYXJlX2Vhcm5fbGlua19jb3B5X2J1dHRvbicpO1xuICAgICAgICB2YXIgaW5wdXQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcja3Rfc2hhcmVfZWFybl9saW5rX2lucHV0Jyk7XG4gICAgICAgIHZhciBjbGlwYm9hcmQgPSBuZXcgQ2xpcGJvYXJkSlMoYnV0dG9uKTtcblxuICAgICAgICBpZiAoIWNsaXBib2FyZCkge1xuICAgICAgICAgICAgcmV0dXJuO1xuICAgICAgICB9XG5cbiAgICAgICAgLy8gIENvcHkgdGV4dCB0byBjbGlwYm9hcmQuIEZvciBtb3JlIGluZm8gY2hlY2sgdGhlIHBsdWdpbidzIGRvY3VtZW50YXRpb246IGh0dHBzOi8vY2xpcGJvYXJkanMuY29tL1xuICAgICAgICBjbGlwYm9hcmQub24oJ3N1Y2Nlc3MnLCBmdW5jdGlvbihlKSB7XG4gICAgICAgICAgICB2YXIgYnV0dG9uQ2FwdGlvbiA9IGJ1dHRvbi5pbm5lckhUTUw7XG4gICAgICAgICAgICAvL0FkZCBiZ2NvbG9yXG4gICAgICAgICAgICBpbnB1dC5jbGFzc0xpc3QuYWRkKCdiZy1zdWNjZXNzJyk7XG4gICAgICAgICAgICBpbnB1dC5jbGFzc0xpc3QuYWRkKCd0ZXh0LWludmVyc2Utc3VjY2VzcycpO1xuXG4gICAgICAgICAgICBidXR0b24uaW5uZXJIVE1MID0gJ0NvcGllZCEnO1xuXG4gICAgICAgICAgICBzZXRUaW1lb3V0KGZ1bmN0aW9uKCkge1xuICAgICAgICAgICAgICAgIGJ1dHRvbi5pbm5lckhUTUwgPSBidXR0b25DYXB0aW9uO1xuXG4gICAgICAgICAgICAgICAgLy8gUmVtb3ZlIGJnY29sb3JcbiAgICAgICAgICAgICAgICBpbnB1dC5jbGFzc0xpc3QucmVtb3ZlKCdiZy1zdWNjZXNzJyk7IFxuICAgICAgICAgICAgICAgIGlucHV0LmNsYXNzTGlzdC5yZW1vdmUoJ3RleHQtaW52ZXJzZS1zdWNjZXNzJyk7IFxuICAgICAgICAgICAgfSwgMzAwMCk7ICAvLyAzc2Vjb25kc1xuXG4gICAgICAgICAgICBlLmNsZWFyU2VsZWN0aW9uKCk7XG4gICAgICAgIH0pO1xuICAgIH1cblxuICAgIC8vIFB1YmxpYyBtZXRob2RzXG4gICAgcmV0dXJuIHtcbiAgICAgICAgaW5pdDogZnVuY3Rpb24gKCkge1xuICAgICAgICAgICAgaGFuZGxlRm9ybSgpO1xuICAgICAgICB9XG4gICAgfVxufSgpO1xuXG4vLyBPbiBkb2N1bWVudCByZWFkeVxuS1RVdGlsLm9uRE9NQ29udGVudExvYWRlZChmdW5jdGlvbigpIHtcbiAgICBLVE1vZGFsU2hhcmVFYXJuLmluaXQoKTtcbn0pO1xuIl0sIm5hbWVzIjpbIktUTW9kYWxTaGFyZUVhcm4iLCJoYW5kbGVGb3JtIiwiYnV0dG9uIiwiZG9jdW1lbnQiLCJxdWVyeVNlbGVjdG9yIiwiaW5wdXQiLCJjbGlwYm9hcmQiLCJDbGlwYm9hcmRKUyIsIm9uIiwiZSIsImJ1dHRvbkNhcHRpb24iLCJpbm5lckhUTUwiLCJjbGFzc0xpc3QiLCJhZGQiLCJzZXRUaW1lb3V0IiwicmVtb3ZlIiwiY2xlYXJTZWxlY3Rpb24iLCJpbml0IiwiS1RVdGlsIiwib25ET01Db250ZW50TG9hZGVkIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./resources/assets/core/js/custom/utilities/modals/share-earn.js\n");
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module can't be inlined because the eval-source-map devtool is used.
+/******/ 	var __webpack_exports__ = {};
+/******/ 	__webpack_modules__["./resources/assets/core/js/custom/utilities/modals/share-earn.js"]();
+/******/ 	
+/******/ })()
+;

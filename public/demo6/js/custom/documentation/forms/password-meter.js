@@ -1,0 +1,33 @@
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./resources/assets/core/js/custom/documentation/forms/password-meter.js":
+/*!*******************************************************************************!*\
+  !*** ./resources/assets/core/js/custom/documentation/forms/password-meter.js ***!
+  \*******************************************************************************/
+/***/ (() => {
+
+eval("\n\n// Class definition\nvar KTGeneralPasswordMeterDemos = function () {\n  // Private functions\n  var _showScore = function _showScore() {\n    // Select show score button\n    var showScoreButton = document.getElementById('kt_password_meter_example_show_score');\n\n    // Get password meter instance\n    var passwordMeterElement = document.querySelector(\"#kt_password_meter_example\");\n    var passwordMeter = KTPasswordMeter.getInstance(passwordMeterElement);\n\n    // Handle show score button click\n    showScoreButton.addEventListener('click', function (e) {\n      // Get password score\n      var score = passwordMeter.getScore();\n\n      // Show popup confirmation \n      Swal.fire({\n        text: \"Current Password Score: \" + score,\n        icon: \"success\",\n        buttonsStyling: false,\n        confirmButtonText: \"Ok, got it!\",\n        customClass: {\n          confirmButton: \"btn btn-primary\"\n        }\n      });\n    });\n  };\n  return {\n    // Public Functions\n    init: function init() {\n      _showScore();\n    }\n  };\n}();\n\n// On document ready\nKTUtil.onDOMContentLoaded(function () {\n  KTGeneralPasswordMeterDemos.init();\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9yZXNvdXJjZXMvYXNzZXRzL2NvcmUvanMvY3VzdG9tL2RvY3VtZW50YXRpb24vZm9ybXMvcGFzc3dvcmQtbWV0ZXIuanMiLCJtYXBwaW5ncyI6IkFBQWE7O0FBRWI7QUFDQSxJQUFJQSwyQkFBMkIsR0FBRyxZQUFXO0VBQ3pDO0VBQ0EsSUFBSUMsVUFBVSxHQUFHLFNBQWJBLFVBQVVBLENBQUEsRUFBYztJQUN4QjtJQUNBLElBQU1DLGVBQWUsR0FBR0MsUUFBUSxDQUFDQyxjQUFjLENBQUMsc0NBQXNDLENBQUM7O0lBRXZGO0lBQ0EsSUFBTUMsb0JBQW9CLEdBQUdGLFFBQVEsQ0FBQ0csYUFBYSxDQUFDLDRCQUE0QixDQUFDO0lBQ2pGLElBQU1DLGFBQWEsR0FBR0MsZUFBZSxDQUFDQyxXQUFXLENBQUNKLG9CQUFvQixDQUFDOztJQUV2RTtJQUNBSCxlQUFlLENBQUNRLGdCQUFnQixDQUFDLE9BQU8sRUFBRSxVQUFBQyxDQUFDLEVBQUk7TUFDM0M7TUFDQSxJQUFNQyxLQUFLLEdBQUdMLGFBQWEsQ0FBQ00sUUFBUSxDQUFDLENBQUM7O01BRXRDO01BQ0FDLElBQUksQ0FBQ0MsSUFBSSxDQUFDO1FBQ05DLElBQUksRUFBRSwwQkFBMEIsR0FBR0osS0FBSztRQUN4Q0ssSUFBSSxFQUFFLFNBQVM7UUFDZkMsY0FBYyxFQUFFLEtBQUs7UUFDckJDLGlCQUFpQixFQUFFLGFBQWE7UUFDaENDLFdBQVcsRUFBRTtVQUNUQyxhQUFhLEVBQUU7UUFDbkI7TUFDSixDQUFDLENBQUM7SUFDTixDQUFDLENBQUM7RUFDTixDQUFDO0VBRUQsT0FBTztJQUNIO0lBQ0FDLElBQUksRUFBRSxTQUFOQSxJQUFJQSxDQUFBLEVBQWE7TUFDYnJCLFVBQVUsQ0FBQyxDQUFDO0lBQ2hCO0VBQ0osQ0FBQztBQUNMLENBQUMsQ0FBQyxDQUFDOztBQUVIO0FBQ0FzQixNQUFNLENBQUNDLGtCQUFrQixDQUFDLFlBQVc7RUFDakN4QiwyQkFBMkIsQ0FBQ3NCLElBQUksQ0FBQyxDQUFDO0FBQ3RDLENBQUMsQ0FBQyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3Jlc291cmNlcy9hc3NldHMvY29yZS9qcy9jdXN0b20vZG9jdW1lbnRhdGlvbi9mb3Jtcy9wYXNzd29yZC1tZXRlci5qcz82YjM2Il0sInNvdXJjZXNDb250ZW50IjpbIlwidXNlIHN0cmljdFwiO1xuXG4vLyBDbGFzcyBkZWZpbml0aW9uXG52YXIgS1RHZW5lcmFsUGFzc3dvcmRNZXRlckRlbW9zID0gZnVuY3Rpb24oKSB7XG4gICAgLy8gUHJpdmF0ZSBmdW5jdGlvbnNcbiAgICB2YXIgX3Nob3dTY29yZSA9IGZ1bmN0aW9uKCkge1xuICAgICAgICAvLyBTZWxlY3Qgc2hvdyBzY29yZSBidXR0b25cbiAgICAgICAgY29uc3Qgc2hvd1Njb3JlQnV0dG9uID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2t0X3Bhc3N3b3JkX21ldGVyX2V4YW1wbGVfc2hvd19zY29yZScpOyAgXG5cbiAgICAgICAgLy8gR2V0IHBhc3N3b3JkIG1ldGVyIGluc3RhbmNlXG4gICAgICAgIGNvbnN0IHBhc3N3b3JkTWV0ZXJFbGVtZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIiNrdF9wYXNzd29yZF9tZXRlcl9leGFtcGxlXCIpO1xuICAgICAgICBjb25zdCBwYXNzd29yZE1ldGVyID0gS1RQYXNzd29yZE1ldGVyLmdldEluc3RhbmNlKHBhc3N3b3JkTWV0ZXJFbGVtZW50KTtcblxuICAgICAgICAvLyBIYW5kbGUgc2hvdyBzY29yZSBidXR0b24gY2xpY2tcbiAgICAgICAgc2hvd1Njb3JlQnV0dG9uLmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJywgZSA9PiB7XG4gICAgICAgICAgICAvLyBHZXQgcGFzc3dvcmQgc2NvcmVcbiAgICAgICAgICAgIGNvbnN0IHNjb3JlID0gcGFzc3dvcmRNZXRlci5nZXRTY29yZSgpO1xuXG4gICAgICAgICAgICAvLyBTaG93IHBvcHVwIGNvbmZpcm1hdGlvbiBcbiAgICAgICAgICAgIFN3YWwuZmlyZSh7XG4gICAgICAgICAgICAgICAgdGV4dDogXCJDdXJyZW50IFBhc3N3b3JkIFNjb3JlOiBcIiArIHNjb3JlLFxuICAgICAgICAgICAgICAgIGljb246IFwic3VjY2Vzc1wiLFxuICAgICAgICAgICAgICAgIGJ1dHRvbnNTdHlsaW5nOiBmYWxzZSxcbiAgICAgICAgICAgICAgICBjb25maXJtQnV0dG9uVGV4dDogXCJPaywgZ290IGl0IVwiLFxuICAgICAgICAgICAgICAgIGN1c3RvbUNsYXNzOiB7XG4gICAgICAgICAgICAgICAgICAgIGNvbmZpcm1CdXR0b246IFwiYnRuIGJ0bi1wcmltYXJ5XCJcbiAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICB9KTtcbiAgICAgICAgfSk7XG4gICAgfVxuXG4gICAgcmV0dXJuIHtcbiAgICAgICAgLy8gUHVibGljIEZ1bmN0aW9uc1xuICAgICAgICBpbml0OiBmdW5jdGlvbigpIHtcbiAgICAgICAgICAgIF9zaG93U2NvcmUoKTtcbiAgICAgICAgfVxuICAgIH07XG59KCk7XG5cbi8vIE9uIGRvY3VtZW50IHJlYWR5XG5LVFV0aWwub25ET01Db250ZW50TG9hZGVkKGZ1bmN0aW9uKCkge1xuICAgIEtUR2VuZXJhbFBhc3N3b3JkTWV0ZXJEZW1vcy5pbml0KCk7XG59KTtcbiJdLCJuYW1lcyI6WyJLVEdlbmVyYWxQYXNzd29yZE1ldGVyRGVtb3MiLCJfc2hvd1Njb3JlIiwic2hvd1Njb3JlQnV0dG9uIiwiZG9jdW1lbnQiLCJnZXRFbGVtZW50QnlJZCIsInBhc3N3b3JkTWV0ZXJFbGVtZW50IiwicXVlcnlTZWxlY3RvciIsInBhc3N3b3JkTWV0ZXIiLCJLVFBhc3N3b3JkTWV0ZXIiLCJnZXRJbnN0YW5jZSIsImFkZEV2ZW50TGlzdGVuZXIiLCJlIiwic2NvcmUiLCJnZXRTY29yZSIsIlN3YWwiLCJmaXJlIiwidGV4dCIsImljb24iLCJidXR0b25zU3R5bGluZyIsImNvbmZpcm1CdXR0b25UZXh0IiwiY3VzdG9tQ2xhc3MiLCJjb25maXJtQnV0dG9uIiwiaW5pdCIsIktUVXRpbCIsIm9uRE9NQ29udGVudExvYWRlZCJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./resources/assets/core/js/custom/documentation/forms/password-meter.js\n");
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module can't be inlined because the eval-source-map devtool is used.
+/******/ 	var __webpack_exports__ = {};
+/******/ 	__webpack_modules__["./resources/assets/core/js/custom/documentation/forms/password-meter.js"]();
+/******/ 	
+/******/ })()
+;
