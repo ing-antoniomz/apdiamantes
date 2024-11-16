@@ -1,3 +1,4 @@
+![Logo](resources/assets/apdiamantes/media/logo.svg)
 # APDiamantes
 
 Plataforma para que los empleados de apdiamantes puedan ver el progreso de sus finanzas asi como de los usuarios asignados a sus grupos.
@@ -15,26 +16,31 @@ Plataforma para que los empleados de apdiamantes puedan ver el progreso de sus f
 
 ## Desplegar
 
-1. Instala las dependencias de `Composer`.
-        ```bash
-        composer install
-        ```
-2. Instala las dependencias de  `NPM`.
-        ```bash
-        npm install
-        ```
-3. Compila los assets (sass, js, media) al folder public.
-        ```bash
-        npm run dev --demo3
-        ```
-4. Crea la base de datos y pon los datos en el archivo .env
-        `DB_DATABASE`
-        `DB_USERNAME`
-        `DB_PASSWORD`
-5. Corre las migraciones y los seeders.
-        ```bash
-        php artisan migrate:fresh --seed
-        ```
+Instala las dependencias de `Composer`.
+```bash
+composer install
+```
+
+Instala las dependencias de  `NPM`.
+```bash
+npm install
+```
+
+Compila los assets (sass, js, media) al folder public.
+```bash
+npm run dev --demo3
+```
+
+Crea la base de datos y pon los datos en el archivo .env
+
+`DB_DATABASE`
+`DB_USERNAME`
+`DB_PASSWORD`
+
+Corre las migraciones y los seeders.
+```bash
+php artisan migrate:fresh --seed
+```
 
 ### Colores
 
