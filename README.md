@@ -1,4 +1,4 @@
-![Logo](resources/assets/apdiamantes/media/logo.svg)
+<img src="resources/assets/apdiamantes/media/logo.svg" alt="Logo" style="max-height: 400px;">
 # APDiamantes
 
 Plataforma para que los empleados de apdiamantes puedan ver el progreso de sus finanzas asi como de los usuarios asignados a sus grupos.
