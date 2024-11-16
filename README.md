@@ -1,88 +1,61 @@
-# Metronic - Bootstrap 5 HTML, React, Angular, VueJS & Laravel Admin Dashboard Theme
+# APDiamantes
 
-- For a quick start please check [Online documentation page](//preview.keenthemes.com/metronic8/laravel/documentation/getting-started/build)
+Plataforma para que los empleados de apdiamantes puedan ver el progreso de sus finanzas asi como de los usuarios asignados a sus grupos.
 
+## Tecnologias
 
-- All demos assets are included in the package. To switch the demo please check [Switch demo documentation](//https://preview.keenthemes.com/metronic8/laravel/documentation/getting-started/multi-demo/build)
+- NPM  => 9.0
+- NODE  => 18.20.4
+- COMPOSER  => 2.4.0
+- PHP  => 8.1.30
+- APACHE  => 2.4.62
+- LARAVEL  => 10.48.23
+- METRONIC  => 8.1.4 - demo3
+- BOOTSTRAP  => 5.2.0
 
+## Desplegar
 
-- For any theme related questions please contact our [Theme Support](//keenthemes.com/support/)
-
-
-- Using Metronic in a new project or for a new client? Purchase a new license https://1.envato.market/EA4JP or watch https://youtu.be/HJ3RNhoI24A to find out more information about licenses.
-
-
-- Stay tuned for updates via [Twitter](//www.twitter.com/keenthemes) and [Instagram](//www.instagram.com/keenthemes) and
-  check our marketplace for more amazing products: [Keenthemes Marketplace](//keenthemes.com/)
-
-
-Happy coding with Metronic!
-
-
-
-### Laravel Quick Start
-
-**NPM 8.19.4
-**NODE 16.20.2
-**PHP 8.1.30
-**APACHE 2.4.62
-
-1. Download the latest theme source from the Marketplace.
-
-
-2. Download and install `Node.js` from Nodejs. The suggested version to install is `14.16.x LTS`.
-
-
-3. Start a command prompt window or terminal and change directory to [unpacked path]:
-
-
-4. Install the latest `NPM`:
-
-        npm install --global npm@latest
-
-
-5. To install `Composer` globally, download the installer from https://getcomposer.org/download/ Verify that Composer in successfully installed, and version of installed Composer will appear:
-
-        composer --version
-
-
-6. Install `Composer` dependencies.
-
+1. Instala las dependencias de `Composer`.
+        ```bash
         composer install
-
-
-7. Install `NPM` dependencies.
-
+        ```
+2. Instala las dependencias de  `NPM`.
+        ```bash
         npm install
-
-
-8. The below command will compile all the assets(sass, js, media) to public folder:
-
-        npm run dev
-
-
-9. Copy `.env.example` file and create duplicate. Use `cp` command for Linux or Max user.
-
-        cp .env.example .env
-
-    If you are using `Windows`, use `copy` instead of `cp`.
-
-        copy .env.example .env
-
-
-10. Create a table in MySQL database and fill the database details `DB_DATABASE` in `.env` file.
-
-
-12. The below command will create tables into database using Laravel migration and seeder.
-
+        ```
+3. Compila los assets (sass, js, media) al folder public.
+        ```bash
+        npm run dev --demo3
+        ```
+4. Crea la base de datos y pon los datos en el archivo .env
+        `DB_DATABASE`
+        `DB_USERNAME`
+        `DB_PASSWORD`
+5. Corre las migraciones y los seeders.
+        ```bash
         php artisan migrate:fresh --seed
+        ```
+
+### Colores
+
+| Color             | Hex                                                                |
+| ----------------- | ------------------------------------------------------------------ |
+| Amarillo | ![#DAE609](https://via.placeholder.com/10/DAE609?text=+) #DAE609 |
+| Rosa | ![#F716BB](https://via.placeholder.com/10/F716BB?text=+) #F716BB |
+| Gris | ![#AFACAC](https://via.placeholder.com/10/AFACAC?text=+) #AFACAC |
+| Azul | ![#0A1AF7](https://via.placeholder.com/10/0A1AF7?text=+) #0A1AF7 |
 
 
-13. Generate your application encryption key:
+### Metronic - Bootstrap 5 HTML, React, Angular, VueJS & Laravel Admin Dashboard Theme
 
-        php artisan key:generate
+- [Documentacion Metronic-Laravel](https://preview.keenthemes.com/laravel/metronic/docs/index)
 
+- [Documentacion Metronic-Html](https://preview.keenthemes.com/html/metronic/docs/index)
 
-14. Start the localhost server:
+### Laravel - The PHP Framework for Web Artisans
 
-        php artisan serve
+- [Documentacion Laravel](https://laravel.com/docs/10.x)
+
+### Bootstrap - Build fast, responsive sites with Bootstrap
+
+- [Documentacion Bootstrap](https://getbootstrap.com/docs/5.2/getting-started/introduction/)
