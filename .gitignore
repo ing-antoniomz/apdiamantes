@@ -23,6 +23,7 @@
 
 # Ignorar la carpeta de srchivos compilados del demo
 /public/demo3
+/piblic/apdiamantes
 
 # Ignorar los archivos de Composer y NPM
 /vendor

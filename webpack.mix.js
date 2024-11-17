@@ -18,6 +18,9 @@ const fs = require('fs');
  |
  */
 
+ //imagenes apdiamantes
+ mix.copyDirectory('resources/apdiamantes', 'public/apdiamantes');
+
 // arguments/params from the line command
 const args = getParameters();
 
