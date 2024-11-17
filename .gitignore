@@ -21,6 +21,9 @@
 /public/storage
 /storage/app/public
 
+# Ignorar la carpeta de srchivos compilados del demo
+/public/demo3
+
 # Ignorar los archivos de Composer y NPM
 /vendor
 /node_modules
