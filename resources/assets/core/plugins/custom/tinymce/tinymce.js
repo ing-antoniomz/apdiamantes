@@ -3,4 +3,4 @@
 require('tinymce/tinymce.js');
 require('tinymce/icons/default/icons.js');
 require('tinymce/themes/silver/theme.js');
-require('tinymce/themes/mobile/theme.js');
+//require('tinymce/themes/mobile/theme.js'); ya no encuentro el tema en el node modules
