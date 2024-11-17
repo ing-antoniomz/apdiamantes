@@ -2,7 +2,7 @@
 return array(
     // Assets
     'assets' => array(
-        'favicon' => 'media/logos/logo_negro.ico',
+        'favicon' => '../apdiamantes/media/logo_negro.ico',
         'fonts'   => array(
             'google' => array(
                 'Inter:300,400,500,600,700',
