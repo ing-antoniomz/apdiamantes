@@ -1,4 +1,4 @@
-<img src="resources/assets/apdiamantes/media/logo_negro.svg" alt="Logo" style="width: 30%;">
+<img src="resources/assets/apdiamantes/media/logo_negro.svg" alt="Logo" style="width: 30%; text-align: center;">
 
 # APDiamantes
 
