@@ -1,4 +1,7 @@
-<img src="resources/assets/apdiamantes/media/logo_negro.svg" alt="Logo" style="width: 200px;"> <img src="resources/assets/apdiamantes/media/apdiamantes-dark.svg" alt="Logo" style="max-height: 200px;">
+<img src="resources/assets/apdiamantes/media/logo_negro.svg" alt="Logo" style="display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;">
 
 # APDiamantes
 
