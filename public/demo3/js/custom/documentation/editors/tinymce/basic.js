@@ -1,1 +1,0 @@
-(()=>{"use strict";var t={init:function(){var t;t={selector:"#kt_docs_tinymce_basic",height:"480"},"dark"===KTThemeMode.getMode()&&(t.skin="oxide-dark",t.content_css="dark"),tinymce.init(t)}};KTUtil.onDOMContentLoaded((function(){t.init()}))})();

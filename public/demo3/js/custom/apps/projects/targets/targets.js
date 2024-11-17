@@ -1,1 +1,0 @@
-(()=>{"use strict";var t={init:function(){var t;(t=document.getElementById("kt_profile_overview_table")).querySelectorAll("tbody tr").forEach((function(t){var e=t.querySelectorAll("td"),r=moment(e[1].innerHTML,"MMM D, YYYY").format();e[1].setAttribute("data-order",r)})),$(t).DataTable({info:!1,order:[],paging:!1})}};KTUtil.onDOMContentLoaded((function(){t.init()}))})();

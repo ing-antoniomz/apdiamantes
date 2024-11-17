@@ -1,1 +1,0 @@
-(()=>{"use strict";var t={init:function(){DecoupledEditor.create(document.querySelector("#kt_docs_ckeditor_document")).then((function(t){document.querySelector("#kt_docs_ckeditor_document_toolbar").appendChild(t.ui.view.toolbar.element)})).catch((function(t){console.error(t)}))}};KTUtil.onDOMContentLoaded((function(){t.init()}))})();
