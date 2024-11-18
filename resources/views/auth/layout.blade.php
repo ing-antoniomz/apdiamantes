@@ -19,9 +19,9 @@
                 <div class="d-flex flex-center flex-wrap px-5">
                     <!--begin::Links-->
                     <div class="d-flex fw-semibold text-primary fs-base">
-                        <a href="{{ $theme->getOption("general", "about") }}" class="px-5">{{ __('About') }}</a>
-                        <a href="{{ $theme->getOption('general', 'contact') }}" class="px-5">{{ __('Contact Us') }}</a>
-                        <a href="{{ $theme->getOption('product', 'purchase') }}" class="px-5">{{ __('Purchase') }}</a>
+                        <a href="{{ $theme->getOption(" general", "about" ) }}" class="px-5 text-white">{{ __('About') }}</a>
+                        <a href="{{ $theme->getOption('general', 'contact') }}" class="px-5 text-white">{{ __('Contact Us') }}</a>
+                        <a href="{{ $theme->getOption('product', 'purchase') }}" class="px-5 text-white">{{ __('Purchase') }}</a>
                     </div>
                     <!--end::Links-->
                 </div>
@@ -29,26 +29,22 @@
             </div>
             <!--end::Body-->
             <!--begin::Aside-->
-            <div class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2" style="background-image: url({{ asset(theme()->getMediaUrlPath() . 'misc/auth-bg.png') }})">
+            <div class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2"
+                style="background-image: url({{ asset('apdiamantes/media/fondo_1.jpg') }})">
                 <!--begin::Content-->
-                <div class="d-flex flex-column flex-center py-15 px-5 px-md-15 w-100">
+                <div class="d-flex flex-column pt-5 pt-lg-10 pb-20 pb-lg-15 px-5 px-md-15 w-100">
                     <!--begin::Logo-->
-                    <a href="/" class="mb-12">
-                        <img alt="Logo" src="{{ asset(theme()->getMediaUrlPath() . 'logos/custom-1.png') }}" class="h-75px">
-                    </a>
+                    <img alt="Logo" src="{{ asset('apdiamantes/media/logo_blanco_2.png') }}"
+                        class="mx-auto mb-12 mb-xl-0 h-50px h-lg-150px h-xl-200px">
                     <!--end::Logo-->
                     <!--begin::Image-->
-                    <img class="mx-auto w-275px w-md-50 w-xl-500px mb-10 mb-lg-20" src="{{ asset(theme()->getMediaUrlPath() . 'misc/auth-screens.png') }}" alt="">
+                    <img class="mx-auto w-275px w-md-300px w-lg-400px w-xl-500px mb-10 mb-lg-20 d-block d-lg-none"
+                        src="{{ asset('apdiamantes/media/apdiamantes-dark.svg') }}" alt="">
                     <!--end::Image-->
-                    <!--begin::Title-->
-                    <h1 class="text-white fs-2qx fw-bolder text-center mb-7">Fast, Efficient and Productive</h1>
-                    <!--end::Title-->
                     <!--begin::Text-->
-                    <div class="text-white fs-base text-center">In this kind of post,
-                        <a href="#" class="opacity-75-hover text-warning fw-bold me-1">the blogger</a>introduces a person they’ve interviewed
-                        <br>and provides some background information about
-                        <a href="#" class="opacity-75-hover text-warning fw-bold me-1">the interviewee</a>and their
-                        <br>work following this is a transcript of the interview.</div>
+                    <div class="text-white fw-bolder fs-base fs-3 position-absolute bottom-0 start-75 translate-middle-x pb-1 pb-xl-10 text-center d-none d-lg-block user-select-none">
+                        <p>Inserte un frase al respecto de la empresa o sbre los valores que representa.</p>
+                    </div>
                     <!--end::Text-->
                 </div>
                 <!--end::Content-->

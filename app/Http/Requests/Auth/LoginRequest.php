@@ -90,4 +90,39 @@ class LoginRequest extends FormRequest
     {
         return Str::lower($this->input('email')).'|'.$this->ip();
     }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'email' => __('E-Mail'),
+            'password' => __('Password'),
+        ];
+    }
+
+    /**
+     * Handle a failed validation attempt.
+     *
+     * @param  \Illuminate\Contracts\Validation\Validator  $validator
+     * @return void
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        $messages = $validator->errors()->all();
+        $message = array_shift($messages);
+        if ($count = count($messages)) {
+            $pluralized = $count === 1 ? __('error') : __('errors');
+            $message .= ' ' . $validator->getTranslator()->get('(and :count more :pluralized)', [
+                'count' => $count,
+                'pluralized' => $pluralized,
+            ]);
+        }
+        throw new ValidationException($validator, response()->json(['message' => $message], 422));
+    }
 }
