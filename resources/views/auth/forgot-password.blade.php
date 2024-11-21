@@ -18,12 +18,12 @@
         <!--begin::Input group=-->
         <div class="fv-row mb-8 fv-plugins-icon-container">
             <!--begin::Email-->
-            <input type="text" placeholder="{{ __('E-Mail') }}" id="email" name="email" autocomplete="off" class="form-control bg-transparent">
+            <input type="text" placeholder="{{ __('E-Mail') }}" id="email" name="email" autocomplete="off" class="form-control bg-transparent" maxlength="60" required>
             <!--end::Email-->
         </div>
         <!--begin::Actions-->
         <div class="d-flex flex-wrap justify-content-center pb-lg-0">
-            <button type="button" id="kt_password_reset_submit" class="btn btn-bg-dark btn-active-secondary btn-active-color-white btn-color-gray-100 me-4">
+            <button type="submit" id="kt_password_reset_submit" class="btn btn-bg-dark btn-active-secondary btn-active-color-white btn-color-gray-100 me-4">
                 @include('partials.general._button-indicator')
             </button>
             <a href="{{ theme()->getPageUrl('login') }}" class="btn btn-bg-dark btn-active-light-danger btn-active-color-white btn-color-gray-100">{{ __('Cancel') }}</a>
