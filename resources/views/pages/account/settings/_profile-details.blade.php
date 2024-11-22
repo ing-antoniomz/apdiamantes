@@ -76,14 +76,20 @@
                         <!--begin::Row-->
                         <div class="row">
                             <!--begin::Col-->
-                            <div class="col-lg-6 fv-row">
-                                <input type="text" name="first_name" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="First name" value="{{ old('first_name', auth()->user()->first_name ?? '') }}"/>
+                            <div class="col-lg-4 fv-row">
+                                <input type="text" name="nombre" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Nombre" value="{{ old('nombre', auth()->user()->nombre ?? '') }}"/>
                             </div>
                             <!--end::Col-->
 
                             <!--begin::Col-->
-                            <div class="col-lg-6 fv-row">
-                                <input type="text" name="last_name" class="form-control form-control-lg form-control-solid" placeholder="Last name" value="{{ old('last_name', auth()->user()->last_name ?? '') }}"/>
+                            <div class="col-lg-4 fv-row">
+                                <input type="text" name="apellido_paterno" class="form-control form-control-lg form-control-solid" placeholder="Apellido Paterno" value="{{ old('apellido_paterno', auth()->user()->apellido_paterno ?? '') }}"/>
+                            </div>
+
+                            <!--begin::Col-->
+                            <div class="col-lg-4 fv-row">
+                                <input type="text" name="apellido_materno" class="form-control form-control-lg form-control-solid"
+                                    placeholder="Apellido Materno" value="{{ old('apellido_materno', auth()->user()->apellido_materno ?? '') }}" />
                             </div>
                             <!--end::Col-->
                         </div>

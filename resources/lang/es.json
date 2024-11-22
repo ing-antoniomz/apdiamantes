@@ -41,5 +41,6 @@
     "errors": "errores",
     "(and :count more :pluralized)": "(y :count :pluralized más)",
     "Enter your email to reset your password.": "Ingresa tu correo para restaurar tu contraseña.",
+    "Full Name": "Nombre Completo",
     "E-Mail": "Correo electrónico"
 }

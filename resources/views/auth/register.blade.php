@@ -45,13 +45,13 @@
         <div class="row fv-row mb-7">
             <!--begin::Col-->
             <div class="col-xl-6">
-                <input class="form-control form-control-lg form-control-solid" type="text" name="first_name" autocomplete="off" value="{{ old('first_name') }}" placeholder="First Name"/>
+                <input class="form-control form-control-lg form-control-solid" type="text" name="nombre" autocomplete="off" value="{{ old('nombre') }}" placeholder="Nombre"/>
             </div>
             <!--end::Col-->
 
             <!--begin::Col-->
             <div class="col-xl-6">
-                <input class="form-control form-control-lg form-control-solid" type="text" name="last_name" autocomplete="off" value="{{ old('last_name') }}" placeholder="Last Name"/>
+                <input class="form-control form-control-lg form-control-solid" type="text" name="apellido_paterno" autocomplete="off" value="{{ old('apellido_paterno') }}" placeholder="Apellido Paterno"/>
             </div>
             <!--end::Col-->
         </div>

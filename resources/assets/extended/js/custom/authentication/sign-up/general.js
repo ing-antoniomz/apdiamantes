@@ -15,17 +15,24 @@ var KTSignupGeneral = function () {
             form,
             {
                 fields: {
-                    'first_name': {
+                    'nombre': {
                         validators: {
                             notEmpty: {
                                 message: 'First Name is required'
                             }
                         }
                     },
-                    'last_name': {
+                    'apellido_paterno': {
                         validators: {
                             notEmpty: {
-                                message: 'Last Name is required'
+                                message: 'Apellido Paterno is required'
+                            }
+                        }
+                    },
+                    'apellido_materno': {
+                        validators: {
+                            notEmpty: {
+                                message: 'Apellido Materno is required'
                             }
                         }
                     },

@@ -21,8 +21,10 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'first_name',
-        'last_name',
+        'user',
+        'nombre',
+        'apellido_paterno',
+        'apellido_materno',
         'email',
         'api_token',
         'password',
@@ -58,13 +60,13 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * Get a fullname combination of first_name and last_name
+     * Get a fullname combination of nombre and apellido_paterno and apellido_materno
      *
      * @return string
      */
     public function getNameAttribute()
     {
-        return "{$this->first_name} {$this->last_name}";
+        return "{$this->nombre} {$this->apellido_paterno} {$this->apellido_materno}";
     }
 
     /**

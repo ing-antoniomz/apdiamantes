@@ -36,16 +36,17 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name'  => 'required|string|max:255',
+            'nombre' => 'required|string|max:255',
+            'apellido_paterno'  => 'required|string|max:255',
+            'apellido_materno'  => 'required|string|max:255',
             'email'      => 'required|string|email|max:255|unique:users',
             'password'   => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $user = User::create([
-            'first_name' => $request->first_name,
-            'last_name'  => $request->last_name,
-            'email'      => $request->email,
+            'nombre' => $request->nombre,
+            'apellido_paterno'  => $request->apellido_paterno,
+            'apellido_materno'  => $request->apellido_materno,
             'password'   => Hash::make($request->password),
         ]);
 
@@ -69,16 +70,18 @@ class RegisteredUserController extends Controller
     public function apiStore(Request $request)
     {
         $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name'  => 'required|string|max:255',
+            'nombre' => 'required|string|max:255',
+            'apellido_paterno'  => 'required|string|max:255',
+            'apellido_materno'  => 'required|string|max:255',
             'email'      => 'required|string|email|max:255|unique:users',
             'password'   => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $token = Str::random(60);
         $user = User::create([
-            'first_name' => $request->first_name,
-            'last_name'  => $request->last_name,
+            'nombre' => $request->nombre,
+            'apellido_paterno'  => $request->apellido_paterno,
+            'apellido_materno'  => $request->apellido_materno,
             'email'      => $request->email,
             'password'   => Hash::make($request->password),
             'api_token' => hash('sha256', $token),

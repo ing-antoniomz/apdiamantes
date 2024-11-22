@@ -60,8 +60,9 @@ class SocialiteLoginController extends Controller
 
         if (!$user) {
             $user = User::create([
-                'first_name' => $name[0] ?? '',
-                'last_name'  => $name[1] ?? '',
+                'nombre' => $name[0] ?? '',
+                'apellido_paterno'  => $name[1] ?? '',
+                'apellido_materno'  => $name[2] ?? '',
                 'email'      => $social_info->email,
                 'password'   => Hash::make($social_info->id),
             ]);

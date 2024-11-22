@@ -37,8 +37,9 @@ class SettingsController extends Controller
     {
         // save user name
         $validated = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name'  => 'required|string|max:255',
+            'nombre' => 'required|string|max:255',
+            'apellido_paterno'  => 'required|string|max:255',
+            'apellido_materno'  => 'required|string|max:255',
         ]);
 
         auth()->user()->update($validated);

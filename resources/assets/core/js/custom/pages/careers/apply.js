@@ -31,17 +31,24 @@ var KTCareersApply = function () {
 			form,
 			{
 				fields: {
-					'first_name': {
+					'nombre': {
 						validators: {
 							notEmpty: {
 								message: 'First name is required'
 							}
 						}
 					},
-					'last_name': {
+					'apellido_paterno': {
 						validators: {
 							notEmpty: {
-								message: 'Last name is required'
+								message: 'Apellido Paterno is required'
+							}
+						}
+					},
+					'apellido_materno': {
+						validators: {
+							notEmpty: {
+								message: 'Apellido Materno is required'
 							}
 						}
 					},
@@ -114,7 +121,7 @@ var KTCareersApply = function () {
 					if (status == 'Valid') {
 						submitButton.setAttribute('data-kt-indicator', 'on');
 
-						// Disable button to avoid multiple click 
+						// Disable button to avoid multiple click
 						submitButton.disabled = true;
 
 						setTimeout(function() {
@@ -122,7 +129,7 @@ var KTCareersApply = function () {
 
 							// Enable button
 							submitButton.disabled = false;
-							
+
 							Swal.fire({
 								text: "Form has been successfully submitted!",
 								icon: "success",
@@ -138,7 +145,7 @@ var KTCareersApply = function () {
 							});
 
 							//form.submit(); // Submit form
-						}, 2000);   						
+						}, 2000);
 					} else {
 						// Scroll top
 

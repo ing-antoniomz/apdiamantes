@@ -17,9 +17,15 @@ class UsersSeeder extends Seeder
      */
     public function run(Generator $faker)
     {
+        $nombre = $faker->firstName;
+        $apellido_paterno = $faker->lastName;
+        $apellido_materno = $faker->lastName;
+        $user = strtolower(substr($nombre, 0, 1) . substr($apellido_paterno, 0, 5));
         $demoUser = User::create([
-            'first_name'        => $faker->firstName,
-            'last_name'         => $faker->lastName,
+            'user'        => $user,
+            'nombre'        => $nombre,
+            'apellido_paterno'         => $apellido_paterno,
+            'apellido_materno'         => $apellido_materno,
             'email'             => 'demo@demo.com',
             'password'          => Hash::make('demo'),
             'email_verified_at' => now(),
@@ -28,9 +34,15 @@ class UsersSeeder extends Seeder
 
         $this->addDummyInfo($faker, $demoUser);
 
+        $nombre = $faker->firstName;
+        $apellido_paterno = $faker->lastName;
+        $apellido_materno = $faker->lastName;
+        $user = strtolower(substr($nombre, 0, 1) . substr($apellido_paterno, 0, 5));
         $demoUser2 = User::create([
-            'first_name'        => $faker->firstName,
-            'last_name'         => $faker->lastName,
+            'user'        => $user,
+            'nombre'        => $nombre,
+            'apellido_paterno'         => $apellido_paterno,
+            'apellido_materno'         => $apellido_materno,
             'email'             => 'admin@demo.com',
             'password'          => Hash::make('demo'),
             'email_verified_at' => now(),
@@ -39,9 +51,9 @@ class UsersSeeder extends Seeder
 
         $this->addDummyInfo($faker, $demoUser2);
 
-        User::factory(100)->create()->each(function (User $user) use ($faker) {
+        /* User::factory(2)->create()->each(function (User $user) use ($faker) {
             $this->addDummyInfo($faker, $user);
-        });
+        }); */
     }
 
     private function addDummyInfo(Generator $faker, User $user)
