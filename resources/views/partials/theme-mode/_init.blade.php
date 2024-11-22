@@ -1,6 +1,6 @@
 <!--begin::Theme mode setup on page load-->
 <script>if (document.documentElement) {
-        const defaultThemeMode = "system";
+        const defaultThemeMode = "dark";
         const name = document.body.getAttribute("data-kt-name");
         let themeMode = localStorage.getItem("kt_" + (name !== null ? name + "_" : "") + "theme_mode_value");
         if (themeMode === null) {
