@@ -24,7 +24,6 @@ class SettingsController extends Controller
         // get the default inner page
         return view('pages.account.settings.settings', compact('info'));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -36,47 +35,36 @@ class SettingsController extends Controller
     public function update(SettingsInfoRequest $request)
     {
         // save user name
-        $validated = $request->validate([
-            'nombre' => 'required|string|max:255',
-            'apellido_paterno'  => 'required|string|max:255',
-            'apellido_materno'  => 'required|string|max:255',
-        ]);
-
+        $validated = $request->validated();
         auth()->user()->update($validated);
-
         // save on user info
         $info = UserInfo::where('user_id', auth()->user()->id)->first();
-
         if ($info === null) {
             // create new model
             $info = new UserInfo();
         }
-
         // attach this info to the current user
         $info->user()->associate(auth()->user());
-
-        foreach ($request->only(array_keys($request->rules())) as $key => $value) {
+        foreach ($request->safe()->except(['nombre','apellido_paterno', 'apellido_materno']) as $key => $value) {
             if (is_array($value)) {
                 $value = serialize($value);
             }
             $info->$key = $value;
         }
-
         // include to save avatar
         if ($avatar = $this->upload()) {
             $info->avatar = $avatar;
         }
-
         if ($request->boolean('avatar_remove')) {
             Storage::delete($info->avatar);
             $info->avatar = null;
         }
-
         $info->save();
-
+        if ($request->expectsJson()) {
+            return response()->json(['message' => __('Personal Information Updated')]);
+        }
         return redirect()->intended('account/settings');
     }
-
     /**
      * Function for upload avatar image
      *
@@ -86,15 +74,13 @@ class SettingsController extends Controller
      *
      * @return false|string|null
      */
-    public function upload($folder = 'images', $key = 'avatar', $validation = 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|sometimes')
+    public function upload($folder = 'images', $key = 'avatar', $validation = 'image|mimes:jpeg,png,jpg|max:2048|sometimes')
     {
         request()->validate([$key => $validation]);
-
         $file = null;
         if (request()->hasFile($key)) {
             $file = Storage::disk('public')->putFile($folder, request()->file($key), 'public');
         }
-
         return $file;
     }
 
@@ -105,17 +91,10 @@ class SettingsController extends Controller
      */
     public function changeEmail(SettingsEmailRequest $request)
     {
-        // prevent change email for demo account
-        if ($request->input('current_email') === 'demo@demo.com') {
-            return redirect()->intended('account/settings');
-        }
-
         auth()->user()->update(['email' => $request->input('email')]);
-
         if ($request->expectsJson()) {
-            return response()->json($request->all());
+            return response()->json(['message' => __('E-Mail Updated')]);
         }
-
         return redirect()->intended('account/settings');
     }
 
@@ -126,17 +105,10 @@ class SettingsController extends Controller
      */
     public function changePassword(SettingsPasswordRequest $request)
     {
-        // prevent change password for demo account
-        if ($request->input('current_email') === 'demo@demo.com') {
-            return redirect()->intended('account/settings');
-        }
-
         auth()->user()->update(['password' => Hash::make($request->input('password'))]);
-
         if ($request->expectsJson()) {
-            return response()->json($request->all());
+            return response()->json(['message'=>__('Password Updated')]);
         }
-
         return redirect()->intended('account/settings');
     }
 }

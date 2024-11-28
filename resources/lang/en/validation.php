@@ -118,6 +118,7 @@ return [
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute format is invalid.',
     'uuid' => 'The :attribute must be a valid UUID.',
+    'match_old_password' => 'The :attribute is not match with old password.',
 
     /*
     |--------------------------------------------------------------------------

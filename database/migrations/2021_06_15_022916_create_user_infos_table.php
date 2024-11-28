@@ -20,12 +20,7 @@ class CreateUserInfosTable extends Migration
             $table->string('company')->nullable();
             $table->string('phone')->nullable();
             $table->string('website')->nullable();
-            $table->string('country')->nullable();
-            $table->string('language')->nullable();
-            $table->string('timezone')->nullable();
-            $table->string('currency')->nullable();
-            $table->string('communication')->nullable();
-            $table->tinyInteger('marketing')->nullable();
+
             $table->timestamps();
         });
     }

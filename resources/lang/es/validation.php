@@ -93,7 +93,13 @@ return [
     'not_in'               => 'El campo :attribute seleccionado es inválido.',
     'not_regex'            => 'El formato del campo :attribute es inválido.',
     'numeric'              => 'El campo :attribute debe ser un número.',
-    'password'             => 'La contraseña es incorrecta.',
+    'password' => [
+        'letters' => 'El campo :attribute debe contener al menos una letra.',
+        'mixed' => 'El campo :attribute debe incluir al menos una letra mayúscula y una minúscula.',
+        'numbers' => 'El campo :attribute debe incluir al menos un número.',
+        'symbols' => 'El campo :attribute debe incluir al menos un símbolo.',
+        'uncompromised' => 'El campo :attribute parece ser muy común. Por favor, elige una diferente.',
+    ],
     'present'              => 'El campo :attribute debe estar presente.',
     'regex'                => 'El formato del campo :attribute es inválido.',
     'required'             => 'El campo :attribute es obligatorio.',
@@ -117,6 +123,8 @@ return [
     'uploaded'             => 'El campo :attribute no se pudo subir.',
     'url'                  => 'El formato del campo :attribute es inválido.',
     'uuid'                 => 'El campo :attribute debe ser un UUID válido.',
+    'match_old_password' => 'La contraseña actual no coincide con la registrada.',
+
 
     /*
     |--------------------------------------------------------------------------

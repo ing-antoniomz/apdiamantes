@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Account;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\ValidationException;
 
 class SettingsInfoRequest extends FormRequest
 {
@@ -24,15 +25,47 @@ class SettingsInfoRequest extends FormRequest
     public function rules()
     {
         return [
-            'company'       => 'nullable|string|max:255',
-            'phone'         => 'nullable|string|max:255',
-            'website'       => 'nullable|string|max:255',
-            'country'       => 'nullable|string|max:255',
-            'language'      => 'nullable|string|max:255',
-            'timezone'      => 'nullable|string|max:255',
-            'currency'      => 'nullable|string|max:255',
-            'communication' => 'nullable|array',
-            'marketing'     => 'nullable|integer',
+            'nombre' => 'required|string|max:100|alpha',
+            'apellido_paterno' => 'required|string|max:100|alpha',
+            'apellido_materno' => 'required|string|max:100|alpha',
+            'company' => 'nullable|string|max:100',
+            'phone' => 'nullable|string|max:40',
+            'website' => 'nullable|string|max:255',
         ];
     }
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'company' => __('Company'),
+            'phone' => __('Phone'),
+            'website' => __('Web Site'),
+        ];
+    }
+    /**
+     * Handle a failed validation attempt.
+     *
+     * @param  \Illuminate\Contracts\Validation\Validator  $validator
+     * @return void
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        $messages = $validator->errors()->all();
+        $message = array_shift($messages);
+        if ($count = count($messages)) {
+            $pluralized = $count === 1 ? __('error') : __('errors');
+            $message .= ' ' . $validator->getTranslator()->get('(and :count more :pluralized)', [
+                'count' => $count,
+                'pluralized' => $pluralized,
+            ]);
+        }
+        throw new ValidationException($validator, response()->json(['message' => $message], 422));
+    }
+
 }

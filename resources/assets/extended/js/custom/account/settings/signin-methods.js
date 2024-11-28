@@ -61,18 +61,18 @@ var KTAccountSettingsSigninMethods = function () {
                     email: {
                         validators: {
                             notEmpty: {
-                                message: 'Email is required'
+                                message: 'Se necesita un correo electrónico'
                             },
                             emailAddress: {
-                                message: 'The value is not a valid email address'
+                                message: 'Formato de correo Incorrecto'
                             }
                         }
                     },
 
-                    password: {
+                    current_password_email: {
                         validators: {
                             notEmpty: {
-                                message: 'Password is required'
+                                message: 'Ingresa tu contraseña'
                             }
                         }
                     }
@@ -104,32 +104,47 @@ var KTAccountSettingsSigninMethods = function () {
                         .then(function (response) {
                             // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                             Swal.fire({
-                                text: "Your email has been successfully changed.",
+                                text: response.data.message,
                                 icon: "success",
                                 buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
+                                confirmButtonText: "Aceptar",
                                 customClass: {
-                                    confirmButton: "btn font-weight-bold btn-light-primary"
+                                    confirmButton: "btn btn-light btn-active-color-white"
                                 }
                             });
+                            $('.correo').empty();
+                            $('.correo').html($('#email').val());
+                            $('#current_email').val($('#email').val());
+                            $('#current_email_password').val($('#email').val());
+                            $('#kt_signin_change_email').trigger('reset');
+                            $('#kt_signin_change_email .form-control').removeClass('is-valid is-invalid');
                         })
                         .catch(function (error) {
                             let dataMessage = error.response.data.message;
-                            let dataErrors = error.response.data.errors;
+                            /* let dataErrors = error.response.data.errors;
 
                             for (const errorsKey in dataErrors) {
                                 if (!dataErrors.hasOwnProperty(errorsKey)) continue;
                                 dataMessage += "\r\n" + dataErrors[errorsKey];
-                            }
-
-                            if (error.response) {
+                            } */
+                            if (error.response.status=='422') {
                                 Swal.fire({
                                     text: dataMessage,
+                                    icon: "warning",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Aceptar",
+                                    customClass: {
+                                        confirmButton: "btn btn-light btn-active-color-white"
+                                    }
+                                });
+                            } else {
+                                Swal.fire({
+                                    text: 'Ha ocurrido algo inesperado.',
                                     icon: "error",
                                     buttonsStyling: false,
-                                    confirmButtonText: "Ok, got it!",
+                                    confirmButtonText: "Aceptar",
                                     customClass: {
-                                        confirmButton: "btn btn-primary"
+                                        confirmButton: "btn btn-light btn-active-color-white"
                                     }
                                 });
                             }
@@ -145,12 +160,12 @@ var KTAccountSettingsSigninMethods = function () {
 
                 } else {
                     Swal.fire({
-                        text: "Sorry, looks like there are some errors detected, please try again.",
-                        icon: "error",
+                        text: "Revisa bien los datos ingresados.",
+                        icon: "warning",
                         buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
+                        confirmButtonText: "Revisar",
                         customClass: {
-                            confirmButton: "btn font-weight-bold btn-light-primary"
+                            confirmButton: "btn btn-light btn-active-color-white"
                         }
                     });
                 }
@@ -160,11 +175,9 @@ var KTAccountSettingsSigninMethods = function () {
 
     var handleChangePassword = function (e) {
         var validation;
-
         // form elements
         var form = document.getElementById('kt_signin_change_password');
         var submitButton = form.querySelector('#kt_password_submit');
-
         validation = FormValidation.formValidation(
             form,
             {
@@ -172,86 +185,96 @@ var KTAccountSettingsSigninMethods = function () {
                     current_password: {
                         validators: {
                             notEmpty: {
-                                message: 'Current Password is required'
+                                message: 'Ingresa tu contraseña actual'
                             }
                         }
                     },
-
                     password: {
                         validators: {
                             notEmpty: {
-                                message: 'New Password is required'
+                                message: 'Ingresa una nueva contraseña'
+                            },
+                            regexp: {
+                                message: 'Formato incorrecto',
+                                regexp: '^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$'
                             }
                         }
                     },
-
                     password_confirmation: {
                         validators: {
                             notEmpty: {
-                                message: 'Confirm Password is required'
+                                message: 'Se necesita confirmar la contraseña'
                             },
                             identical: {
                                 compare: function () {
                                     return form.querySelector('[name="password"]').value;
                                 },
-                                message: 'The password and its confirm are not the same'
+                                message: 'No coincide con la contraseña nueva'
                             }
                         }
                     },
                 },
-
                 plugins: { //Learn more: https://formvalidation.io/guide/plugins
                     trigger: new FormValidation.plugins.Trigger(),
                     bootstrap: new FormValidation.plugins.Bootstrap5({
-                        rowSelector: '.fv-row'
+                        rowSelector: '.fv-row',
+                        eleInvalidClass: 'is-invalid',
+                        eleValidClass: 'is-valid'
                     })
                 }
             }
         );
-
         submitButton.addEventListener('click', function (e) {
             e.preventDefault();
-
             validation.validate().then(function (status) {
                 if (status == 'Valid') {
-
                     // Show loading indication
                     submitButton.setAttribute('data-kt-indicator', 'on');
-
                     // Disable button to avoid multiple click
                     submitButton.disabled = true;
-
                     // Send ajax request
                     axios.post(form.getAttribute('action'), new FormData(form))
                         .then(function (response) {
                             // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                             Swal.fire({
-                                text: "Your password has been successfully reset.",
+                                text: response.data.message,
                                 icon: "success",
                                 buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
+                                confirmButtonText: "Aceptar",
                                 customClass: {
-                                    confirmButton: "btn font-weight-bold btn-light-primary"
+                                    confirmButton: "btn btn-light btn-active-color-white"
                                 }
                             });
+                            $('#current_email').val($('#email').val());
+                            $('#current_email_password').val($('#email').val());
+                            $('#kt_signin_change_password').trigger('reset');
+                            $('#kt_signin_change_password .form-control').removeClass('is-valid is-invalid');
                         })
                         .catch(function (error) {
                             let dataMessage = error.response.data.message;
-                            let dataErrors = error.response.data.errors;
-
+                            /* let dataErrors = error.response.data.errors;
                             for (const errorsKey in dataErrors) {
                                 if (!dataErrors.hasOwnProperty(errorsKey)) continue;
                                 dataMessage += "\r\n" + dataErrors[errorsKey];
-                            }
-
-                            if (error.response) {
+                            } */
+                            if (error.response.status=='422') {
                                 Swal.fire({
                                     text: dataMessage,
+                                    icon: "warning",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Aceptar",
+                                    customClass: {
+                                        confirmButton: "btn btn-light btn-active-color-white"
+                                    }
+                                });
+                            } else {
+                                Swal.fire({
+                                    text: 'Ha ocurrido algo inesperado.',
                                     icon: "error",
                                     buttonsStyling: false,
-                                    confirmButtonText: "Ok, got it!",
+                                    confirmButtonText: "Aceptar",
                                     customClass: {
-                                        confirmButton: "btn btn-primary"
+                                        confirmButton: "btn btn-light btn-active-color-white"
                                     }
                                 });
                             }
@@ -260,19 +283,17 @@ var KTAccountSettingsSigninMethods = function () {
                             // always executed
                             // Hide loading indication
                             submitButton.removeAttribute('data-kt-indicator');
-
                             // Enable button
                             submitButton.disabled = false;
                         });
-
                 } else {
                     Swal.fire({
-                        text: "Sorry, looks like there are some errors detected, please try again.",
-                        icon: "error",
+                        text: "Revisa bien los datos ingresados.",
+                        icon: "warning",
                         buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
+                        confirmButtonText: "Revisar",
                         customClass: {
-                            confirmButton: "btn font-weight-bold btn-light-primary"
+                            confirmButton: "btn btn-light btn-active-color-white"
                         }
                     });
                 }

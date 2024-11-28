@@ -78,56 +78,6 @@
             <!--end::Col-->
         </div>
         <!--end::Input group-->
-
-        <!--begin::Input group-->
-        <div class="row mb-7">
-            <!--begin::Label-->
-            <label class="col-lg-4 fw-bold text-muted">
-                {{ __('Country') }}
-                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Country of origination"></i>
-            </label>
-            <!--end::Label-->
-
-            <!--begin::Col-->
-            <div class="col-lg-8">
-                <span class="fw-bolder fs-6 text-dark">
-                    {{ $info->country ? collect(\App\Core\Data::getCountriesList())->get($info->country)['name'] ?? '' : '-' }}
-                </span>
-            </div>
-            <!--end::Col-->
-        </div>
-        <!--end::Input group-->
-
-        <!--begin::Input group-->
-        <div class="row mb-7">
-            <!--begin::Label-->
-            <label class="col-lg-4 fw-bold text-muted">{{ __('Communication') }}</label>
-            <!--end::Label-->
-
-            <!--begin::Col-->
-            <div class="col-lg-8">
-                <span class="fw-bolder fs-6 text-dark">
-                    {{ implode(', ', array_map('ucwords', array_keys(array_filter($info->communication ?? []) ?? []))) }}
-                </span>
-            </div>
-            <!--end::Col-->
-        </div>
-        <!--end::Input group-->
-
-        <!--begin::Input group-->
-        <div class="row mb-10">
-            <!--begin::Label-->
-            <label class="col-lg-4 fw-bold text-muted">{{ __('Allow Changes') }}</label>
-            <!--begin::Label-->
-
-            <!--begin::Label-->
-            <div class="col-lg-8">
-                <span class="fw-bold fs-6">{{ __('Yes') }}</span>
-            </div>
-            <!--begin::Label-->
-        </div>
-        <!--end::Input group-->
-
     </div>
     <!--end::Card body-->
 </div>

@@ -62,8 +62,6 @@ class UsersSeeder extends Seeder
             'company'  => $faker->company,
             'phone'    => $faker->phoneNumber,
             'website'  => $faker->url,
-            'language' => $faker->languageCode,
-            'country'  => $faker->countryCode,
         ];
 
         $info = new UserInfo();
