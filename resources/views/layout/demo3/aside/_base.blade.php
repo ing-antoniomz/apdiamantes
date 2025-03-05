@@ -1,7 +1,7 @@
 <!--begin::Aside-->
 <div
 	id="kt_aside"
-	class="aside py-9 {{ theme()->printHtmlClasses('aside', false) }}"
+	class="aside py-9 user-select-none {{ theme()->printHtmlClasses('aside', false) }}"
 	data-kt-drawer="true"
 	data-kt-drawer-name="aside"
 	data-kt-drawer-activate="{default: true, lg: false}"

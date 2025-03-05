@@ -5,7 +5,7 @@
         <!--begin::Card title-->
         <div class="card-title m-0">
             <i class="bi bi-person-lines-fill fs-2x text-light"></i>
-            <h3 class="fw-bolder ms-4">{{ __('Personal Information') }}</h3>
+            <h3 class="fw-bolder ms-4 user-select-none">{{ __('Personal Information') }}</h3>
         </div>
         <!--end::Card title-->
     </div>
@@ -22,7 +22,7 @@
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
-                    <label class="col-lg-4 col-form-label fw-bold fs-6">{{ __('Avatar') }}</label>
+                    <label class="col-lg-4 col-form-label fw-bold fs-6 user-select-none">{{ __('Avatar') }}</label>
                     <!--end::Label-->
 
                     <!--begin::Col-->
@@ -59,7 +59,7 @@
                         <!--end::Image input-->
 
                         <!--begin::Hint-->
-                        <div class="form-text">{{ __('Allowed file types') }}: png, jpg, jpeg.</div>
+                        <div class="form-text user-select-none">{{ __('Allowed file types') }}: png, jpg, jpeg.</div>
                         <!--end::Hint-->
                     </div>
                     <!--end::Col-->
@@ -69,7 +69,7 @@
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
-                    <label class="col-lg-4 col-form-label required fw-bold fs-6">{{ __('Full Name') }}</label>
+                    <label class="col-lg-4 col-form-label required fw-bold fs-6 user-select-none">{{ __('Full Name') }}</label>
                     <!--end::Label-->
 
                     <!--begin::Col-->
@@ -103,7 +103,7 @@
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
-                    <label class="col-lg-4 col-form-label fw-bold fs-6">{{ __('Company') }}</label>
+                    <label class="col-lg-4 col-form-label fw-bold fs-6 user-select-none">{{ __('Company') }}</label>
                     <!--end::Label-->
 
                     <!--begin::Col-->
@@ -117,7 +117,7 @@
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
-                    <label class="col-lg-4 col-form-label fw-bold fs-6">
+                    <label class="col-lg-4 col-form-label fw-bold fs-6 user-select-none">
                         <span class="required">{{ __('Phone') }}</span>
 
                         <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="{{ __('Phone number must be active') }}"></i>
@@ -135,7 +135,7 @@
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
-                    <label class="col-lg-4 col-form-label fw-bold fs-6">{{ __('Web Site') }}</label>
+                    <label class="col-lg-4 col-form-label fw-bold fs-6 user-select-none">{{ __('Web Site') }}</label>
                     <!--end::Label-->
 
                     <!--begin::Col-->

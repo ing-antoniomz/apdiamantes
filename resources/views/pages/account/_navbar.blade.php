@@ -158,7 +158,7 @@
                 @foreach($nav as $each)
                 <!--begin::Nav item-->
                     <li class="nav-item">
-                        <a class="nav-link text-active-primary me-6 {{ theme()->getPagePath() === $each['view'] ? 'active' : '' }}" href="{{ $each['view'] ? theme()->getPageUrl($each['view']) : '#' }}">
+                        <a class="nav-link text-active-primary me-6 user-select-none {{ theme()->getPagePath() === $each['view'] ? 'active' : '' }}" href="{{ $each['view'] ? theme()->getPageUrl($each['view']) : '#' }}">
                             {{ $each['title'] }}
                         </a>
                     </li>

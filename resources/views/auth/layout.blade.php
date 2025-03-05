@@ -19,9 +19,9 @@
                 <div class="d-flex flex-center flex-wrap px-5">
                     <!--begin::Links-->
                     <div class="d-flex fw-semibold text-primary fs-base">
-                        <a href="{{ $theme->getOption(" general", "about" ) }}" class="px-5 text-white">{{ __('About') }}</a>
-                        <a href="{{ $theme->getOption('general', 'contact') }}" class="px-5 text-white">{{ __('Contact Us') }}</a>
-                        <a href="{{ $theme->getOption('product', 'purchase') }}" class="px-5 text-white">{{ __('Purchase') }}</a>
+                        <a href="{{ $theme->getOption(" general", "about" ) }}" class="px-5 text-white user-select-none">{{ __('About') }}</a>
+                        <a href="{{ $theme->getOption('general', 'contact') }}" class="px-5 text-white user-select-none">{{ __('Contact Us') }}</a>
+                        <a href="{{ $theme->getOption('product', 'purchase') }}" class="px-5 text-white user-select-none">{{ __('Purchase') }}</a>
                     </div>
                     <!--end::Links-->
                 </div>

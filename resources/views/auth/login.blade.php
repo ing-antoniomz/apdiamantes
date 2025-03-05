@@ -61,7 +61,7 @@
             <div></div>
             @if (Route::has('password.request'))
             <!--begin::Link-->
-                <a href="{{ theme()->getPageUrl('password.request') }}" class="link-white">{{ __('Forgot Password ?') }}</a>
+                <a href="{{ theme()->getPageUrl('password.request') }}" class="link-white user-select-none">{{ __('Forgot Password ?') }}</a>
                 <!--end::Link-->
             @endif
         </div>
