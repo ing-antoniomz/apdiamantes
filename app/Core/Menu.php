@@ -468,13 +468,14 @@ class Menu {
         if ( !empty($breadcrumb)) {
             if ( isset($options['home']) ) {
                 array_unshift($breadcrumb, $options['home']);
-            } else {
+            } /* Se comenta para evitar el breadcrumb HOME al inicio
+            else {
                 array_unshift($breadcrumb, array(
                     'title' => 'Home',
                     'path' => 'index',
                     'active' => false
                 ));
-            }
+            } */
         }
 
 		return $breadcrumb;
