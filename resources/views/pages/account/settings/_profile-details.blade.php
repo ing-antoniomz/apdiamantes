@@ -12,7 +12,7 @@
     <!--begin::Card header-->
 
     <!--begin::Content-->
-    <div id="kt_account_profile_details" class="collapse show">
+    <div id="kt_account_profile_details" class="collapse">
         <!--begin::Form-->
         <form id="kt_account_profile_details_form" class="form" method="POST" action="{{ route('settings.update') }}" enctype="multipart/form-data">
         @csrf

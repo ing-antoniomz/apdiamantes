@@ -1,10 +1,10 @@
 <!--begin::details View-->
-<div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+<div class="card mb-5 mb-xl-10 user-select-none" id="kt_profile_details_view">
     <!--begin::Card header-->
-    <div class="card-header cursor-pointer">
+    <div class="card-header">
         <!--begin::Card title-->
         <div class="card-title m-0">
-            <h3 class="fw-bolder m-0">{{ __('Profile Details') }}</h3>
+            <h3 class="fw-bolder m-0">{{ __('Account Details') }}</h3>
         </div>
         <!--end::Card title-->
 
@@ -48,8 +48,8 @@
         <div class="row mb-7">
             <!--begin::Label-->
             <label class="col-lg-4 fw-bold text-muted">
-                {{ __('Contact Phone') }}
-                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Phone number must be active"></i>
+                {{ __('Phone') }}
+                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="{{ __('Phone number must be active') }}"></i>
             </label>
             <!--end::Label-->
 
@@ -68,7 +68,7 @@
         <!--begin::Input group-->
         <div class="row mb-7">
             <!--begin::Label-->
-            <label class="col-lg-4 fw-bold text-muted">{{ __('Website') }}</label>
+            <label class="col-lg-4 fw-bold text-muted">{{ __('Web Site') }}</label>
             <!--end::Label-->
 
             <!--begin::Col-->

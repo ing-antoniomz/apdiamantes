@@ -94,12 +94,13 @@ class AuditLogsDataTable extends DataTable
         return [
             Column::make('id')->title('Log ID')->addClass('ps-0'),
             Column::make('log_name')->title(__('Location')),
-            Column::make('description'),
-            Column::make('subject_type'),
+            Column::make('description')->title(__('Description')),
+            Column::make('subject_type')->title(__('Type')),
             Column::make('subject_id')->title(__('Subject')),
             Column::make('causer_id')->title(__('Causer')),
-            Column::make('created_at'),
+            Column::make('created_at')->title(__('Created at')),
             Column::computed('action')
+                ->title(__('Actions'))
                 ->exportable(false)
                 ->printable(false)
                 ->addClass('text-center')

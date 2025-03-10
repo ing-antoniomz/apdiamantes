@@ -66,7 +66,7 @@ return array(
 
         // Sidebar
         'sidebar'    => array(
-            'display' => true,
+            'display' => false,
         ),
 
         // Content

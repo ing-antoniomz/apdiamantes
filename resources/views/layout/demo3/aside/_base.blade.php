@@ -12,11 +12,11 @@
 	>
 
     <!--begin::Brand-->
-    <div class="aside-logo flex-column-auto px-9 mb-9" id="kt_aside_logo">
+    <div class="flex-column-auto px-9 mb-9" id="kt_aside_logo">
         <!--begin::Logo-->
-        <a href="{{ theme()->getPageUrl('') }}">
-            <img alt="Logo" src="{{ asset(theme()->getMediaUrlPath() . 'logos/demo3.svg') }}" class="h-20px"/>
-            <img alt="Logo" src="{{ asset(theme()->getMediaUrlPath() . 'logos/demo3-dark.svg') }}" class="h-20px logo theme-dark-show">
+        <a href="{{ theme()->getPageUrl('') }}" class="d-flex flex-column align-items-center">
+            <img alt="Logo" src="{{ asset('apdiamantes/media/apdiamantes-dark.svg') }}" class="h-50px mb-2" />
+            <img alt="Logo" src="{{ asset('apdiamantes/media/logo_blanco_2.png') }}" class="h-40px" />
         </a>
         <!--end::Logo-->
     </div>
@@ -36,7 +36,7 @@
             <div class="d-flex align-items-center">
                 <!--begin::Avatar-->
                 <div class="symbol symbol-circle symbol-40px">
-                    <img src="{{ asset(theme()->getMediaUrlPath() . 'avatars/300-1.jpg') }}" alt="photo"/>
+                    <img src="{{ auth()->user()->avatar_url }}" alt="photo"/>
                 </div>
                 <!--end::Avatar-->
 
@@ -47,7 +47,7 @@
                     <!--end::Name-->
 
                     <!--begin::Major-->
-                    <span class="text-muted fw-bold d-block fs-7 lh-1">Python Dev</span>
+                    <span class="text-muted fw-bold mt-2 d-block fs-7 lh-1">Nivel<i class="ms-2 fas fa-solid fa-certificate"></i><i class="ms-2 fas fa-solid fa-ribbon"></i><i class="ms-2 fas fa-solid fa-otter"></i></span>
                     <!--end::Major-->
                 </div>
                 <!--end::User info-->

@@ -74,5 +74,17 @@ Route::resource('users', UsersController::class);
  * https://laravel.com/docs/8.x/socialite
  */
 Route::get('/auth/redirect/{provider}', [SocialiteLoginController::class, 'redirect']);
+//lang files for datatables
+Route::get('lang/datatables/{locale}.json', function ($locale) {
+    $path = resource_path("lang/$locale/datatables.php");
+
+    if (!File::exists($path)) {
+        abort(404);
+    }
+
+    $translations = require $path;
+
+    return Response::json($translations);
+});
 
 require __DIR__.'/auth.php';

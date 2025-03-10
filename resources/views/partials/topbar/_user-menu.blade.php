@@ -1,7 +1,7 @@
 <!--begin::Menu-->
 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px" data-kt-menu="true">
     <!--begin::Menu item-->
-    <div class="menu-item px-3">
+    {{-- <div class="menu-item px-3">
         <div class="menu-content d-flex align-items-center px-3">
             <!--begin::Avatar-->
             <div class="symbol symbol-50px me-5">
@@ -19,17 +19,20 @@
             </div>
             <!--end::Username-->
         </div>
-    </div>
+    </div> --}}
     <!--end::Menu item-->
 
     <!--begin::Menu separator-->
-    <div class="separator my-2"></div>
+    {{-- <div class="separator my-2"></div> --}}
     <!--end::Menu separator-->
 
     <!--begin::Menu item-->
     <div class="menu-item px-5">
         <a href="{{ theme()->getPageUrl('settings.index') }}" class="menu-link px-5">
-            {{ __('My Profile') }}
+            <span class="menu-text">{{ __('My Profile') }}</span>
+            <span class="menu-badge">
+                <span class="badge badge-light-primary badge-circle fw-bolder fs-7">3</span>
+            </span>
         </a>
     </div>
     <!--end::Menu item-->
@@ -55,19 +58,19 @@
         <!--begin::Menu sub-->
         <div class="menu-sub menu-sub-dropdown w-175px py-4">
             <!--begin::Menu item-->
-            <div class="menu-item px-3">
+            {{-- <div class="menu-item px-3">
                 <a href="#" class="menu-link px-5">
                     {{ __('Referrals') }}
                 </a>
-            </div>
+            </div> --}}
             <!--end::Menu item-->
 
             <!--begin::Menu item-->
-            <div class="menu-item px-3">
+            {{-- <div class="menu-item px-3">
                 <a href="#" class="menu-link px-5">
                     {{ __('Billing') }}
                 </a>
-            </div>
+            </div> --}}
             <!--end::Menu item-->
 
             <!--begin::Menu item-->
@@ -81,9 +84,9 @@
             <!--begin::Menu item-->
             <div class="menu-item px-3">
                 <a href="#" class="menu-link d-flex flex-stack px-5">
-                    {{ __('Statements') }}
+                    {{ __('Billing') }}
 
-                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="View your statements"></i>
+                    <i class="fas fa-exclamation-circle text-success ms-2 fs-7" data-bs-toggle="tooltip" title="Billing Information"></i>
                 </a>
             </div>
             <!--end::Menu item-->
@@ -110,11 +113,11 @@
     <!--end::Menu item-->
 
     <!--begin::Menu item-->
-    <div class="menu-item px-5" data-bs-toggle="tooltip" data-bs-placement="left" title="{{ __('Coming soon') }}">
+    {{-- <div class="menu-item px-5" data-bs-toggle="tooltip" data-bs-placement="left" title="{{ __('Coming soon') }}">
         <a href="#" class="menu-link px-5">
             {{ __('My Statements') }}
         </a>
-    </div>
+    </div> --}}
     <!--end::Menu item-->
 
     <!--begin::Menu separator-->

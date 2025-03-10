@@ -104,7 +104,12 @@ class SystemLogsDataTable extends DataTable
             ->orderBy(3)
             ->responsive()
             ->autoWidth(false)
-            ->parameters(['scrollX' => true])
+            ->parameters([
+                'scrollX' => true,
+                'language' => [
+                    'url' => url('lang/datatables/' . app()->getLocale() . '.json'),
+                ],
+            ])
             ->addTableClass('align-middle table-row-dashed fs-6 gy-5');
     }
 
@@ -117,10 +122,11 @@ class SystemLogsDataTable extends DataTable
     {
         return [
             Column::make('id')->title('Log ID')->width(100)->addClass('ps-0'),
-            Column::make('message'),
-            Column::make('level'),
-            Column::make('date')->width(200),
+            Column::make('message')->title(__('Message')),
+            Column::make('level')->title(__('Level')),
+            Column::make('date')->width(200)->title(__('Date')),
             Column::computed('action')
+                ->title(__('Actions'))
                 ->exportable(false)
                 ->printable(false)
                 ->addClass('text-center')

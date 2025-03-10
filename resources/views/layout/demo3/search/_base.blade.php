@@ -24,7 +24,7 @@
         <!--end::Icon-->
 
         <!--begin::Input-->
-        <input type="text" class="form-control bg-transparent ps-13 fs-7 h-40px" name="search" value="" placeholder="Quick Search" data-kt-search-element="input"/>
+        <input type="text" class="form-control bg-transparent ps-13 fs-7 h-40px" name="search" value="" placeholder="{{ __('Quick Search') }}" data-kt-search-element="input"/>
         <!--end::Input-->
 
         <!--begin::Spinner-->

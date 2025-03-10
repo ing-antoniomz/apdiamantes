@@ -36,8 +36,8 @@
 
       <!--begin::Logo-->
       <a href="{{ theme()->getPageUrl('') }}" class="d-flex align-items-center">
-        <img alt="Logo" src="{{ asset(theme()->getMediaUrlPath() . 'logos/demo3.svg') }}" class="h-20px"/>
-          <img alt="Logo" src="{{ asset(theme()->getMediaUrlPath() . 'logos/demo3-dark.svg') }}" class="h-20px logo theme-dark-show">
+          <img alt="Logo" src="{{ asset('apdiamantes/media/logo_blanco_2.png') }}" class="h-20px me-2"/>
+          <img alt="Logo" src="{{ asset('apdiamantes/media/apdiamantes-dark.svg') }}" class="h-20px logo theme-dark-show">
       </a>
       <!--end::Logo-->
     </div>

@@ -184,12 +184,12 @@ return array(
 
         array(
             'title' => 'Components',
-            'path'  => '//preview.keenthemes.com/metronic8/demo1/documentation/base/utilities.html',
+            'path'  => '//preview.keenthemes.com/metronic8/demo3/documentation/base/utilities.html',
         ),
 
         array(
             'title' => 'Documentation',
-            'path'  => '//preview.keenthemes.com/metronic8/demo1/documentation/getting-started.html',
+            'path'  => '//preview.keenthemes.com/metronic8/demo3/documentation/getting-started.html',
         ),
     ),
 
@@ -199,23 +199,28 @@ return array(
         array(
             'title' => 'Dashboard',
             'path'  => '',
-            'icon'  => theme()->getSvgIcon("demo1/media/icons/duotune/art/art002.svg", "svg-icon-2"),
+            'icon'       => array(
+                'svg'  => theme()->getSvgIcon("demo3/media/icons/duotune/art/art002.svg", "svg-icon-2"),
+                'font' => '',
+            ),
         ),
 
         //// Modules
         array(
             'classes' => array('content' => 'pt-8 pb-2'),
-            'content' => '<span class="menu-section text-muted text-uppercase fs-8 ls-1">Modules</span>',
+            'content' => '<span class="menu-section text-muted text-uppercase fs-8 ls-1">Menú</span>',
         ),
 
         // Account
         array(
-            'title'      => 'Account',
+            'title'      => function () {
+                return trans('Account');
+            },
             'icon'       => array(
-                'svg'  => theme()->getSvgIcon("demo1/media/icons/duotune/communication/com006.svg", "svg-icon-2"),
+                'svg'  => theme()->getSvgIcon("demo3/media/icons/duotune/communication/com006.svg", "svg-icon-2"),
                 'font' => '<i class="bi bi-person fs-2"></i>',
             ),
-            'classes'    => array('item' => 'menu-accordion'),
+            'classes'    => array('item' => ''),
             'attributes' => array(
                 "data-kt-menu-trigger" => "click",
             ),
@@ -223,16 +228,20 @@ return array(
                 'class' => 'menu-sub-accordion menu-active-bg',
                 'items' => array(
                     array(
-                        'title'  => 'Overview',
+                        'title'  => function () {
+                            return trans('Overview');
+                        },
                         'path'   => 'account/overview',
                         'bullet' => '<span class="bullet bullet-dot"></span>',
                     ),
                     array(
-                        'title'  => 'Settings',
+                        'title'  => function () {
+                            return trans('Settings');
+                        },
                         'path'   => 'account/settings',
                         'bullet' => '<span class="bullet bullet-dot"></span>',
                     ),
-                    array(
+                    /* array(
                         'title'      => 'Security',
                         'path'       => '#',
                         'bullet'     => '<span class="bullet bullet-dot"></span>',
@@ -245,16 +254,18 @@ return array(
                                 "data-bs-placement" => "right",
                             ),
                         ),
-                    ),
+                    ), */
                 ),
             ),
         ),
 
         // System
         array(
-            'title'      => 'System',
+            'title'      => function () {
+                return trans('System');
+            },
             'icon'       => array(
-                'svg'  => theme()->getSvgIcon("demo1/media/icons/duotune/general/gen025.svg", "svg-icon-2"),
+                'svg'  => theme()->getSvgIcon("demo3/media/icons/duotune/general/gen025.svg", "svg-icon-2"),
                 'font' => '<i class="bi bi-layers fs-3"></i>',
             ),
             'classes'    => array('item' => 'menu-accordion'),
@@ -264,7 +275,7 @@ return array(
             'sub'        => array(
                 'class' => 'menu-sub-accordion menu-active-bg',
                 'items' => array(
-                    array(
+                    /* array(
                         'title'      => 'Settings',
                         'path'       => '#',
                         'bullet'     => '<span class="bullet bullet-dot"></span>',
@@ -277,18 +288,22 @@ return array(
                                 "data-bs-placement" => "right",
                             ),
                         ),
-                    ),
+                    ), */
                     array(
-                        'title'  => 'Audit Log',
+                        'title'  => function () {
+                            return trans('Audit Log');
+                        },
                         'path'   => 'log/audit',
                         'bullet' => '<span class="bullet bullet-dot"></span>',
                     ),
                     array(
-                        'title'  => 'System Log',
+                        'title'  => function () {
+                            return trans('System Log');
+                        },
                         'path'   => 'log/system',
                         'bullet' => '<span class="bullet bullet-dot"></span>',
                     ),
-                    array(
+                    /* array(
                         'title'  => 'Error 404',
                         'path'   => 'error/error-404',
                         'bullet' => '<span class="bullet bullet-dot"></span>',
@@ -297,7 +312,7 @@ return array(
                         'title'  => 'Error 500',
                         'path'   => 'error/error-500',
                         'bullet' => '<span class="bullet bullet-dot"></span>',
-                    ),
+                    ), */
                 ),
             ),
         ),
@@ -305,22 +320,22 @@ return array(
         //// Help
         array(
             'classes' => array('content' => 'pt-8 pb-2'),
-            'content' => '<span class="menu-section text-muted text-uppercase fs-8 ls-1">Help</span>',
+            'content' => '<span class="menu-section text-muted text-uppercase fs-8 ls-1">Ayuda</span>',
         ),
 
         // Documentation
         array(
-            'title' => 'Documentation',
-            'icon'  => theme()->getSvgIcon("demo1/media/icons/duotune/abstract/abs027.svg", "svg-icon-2"),
+            'title' => 'Documentación',
+            'icon'  => theme()->getSvgIcon("demo3/media/icons/duotune/abstract/abs027.svg", "svg-icon-2"),
             'path'  => 'documentation/getting-started/overview',
         ),
 
         // Changelog
-        array(
+        /* array(
             'title' => 'Changelog v'.theme()->getVersion(),
-            'icon'  => theme()->getSvgIcon("demo1/media/icons/duotune/coding/cod003.svg", "svg-icon-2"),
+            'icon'  => theme()->getSvgIcon("demo3/media/icons/duotune/coding/cod003.svg", "svg-icon-2"),
             'path'  => 'documentation/getting-started/changelog',
-        ),
+        ), */
 
     ),
 
@@ -347,14 +362,14 @@ return array(
                     // Documentation
                     array(
                         'title' => 'Documentation',
-                        'icon'  => theme()->getSvgIcon("demo1/media/icons/duotune/abstract/abs027.svg", "svg-icon-2"),
+                        'icon'  => theme()->getSvgIcon("demo3/media/icons/duotune/abstract/abs027.svg", "svg-icon-2"),
                         'path'  => 'documentation/getting-started/overview',
                     ),
 
                     // Changelog
                     array(
                         'title' => 'Changelog v'.theme()->getVersion(),
-                        'icon'  => theme()->getSvgIcon("demo1/media/icons/duotune/general/gen005.svg", "svg-icon-2"),
+                        'icon'  => theme()->getSvgIcon("demo3/media/icons/duotune/general/gen005.svg", "svg-icon-2"),
                         'path'  => 'documentation/getting-started/changelog',
                     ),
                 ),

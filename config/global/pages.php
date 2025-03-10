@@ -77,7 +77,9 @@ return array(
 
     'log' => array(
         'audit'  => array(
-            'title'  => 'Audit Log',
+            'title'  => function () {
+                return trans('Audit Log');
+            },
             'assets' => array(
                 'custom' => array(
                     'css' => array(
@@ -90,7 +92,9 @@ return array(
             ),
         ),
         'system' => array(
-            'title'  => 'System Log',
+            'title'  => function () {
+                return trans('System Log');
+            },
             'assets' => array(
                 'custom' => array(
                     'css' => array(
@@ -104,18 +108,20 @@ return array(
         ),
     ),
 
-    'error' => array(
+    /* 'error' => array(
         'error-404' => array(
             'title' => 'Error 404',
         ),
         'error-500' => array(
             'title' => 'Error 500',
         ),
-    ),
+    ), */
 
     'account' => array(
         'overview' => array(
-            'title'  => 'Account Overview',
+            'title'  => function () {
+                return trans('Account Overview');
+            },
             'view'   => 'account/overview/overview',
             'assets' => array(
                 'custom' => array(
@@ -127,7 +133,9 @@ return array(
         ),
 
         'settings' => array(
-            'title'  => 'Account Settings',
+            'title'  => function () {
+                return trans('Account Settings');
+            },
             'assets' => array(
                 'custom' => array(
                     'js' => array(

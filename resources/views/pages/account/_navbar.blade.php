@@ -1,6 +1,6 @@
 @php
     $nav = array(
-        array('title' => 'Overview', 'view' => 'account/overview'),
+        array('title' => __('Overview'), 'view' => 'account/overview'),
         array('title' => __('Settings'), 'view' => 'account/settings'),
         // array('title' => 'Security', 'view' => ''),
     );
@@ -10,7 +10,7 @@
 <div class="card {{ $class }}">
     <div class="card-body pt-9 pb-0">
         <!--begin::Details-->
-        <div class="d-flex flex-wrap flex-sm-nowrap mb-3">
+        <div class="d-flex flex-wrap flex-sm-nowrap mb-3 user-select-none">
             <!--begin: Pic-->
             <div class="me-7 mb-4">
                 <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
@@ -41,11 +41,11 @@
                         <div class="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
                             <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
                                 {!! theme()->getSvgIcon("icons/duotune/communication/com006.svg", "svg-icon-4 me-1") !!}
-                                Developer
+                                Ocupación
                             </a>
                             <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
                                 {!! theme()->getSvgIcon("icons/duotune/general/gen018.svg", "svg-icon-4 me-1") !!}
-                                SF, Bay Area
+                                Direccion, corta
                             </a>
                             <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
                                 {!! theme()->getSvgIcon("icons/duotune/communication/com011.svg", "svg-icon-4 me-1") !!}
@@ -58,16 +58,34 @@
 
                     <!--begin::Actions-->
                     <div class="d-flex my-4">
-                        <a href="#" class="btn btn-sm btn-light me-2" id="kt_user_follow_button">
+                        <a href="#" class="btn btn-sm btn-bg-dark btn-active-light-dark btn-active-color-white btn-color-gray-100 me-2" id="kt_user_follow_button">
                             {!! theme()->getSvgIcon("icons/duotune/arrows/arr012.svg", "svg-icon-3 d-none") !!}
-                            {{ theme()->getView('partials/general/_button-indicator', array('label' => 'Follow')) }}
+                            {{ theme()->getView('partials/general/_button-indicator', array('label' => __('Follow'))) }}
                         </a>
 
-                        <a href="#" class="btn btn-sm btn-primary me-3" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-trigger="hover" title="Coming soon">Hire Me</a>
+                        <a href="#" class="btn btn-sm btn-bg-dark btn-active-light-primary btn-active-color-white btn-color-gray-100 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="{{ __('Coming soon') }}">{{ __('Upgrade') }}</a>
 
                         <!--begin::Menu-->
+                        <div class="me-3">
+                            <button class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary" data-kt-menu-trigger="click"
+                                data-kt-menu-placement="bottom-end">
+                                <i class="bi bi-three-dots fs-3"></i>
+                            </button>
+                            {{ theme()->getView('partials/menus/_menu-1') }}
+                        </div>
+                        <!--end::Menu-->
+                        <!--begin::Menu-->
+                        <div class="me-3">
+                            <button class="btn btn-sm btn-icon btn-bg-light btn-active-color-dark" data-kt-menu-trigger="click"
+                                data-kt-menu-placement="bottom-end">
+                                <i class="bi bi-three-dots fs-3"></i>
+                            </button>
+                            {{ theme()->getView('partials/menus/_menu-2') }}
+                        </div>
+                        <!--end::Menu-->
+                        <!--begin::Menu-->
                         <div class="me-0">
-                            <button class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                            <button class="btn btn-sm btn-icon btn-bg-light btn-active-color-danger" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
                                 <i class="bi bi-three-dots fs-3"></i>
                             </button>
                             {{ theme()->getView('partials/menus/_menu-3') }}
@@ -109,7 +127,7 @@
                                 <!--end::Number-->
 
                                 <!--begin::Label-->
-                                <div class="fw-bold fs-6 text-gray-400">{{ __('Projects') }}</div>
+                                <div class="fw-bold fs-6 text-gray-400">{{ __('Losses') }}</div>
                                 <!--end::Label-->
                             </div>
                             <!--end::Stat-->
@@ -136,7 +154,7 @@
                     <!--begin::Progress-->
                     <div class="d-flex align-items-center w-200px w-sm-300px flex-column mt-3">
                         <div class="d-flex justify-content-between w-100 mt-auto mb-2">
-                            <span class="fw-bold fs-6 text-gray-400">{{ __('Profile Completion') }}</span>
+                            <span class="fw-bold fs-6 ">{{ __('Level Completion') }}</span>
                             <span class="fw-bolder fs-6">50%</span>
                         </div>
 
