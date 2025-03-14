@@ -33,7 +33,7 @@ class SystemLogsDataTable extends DataTable
                 return Str::limit($model->get('context')->message, 95);
             })
             ->editColumn('date', function (Collection $model) {
-                return $model->get('date')->format('d M, Y H:i:s');
+                return $model->get('date')->format('Y-m-d H:i:s');
             })
             ->editColumn('level', function (Collection $model) {
                 $styles = [
@@ -109,6 +109,7 @@ class SystemLogsDataTable extends DataTable
                 'language' => [
                     'url' => url('lang/datatables/' . app()->getLocale() . '.json'),
                 ],
+                'drawCallback' => 'function() { KTMenu.createInstances(); }',
             ])
             ->addTableClass('align-middle table-row-dashed fs-6 gy-5');
     }

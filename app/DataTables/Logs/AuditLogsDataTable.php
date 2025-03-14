@@ -43,7 +43,7 @@ class AuditLogsDataTable extends DataTable
                 return view('pages.log.audit._details', compact('content'));
             })
             ->editColumn('created_at', function (Activity $model) {
-                return $model->created_at->format('d M, Y H:i:s');
+                return $model->created_at->format('Y-m-d H:i:s');
             })
             ->addColumn('action', function (Activity $model) {
                 return view('pages.log.audit._action-menu', compact('model'));
@@ -78,7 +78,10 @@ class AuditLogsDataTable extends DataTable
             ->responsive()
             ->autoWidth(false)
             ->parameters([
-                'scrollX'      => true,
+                'scrollX' => true,
+                'language' => [
+                    'url' => url('lang/datatables/' . app()->getLocale() . '.json'),
+                ],
                 'drawCallback' => 'function() { KTMenu.createInstances(); }',
             ])
             ->addTableClass('align-middle table-row-dashed fs-6 gy-5');

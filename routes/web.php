@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\Account\SettingsController;
-use App\Http\Controllers\Auth\SocialiteLoginController;
-use App\Http\Controllers\Documentation\LayoutBuilderController;
-use App\Http\Controllers\Documentation\ReferencesController;
-use App\Http\Controllers\Logs\AuditLogsController;
-use App\Http\Controllers\Logs\SystemLogsController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\UsersController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\UsuariosController;
+use App\Http\Controllers\Logs\AuditLogsController;
+use App\Http\Controllers\Logs\SystemLogsController;
+use App\Http\Controllers\Account\SettingsController;
+use App\Http\Controllers\Auth\SocialiteLoginController;
+use App\Http\Controllers\Documentation\ReferencesController;
+use App\Http\Controllers\Documentation\LayoutBuilderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,6 +66,11 @@ Route::middleware('auth')->group(function () {
         Route::resource('system', SystemLogsController::class)->only(['index', 'destroy']);
         Route::resource('audit', AuditLogsController::class)->only(['index', 'destroy']);
     });
+
+    // Admin pages
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::resource('users', UsuariosController::class)->only(['index', 'destroy']);
+    });
 });
 
 Route::resource('users', UsersController::class);
@@ -77,13 +83,10 @@ Route::get('/auth/redirect/{provider}', [SocialiteLoginController::class, 'redir
 //lang files for datatables
 Route::get('lang/datatables/{locale}.json', function ($locale) {
     $path = resource_path("lang/$locale/datatables.php");
-
     if (!File::exists($path)) {
         abort(404);
     }
-
     $translations = require $path;
-
     return Response::json($translations);
 });
 

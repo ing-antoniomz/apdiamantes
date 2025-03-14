@@ -20,6 +20,25 @@ return array(
         ),
     ),
 
+    'admin' => array(
+        'users'  => array(
+            'title'  => function () {
+                return trans('Users');
+            },
+            'assets' => array(
+                'custom' => array(
+                    'css' => array(
+                        'plugins/custom/datatables/datatables.bundle.css',
+                    ),
+                    'js'  => array(
+                        '../apdiamantes/js/admin/users.js',
+                        'plugins/custom/datatables/datatables.bundle.js',
+                    ),
+                ),
+            ),
+        )
+    ),
+
     'login'           => array(
         'title'  => 'Login',
         'assets' => array(
@@ -38,6 +57,7 @@ return array(
             ),
         ),
     ),
+
     'register'        => array(
         'title'  => 'Register',
         'assets' => array(
@@ -56,6 +76,7 @@ return array(
             ),
         ),
     ),
+
     'forgot-password' => array(
         'title'  => 'Forgot Password',
         'assets' => array(

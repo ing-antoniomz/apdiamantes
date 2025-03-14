@@ -211,6 +211,35 @@ return array(
             'content' => '<span class="menu-section text-muted text-uppercase fs-8 ls-1">Menú</span>',
         ),
 
+        // Administracion
+        array(
+            'title'      => function () {
+                return trans('Administration');
+            },
+            'icon'       => array(
+                'svg'  => theme()->getSvgIcon("demo3/media/icons/duotune/general/gen025.svg", "svg-icon-2"),
+                'font' => '<i class="bi bi-layers fs-3"></i>',
+            ),
+            'classes'    => array('item' => 'menu-accordion'),
+            'attributes' => array(
+                "data-kt-menu-trigger" => "click",
+            ),
+            'sub'        => array(
+                'class' => 'menu-sub-accordion menu-active-bg',
+                'items' => array(
+                    array(
+                        'title'  => function () {
+                            return trans('Users');
+                        },
+                        'path'   => 'admin/users',
+                        'bullet' => '<span class="bullet bullet-dot"></span>',
+                        /* 'role' => ['admin', 'ADMINISTRADOR'],
+                        'permission' => ['catalogos_menu'], */
+                    ),
+                ),
+            ),
+        ),
+
         // Account
         array(
             'title'      => function () {
@@ -265,7 +294,7 @@ return array(
                 return trans('System');
             },
             'icon'       => array(
-                'svg'  => theme()->getSvgIcon("demo3/media/icons/duotune/general/gen025.svg", "svg-icon-2"),
+                'svg'  => theme()->getSvgIcon("demo3/media/icons/duotune/technology/teh001.svg", "svg-icon-2"),
                 'font' => '<i class="bi bi-layers fs-3"></i>',
             ),
             'classes'    => array('item' => 'menu-accordion'),
