@@ -68,25 +68,17 @@ var KTSigninGeneral = function () {
                             form.querySelector('[name="email"]').value = "";
                             form.querySelector('[name="password"]').value = "";
                             window.location.reload();
-                            /*
-                                Swal.fire({
-                                    text: "You have successfully logged in!",
-                                    icon: "success",
-                                    buttonsStyling: false,
-                                    confirmButtonText: "Ok, got it!",
-                                    customClass: {
-                                        confirmButton: "btn btn-primary"
-                                    }
-                                }).then(function (result) {
-                                    if (result.isConfirmed) {
-                                        form.querySelector('[name="email"]').value = "";
-                                        form.querySelector('[name="password"]').value = "";
-                                        window.location.reload();
-                                    }
-                                });
-                            */
                         })
                         .catch(function (error) {
+                            if (!error.response) {
+                                Swal.fire({
+                                    text: "No se pudo establecer comunicación con el servidor.",
+                                    icon: "error",
+                                    confirmButtonText: "Aceptar",
+                                    customClass: { confirmButton: "btn btn-light btn-active-color-white" }
+                                });
+                                return;
+                            }
                             let dataMessage = error.response.data.message;
                             /*
                                 let dataErrors = error.response.data.errors;
@@ -95,7 +87,22 @@ var KTSigninGeneral = function () {
                                     dataMessage += "\r\n" + dataErrors[errorsKey];
                                 }
                             */
-                            if (error.response.status=='422') {
+                            if (error.response.status == '419') {
+                                Swal.fire({
+                                    text: 'Ha expirado la sesión, recarga la página.',
+                                    icon: "info",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Recargar",
+                                    customClass: {
+                                        confirmButton: "btn btn-light btn-active-color-white"
+                                    }
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        // Recargar la página y eliminar el caché
+                                        window.location.reload(true); // El true borra la caché y recarga la página.
+                                    }
+                                });
+                            } else if (error.response.status=='422') {
                                 Swal.fire({
                                     text: dataMessage,
                                     icon: "warning",
@@ -105,7 +112,7 @@ var KTSigninGeneral = function () {
                                         confirmButton: "btn btn-light btn-active-color-white"
                                     }
                                 });
-                            } else {
+                            }  else {
                                 Swal.fire({
                                     text: 'Ha ocurrido algo inesperado.',
                                     icon: "error",

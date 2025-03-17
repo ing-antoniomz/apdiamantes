@@ -46,13 +46,13 @@
         <!--begin::Input group=-->
         <div class="fv-row mb-8 fv-plugins-icon-container fv-plugins-bootstrap5-row-valid">
             <!--begin::Email-->
-            <input type="text" placeholder="{{ __('E-Mail') }}" id="email" name="email" autocomplete="off" class="form-control bg-transparent" value="{{ old('email', 'demo@demo.com') }}" maxlength="60" required autofocus>
+            <input type="text" placeholder="{{ __('E-Mail') }}" id="email" name="email" autocomplete="off" class="form-control bg-transparent" value="{{ old('email') }}" maxlength="60" required autofocus>
             <!--end::Email-->
         </div>
         <!--end::Input group=-->
         <div class="fv-row mb-3 fv-plugins-icon-container fv-plugins-bootstrap5-row-valid">
             <!--begin::Password-->
-            <input type="password" placeholder="{{ __('Password') }}" id="password" name="password" autocomplete="off" class="form-control bg-transparent" maxlength="30" value="demo" required>
+            <input type="password" placeholder="{{ __('Password') }}" id="password" name="password" autocomplete="off" class="form-control bg-transparent" maxlength="30"  required>
             <!--end::Password-->
         </div>
         <!--end::Input group=-->
