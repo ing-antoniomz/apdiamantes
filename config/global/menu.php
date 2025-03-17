@@ -224,6 +224,7 @@ return array(
             'attributes' => array(
                 "data-kt-menu-trigger" => "click",
             ),
+            'permission' => ['menu_admin'],
             'sub'        => array(
                 'class' => 'menu-sub-accordion menu-active-bg',
                 'items' => array(
@@ -233,57 +234,23 @@ return array(
                         },
                         'path'   => 'admin/users',
                         'bullet' => '<span class="bullet bullet-dot"></span>',
-                        /* 'role' => ['admin', 'ADMINISTRADOR'],
-                        'permission' => ['catalogos_menu'], */
-                    ),
-                ),
-            ),
-        ),
-
-        // Account
-        array(
-            'title'      => function () {
-                return trans('Account');
-            },
-            'icon'       => array(
-                'svg'  => theme()->getSvgIcon("demo3/media/icons/duotune/communication/com006.svg", "svg-icon-2"),
-                'font' => '<i class="bi bi-person fs-2"></i>',
-            ),
-            'classes'    => array('item' => ''),
-            'attributes' => array(
-                "data-kt-menu-trigger" => "click",
-            ),
-            'sub'        => array(
-                'class' => 'menu-sub-accordion menu-active-bg',
-                'items' => array(
-                    array(
-                        'title'  => function () {
-                            return trans('Overview');
-                        },
-                        'path'   => 'account/overview',
-                        'bullet' => '<span class="bullet bullet-dot"></span>',
+                        'permission' => ['submenu_usuarios'],
                     ),
                     array(
-                        'title'  => function () {
-                            return trans('Settings');
-                        },
-                        'path'   => 'account/settings',
-                        'bullet' => '<span class="bullet bullet-dot"></span>',
-                    ),
-                    /* array(
-                        'title'      => 'Security',
+                        'title'      => 'Correo',
                         'path'       => '#',
                         'bullet'     => '<span class="bullet bullet-dot"></span>',
+                        'permission' => ['submenu_correo'],
                         'attributes' => array(
                             'link' => array(
-                                "title"             => "Coming soon",
+                                "title"             => "Proximamnete",
                                 "data-bs-toggle"    => "tooltip",
                                 "data-bs-trigger"   => "hover",
                                 "data-bs-dismiss"   => "click",
                                 "data-bs-placement" => "right",
                             ),
                         ),
-                    ), */
+                    ),
                 ),
             ),
         ),
@@ -301,29 +268,17 @@ return array(
             'attributes' => array(
                 "data-kt-menu-trigger" => "click",
             ),
+            'permission' => ['menu_sistema'],
             'sub'        => array(
                 'class' => 'menu-sub-accordion menu-active-bg',
                 'items' => array(
-                    /* array(
-                        'title'      => 'Settings',
-                        'path'       => '#',
-                        'bullet'     => '<span class="bullet bullet-dot"></span>',
-                        'attributes' => array(
-                            'link' => array(
-                                "title"             => "Coming soon",
-                                "data-bs-toggle"    => "tooltip",
-                                "data-bs-trigger"   => "hover",
-                                "data-bs-dismiss"   => "click",
-                                "data-bs-placement" => "right",
-                            ),
-                        ),
-                    ), */
                     array(
                         'title'  => function () {
                             return trans('Audit Log');
                         },
                         'path'   => 'log/audit',
                         'bullet' => '<span class="bullet bullet-dot"></span>',
+                        'permission' => ['submenu_log_auditoria'],
                     ),
                     array(
                         'title'  => function () {
@@ -331,6 +286,7 @@ return array(
                         },
                         'path'   => 'log/system',
                         'bullet' => '<span class="bullet bullet-dot"></span>',
+                        'permission' => ['submenu_log_sistema'],
                     ),
                     /* array(
                         'title'  => 'Error 404',
@@ -346,10 +302,50 @@ return array(
             ),
         ),
 
+        // Account
+        array(
+            'title'      => function () {
+                return trans('Account');
+            },
+            'icon'       => array(
+                'svg'  => theme()->getSvgIcon("demo3/media/icons/duotune/communication/com006.svg", "svg-icon-2"),
+                'font' => '<i class="bi bi-person fs-2"></i>',
+            ),
+            'classes'    => array('item' => ''),
+            'attributes' => array(
+                "data-kt-menu-trigger" => "click",
+            ),
+            'permission' => ['menu_cuenta'],
+            'sub'        => array(
+                'class' => 'menu-sub-accordion menu-active-bg',
+                'items' => array(
+                    array(
+                        'title'  => function () {
+                            return trans('Overview');
+                        },
+                        'path'   => 'account/overview',
+                        'bullet' => '<span class="bullet bullet-dot"></span>',
+                        'permission' => ['submenu_resumen'],
+                    ),
+                    array(
+                        'title'  => function () {
+                            return trans('Settings');
+                        },
+                        'path'   => 'account/settings',
+                        'bullet' => '<span class="bullet bullet-dot"></span>',
+                        'permission' => ['submenu_ajustes'],
+                    ),
+                ),
+            ),
+        ),
+
+
+
         //// Help
         array(
             'classes' => array('content' => 'pt-8 pb-2'),
             'content' => '<span class="menu-section text-muted text-uppercase fs-8 ls-1">Ayuda</span>',
+            'permission' => ['menu_documentacion'],
         ),
 
         // Documentation
@@ -357,6 +353,7 @@ return array(
             'title' => 'Documentación',
             'icon'  => theme()->getSvgIcon("demo3/media/icons/duotune/abstract/abs027.svg", "svg-icon-2"),
             'path'  => 'documentation/getting-started/overview',
+            'permission' => ['menu_documentacion'],
         ),
 
         // Changelog

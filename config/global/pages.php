@@ -169,18 +169,6 @@ return array(
         ),
     ),
 
-    'users'         => array(
-        'title' => 'User List',
-
-        '*' => array(
-            'title' => 'Show User',
-
-            'edit' => array(
-                'title' => 'Edit User',
-            ),
-        ),
-    ),
-
     // Documentation pages
     'documentation' => array(
         '*' => array(

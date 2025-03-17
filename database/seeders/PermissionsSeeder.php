@@ -4,9 +4,16 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\PermissionRegistrar;
 
 class PermissionsSeeder extends Seeder
 {
+    private array $data;
+
+    public function __construct()
+    {
+        $this->data = $this->data();
+    }
     /**
      * Run the database seeds.
      *
@@ -14,42 +21,59 @@ class PermissionsSeeder extends Seeder
      */
     public function run()
     {
-        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
-
-        $data = $this->data();
-
+        app(PermissionRegistrar::class)->forgetCachedPermissions();
+        $data = $this->data;
         foreach ($data as $value) {
             Permission::create([
                 'name' => $value['name'],
+                'descripcion' => $value['descripcion'],
             ]);
         }
     }
 
-    public function data()
+    private function data()
     {
-        $data = [];
-        // list of model permission
-        $model = ['content', 'user', 'role', 'permission'];
-
-        foreach ($model as $value) {
-            foreach ($this->crudActions($value) as $action) {
-                $data[] = ['name' => $action];
-            }
-        }
-
-        return $data;
-    }
-
-    public function crudActions($name)
-    {
-        $actions = [];
-        // list of permission actions
-        $crud = ['create', 'read', 'update', 'delete'];
-
-        foreach ($crud as $value) {
-            $actions[] = $value.' '.$name;
-        }
-
-        return $actions;
+        return[
+            0 => [
+                'name'        => 'menu_admin',
+                'descripcion' => 'Permite visualizar el menu de Administrador',
+            ],
+            1 => [
+                'name'        => 'menu_cuenta',
+                'descripcion' => 'Permite visualizar el menu de Cuenta',
+            ],
+            2 => [
+                'name'        => 'menu_sistema',
+                'descripcion' => 'Permite visualizar el menu de Sistema',
+            ],
+            3 => [
+                'name'        => 'submenu_usuarios',
+                'descripcion' => 'Permite ver el submenu de usuarios',
+            ],
+            4 => [
+                'name'        => 'submenu_resumen',
+                'descripcion' => 'Permite ver el submenu de resumen de cuenta',
+            ],
+            5 => [
+                'name'        => 'submenu_ajustes',
+                'descripcion' => 'Permite ver el submenu de ajustes de ceunta',
+            ],
+            6 => [
+                'name'        => 'submenu_log_auditoria',
+                'descripcion' => 'Permite ver el submenu de logs de auditoria',
+            ],
+            7 => [
+                'name'        => 'submenu_log_sistema',
+                'descripcion' => 'Permite ver el submenu de logs de sistema',
+            ],
+            8 => [
+                'name'        => 'menu_documentacion',
+                'descripcion' => 'Permite ver el menu de documentacion',
+            ],
+            9 => [
+                'name'        => 'submenu_correo',
+                'descripcion' => 'Permite ver el submenu de correos',
+            ],
+        ];
     }
 }
