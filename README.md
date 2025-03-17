@@ -1,6 +1,6 @@
-<img src="resources/assets/apdiamantes/media/logo_negro.svg" alt="Logo" style="width: 30%;">
 
-# APDiamantes
+
+# <img src="resources/assets/apdiamantes/media/logo_negro.svg" alt="Logo" style="height:50px;"> APDiamantes
 
 Plataforma para que los empleados de apdiamantes puedan ver el progreso de sus finanzas asi como de los usuarios asignados a sus grupos.
 
@@ -12,8 +12,11 @@ Plataforma para que los empleados de apdiamantes puedan ver el progreso de sus f
 - PHP  => 8.1.30
 - APACHE  => 2.4.62
 - LARAVEL  => 10.48.23
+- POSTGRESQL  => 13.14
 - METRONIC  => 8.1.4 - demo3
 - BOOTSTRAP  => 5.2.0
+- PHP EXTENSIONS  => adasfadsas,sadfsdaf,sadf,sadf,sadf
+- APACHE MODULES  => adasfadsas,sadfsdaf,sadf,sadf,sadf
 
 ## Desplegar
 
