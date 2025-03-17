@@ -1,8 +1,7 @@
-
-
-# <img src="resources/assets/apdiamantes/media/logo_negro.svg" alt="Logo" style="height:50px;"> APDiamantes
-
-Plataforma para que los empleados de apdiamantes puedan ver el progreso de sus finanzas asi como de los usuarios asignados a sus grupos.
+<p align="left">
+    <img src="resources/assets/apdiamantes/media/logo_negro.svg" alt="Logo" style="height:100px; vertical-align: middle;">
+    <span style="font-size: 32px; font-weight: bold; vertical-align: middle;">APDiamantes</span>
+</p>
 
 ## Tecnologias
 
