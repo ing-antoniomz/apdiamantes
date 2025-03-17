@@ -1,6 +1,6 @@
-<p align="left">
-    <img src="resources/assets/apdiamantes/media/logo_negro.svg" alt="Logo" style="height:100px; vertical-align: middle;">
-    <span style="font-size: 32px; font-weight: bold; vertical-align: middle;">APDiamantes</span>
+<p align="left" style="display: flex; align-items: center;">
+    <img src="resources/assets/apdiamantes/media/logo_negro.svg" alt="Logo" style="height: 100px; margin-right: 10px;">
+    <span style="font-size: 32px; font-weight: bold; display: inline-block;">APDiamantes</span>
 </p>
 
 ## Tecnologias
