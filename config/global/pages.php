@@ -6,7 +6,7 @@ return array(
         'view'        => 'index',
         'layout'      => array(
             'page-title' => array(
-                'description' => true,
+                'description' => false,
                 'breadcrumb'  => false,
             ),
         ),
@@ -25,6 +25,13 @@ return array(
             'title'  => function () {
                 return trans('Users');
             },
+            'description' => '',
+            'layout'      => array(
+                'page-title' => array(
+                    'description' => false,
+                    'breadcrumb'  => true,
+                ),
+            ),
             'assets' => array(
                 'custom' => array(
                     'css' => array(

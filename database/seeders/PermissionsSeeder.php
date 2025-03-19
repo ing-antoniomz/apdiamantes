@@ -74,6 +74,26 @@ class PermissionsSeeder extends Seeder
                 'name'        => 'submenu_correo',
                 'descripcion' => 'Permite ver el submenu de correos',
             ],
+            10 => [
+                'name'        => 'submenu_catalogos',
+                'descripcion' => 'Permite ver el submenu de catalogos',
+            ],
+            11 => [
+                'name'        => 'submenu_anuncios',
+                'descripcion' => 'Permite ver el submenu de anuncios',
+            ],
+            12 => [
+                'name'        => 'menu_grupo',
+                'descripcion' => 'Permite ver el menu de grupo',
+            ],
+            13 => [
+                'name'        => 'submenu_companeros',
+                'descripcion' => 'Permite ver el submenu de companeros',
+            ],
+            14 => [
+                'name'        => 'submenu_admin_grupos',
+                'descripcion' => 'Permite ver el submenu de administracion de grupos',
+            ],
         ];
     }
 }
