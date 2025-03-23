@@ -22,9 +22,7 @@ use App\Http\Controllers\Documentation\LayoutBuilderController;
 |
 */
 
-// Route::get('/', function () {
-//     return redirect('index');
-// });
+require __DIR__ . '/auth.php';
 
 $menu = theme()->getMenu();
 array_walk($menu, function ($val) {
@@ -45,14 +43,8 @@ array_walk($menu, function ($val) {
     }
 });
 
-// Documentations pages
-Route::prefix('documentation')->group(function () {
-    Route::get('getting-started/references', [ReferencesController::class, 'index']);
-    Route::get('getting-started/changelog', [PagesController::class, 'index']);
-    Route::resource('layout-builder', LayoutBuilderController::class)->only(['store']);
-});
-
 Route::middleware('auth')->group(function () {
+
     // Account pages
     Route::prefix('account')->group(function () {
         Route::get('settings', [SettingsController::class, 'index'])->name('settings.index');
@@ -73,14 +65,7 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-Route::resource('users', UsersController::class);
-
-/**
- * Socialite login using Google service
- * https://laravel.com/docs/8.x/socialite
- */
-Route::get('/auth/redirect/{provider}', [SocialiteLoginController::class, 'redirect']);
-//lang files for datatables
+// Lang files for datatables
 Route::get('lang/datatables/{locale}.json', function ($locale) {
     $path = resource_path("lang/$locale/datatables.php");
     if (!File::exists($path)) {
@@ -90,4 +75,17 @@ Route::get('lang/datatables/{locale}.json', function ($locale) {
     return Response::json($translations);
 });
 
-require __DIR__.'/auth.php';
+//Route::resource('users', UsersController::class);
+
+/**
+ * Socialite login using Google service
+ * https://laravel.com/docs/8.x/socialite
+ */
+//Route::get('/auth/redirect/{provider}', [SocialiteLoginController::class, 'redirect']);
+
+// Documentations pages
+Route::prefix('documentation')->group(function () {
+    Route::get('getting-started/references', [ReferencesController::class, 'index']);
+    Route::get('getting-started/changelog', [PagesController::class, 'index']);
+    Route::resource('layout-builder', LayoutBuilderController::class)->only(['store']);
+});
