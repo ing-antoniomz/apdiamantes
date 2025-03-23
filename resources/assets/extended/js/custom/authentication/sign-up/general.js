@@ -15,83 +15,52 @@ var KTSignupGeneral = function () {
             form,
             {
                 fields: {
-                    'nombre': {
-                        validators: {
-                            notEmpty: {
-                                message: 'First Name is required'
-                            }
-                        }
-                    },
-                    'apellido_paterno': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Apellido Paterno is required'
-                            }
-                        }
-                    },
-                    'apellido_materno': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Apellido Materno is required'
-                            }
-                        }
-                    },
                     'email': {
                         validators: {
                             notEmpty: {
-                                message: 'Email address is required'
+                                message: 'Se necesita una dirección de correo'
                             },
                             emailAddress: {
-                                message: 'The value is not a valid email address'
+                                message: 'Formato de correo invalido'
                             }
                         }
                     },
                     'password': {
                         validators: {
                             notEmpty: {
-                                message: 'The password is required'
+                                message: 'Se necesita una contraseña'
                             },
                             callback: {
-                                message: 'Please enter valid password',
+                                message: 'Ingresa una contraseña valida',
                                 callback: function (input) {
-                                    if (input.value.length > 0) {
-                                        return validatePassword();
+                                    if (input.value.length === 0) {
+                                        return false; // Si está vacío, la validación falla
                                     }
+                                    return validatePassword(input.value);
                                 }
                             }
                         }
                     },
-                    'confirm-password': {
+                    'password_confirmation': {
                         validators: {
                             notEmpty: {
-                                message: 'The password confirmation is required'
+                                message: 'Se necesita la confirmación de contraseña'
                             },
                             identical: {
                                 compare: function () {
                                     return form.querySelector('[name="password"]').value;
                                 },
-                                message: 'The password and its confirm are not the same'
-                            }
-                        }
-                    },
-                    'toc': {
-                        validators: {
-                            notEmpty: {
-                                message: 'You must accept the terms and conditions'
+                                message: 'Debe coincidir la contraseña y la confirmación de contraseña'
                             }
                         }
                     }
                 },
                 plugins: {
-                    trigger: new FormValidation.plugins.Trigger({
-                        event: {
-                            password: false
-                        }
-                    }),
+                    trigger: new FormValidation.plugins.Trigger(),
                     bootstrap: new FormValidation.plugins.Bootstrap5({
                         rowSelector: '.fv-row',
-                        eleInvalidClass: '',
-                        eleValidClass: ''
+                        eleInvalidClass: 'is-invalid',
+                        eleValidClass: 'is-valid'
                     })
                 }
             }
@@ -116,38 +85,38 @@ var KTSignupGeneral = function () {
                         .then(function (response) {
                             // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                             Swal.fire({
-                                text: "You have successfully registered! Please check your email for verification.",
+                                text: response.data.message,
                                 icon: "success",
                                 buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
+                                confirmButtonText: "Ok",
                                 customClass: {
-                                    confirmButton: "btn btn-primary"
+                                    confirmButton: "btn btn-light btn-active-color-white"
                                 }
                             }).then(function (result) {
+                                // Redirigir si el usuario hace clic en "Ok"
                                 if (result.isConfirmed) {
-                                    form.querySelector('[name="email"]').value = "";
-                                    form.querySelector('[name="password"]').value = "";
-                                    window.location.reload();
+                                    window.location.href = "/login"; // Cambia "/login" por la ruta correcta
                                 }
+                            }).finally(function () {
+                                // Redirigir incluso si el usuario no confirma
+                                window.location.href = "/login"; // Cambia "/login" por la ruta correcta
                             });
                         })
                         .catch(function (error) {
                             let dataMessage = error.response.data.message;
                             let dataErrors = error.response.data.errors;
-
                             for (const errorsKey in dataErrors) {
                                 if (!dataErrors.hasOwnProperty(errorsKey)) continue;
                                 dataMessage += "\r\n" + dataErrors[errorsKey];
                             }
-
                             if (error.response) {
                                 Swal.fire({
-                                    text: dataMessage,
+                                    text: error.response.data.message,
                                     icon: "error",
                                     buttonsStyling: false,
-                                    confirmButtonText: "Ok, got it!",
+                                    confirmButtonText: "Ok",
                                     customClass: {
-                                        confirmButton: "btn btn-primary"
+                                        confirmButton: "btn btn-light btn-active-color-white"
                                     }
                                 });
                             }
@@ -156,19 +125,18 @@ var KTSignupGeneral = function () {
                             // always executed
                             // Hide loading indication
                             submitButton.removeAttribute('data-kt-indicator');
-
                             // Enable button
                             submitButton.disabled = false;
                         });
                 } else {
                     // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                     Swal.fire({
-                        text: "Sorry, looks like there are some errors detected, please try again.",
-                        icon: "error",
+                        text: "Revisa bien los datos ingresados.",
+                        icon: "warning",
                         buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
+                        confirmButtonText: "Revisar",
                         customClass: {
-                            confirmButton: "btn btn-primary"
+                            confirmButton: "btn btn-light btn-active-color-white"
                         }
                     });
                 }
@@ -184,8 +152,10 @@ var KTSignupGeneral = function () {
     }
 
     // Password input validation
-    var validatePassword = function () {
-        return (passwordMeter.getScore() > 50);
+    var validatePassword = function (value) {
+        // Ejemplo: Mínimo 8 caracteres, al menos 1 número y 1 letra
+        let regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        return regex.test(value);
     }
 
     // Public functions
@@ -195,7 +165,6 @@ var KTSignupGeneral = function () {
             form = document.querySelector('#kt_sign_up_form');
             submitButton = document.querySelector('#kt_sign_up_submit');
             passwordMeter = KTPasswordMeter.getInstance(form.querySelector('[data-kt-password-meter="true"]'));
-
             handleForm();
         }
     };

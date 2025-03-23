@@ -35,6 +35,7 @@ class NewPasswordController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->all());
         $request->validate([
             'token'    => 'required',
             'email'    => 'required|email',
@@ -55,13 +56,33 @@ class NewPasswordController extends Controller
                 event(new PasswordReset($user));
             }
         );
-
         // If the password was successfully reset, we will redirect the user back to
         // the application's home authenticated view. If there is an error we can
         // redirect them back to where they came from with their error message.
-        return $status == Password::PASSWORD_RESET
-            ? redirect()->route('login')->with('status', __($status))
-            : back()->withInput($request->only('email'))
-                ->withErrors(['email' => __($status)]);
+        switch ($status) {
+            case Password::PASSWORD_RESET; //Autenticacion exitosa
+                # code...
+                return response()->json([
+                    'message' => __('Password change successful. You will be redirected to login')
+                ], 200);
+            break;
+            case Password::INVALID_USER; //Usuario no encontrado
+                return response()->json([
+                    'message' => __('The data entered does not match our records')
+                ], 404);
+                # code...
+            break;
+            case Password::INVALID_TOKEN; //Token invalido
+                return response()->json([
+                    'message' => __('The token has expired or is invalid')
+                ], 400);
+            break;
+            default:
+                return response()->json([
+                    'message' => __('Something strange happened').'NPC-01.'
+                ], 422);
+            break;
+        }
+
     }
 }
