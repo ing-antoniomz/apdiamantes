@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 });*/
 
 // Sample API route
-Route::get('/profits', [SampleDataController::class, 'profits'])->name('profits');
+/* Route::get('/profits', [SampleDataController::class, 'profits'])->name('profits');
 
 Route::post('/register', [RegisteredUserController::class, 'apiStore']);
 
@@ -32,5 +32,5 @@ Route::post('/forgot_password', [PasswordResetLinkController::class, 'apiStore']
 
 Route::post('/verify_token', [AuthenticatedSessionController::class, 'apiVerifyToken']);
 
-Route::get('/users', [SampleDataController::class, 'getUsers']);
+Route::get('/users', [SampleDataController::class, 'getUsers']); */
 
