@@ -169,7 +169,6 @@ return array(
                     'js' => array(
                         'js/custom/account/settings/profile-details.js',
                         'js/custom/account/settings/signin-methods.js',
-                        'js/custom/modals/two-factor-authentication.js',
                     ),
                 ),
             ),
