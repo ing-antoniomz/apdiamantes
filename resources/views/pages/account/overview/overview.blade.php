@@ -1,8 +1,8 @@
 <x-base-layout>
 
-{{ theme()->getView('pages/account/_navbar', array('class' => 'mb-5 mb-xl-10')) }}
+{{ theme()->getView('pages/account/_navbar', array('class' => 'mb-5 mb-xl-10', 'info' => auth()->user()->info)) }}
 
-{{ theme()->getView('pages/account/overview/_details', array('class' => 'mb-5 mb-xl-10', 'info' => auth()->user()->info)) }}
+{{-- {{ theme()->getView('pages/account/overview/_details', array('class' => 'mb-5 mb-xl-10', 'info' => auth()->user()->info)) }} --}}
 
 <!--begin::Row-->
     <div class="row gy-10 gx-xl-10">

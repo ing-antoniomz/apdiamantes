@@ -12,7 +12,7 @@
     <!--begin::Card header-->
 
     <!--begin::Content-->
-    <div id="kt_account_profile_details" class="collapse show">
+    <div id="kt_account_profile_details" class="collapse">
         <!--begin::Form-->
         <form id="kt_account_profile_details_form" class="form" method="POST" action="{{ route('settings.update') }}" enctype="multipart/form-data">
         @csrf
@@ -20,7 +20,7 @@
         <!--begin::Card body-->
             <div class="card-body border-top p-9">
 
-                <div class="row mb-6">
+                <div class="row mb-5">
                     <div class="col-lg-10">
                         <!--begin::Input group-->
                         <div class="row mb-6">
@@ -233,16 +233,19 @@
                         <!--begin::Hint-->
                         {{-- <div class="form-text user-select-none">{{ __('Allowed file types') }}: png, jpg, jpeg.</div> --}}
                         <!--end::Hint-->
+                        <p class="text-white text-center fw-bold">{{ $info->membresia }}</p>
+                        <hr class="my-4 mx-4">
+                        <p class="text-white text-center small">{{ auth()->user()->user }}</p>
                         <p class="text-white text-center small">{{ auth()->user()->email }}</p>
                         <p class="text-white text-center small">{{  $info->phone }}</p>
                         @if(isset($info->beneficiario1) || isset($info->beneficiario2))
                             <hr class="my-4 mx-4">
                             <p class="text-white text-center small user-select-none">{{ __("Beneficiaries") }}</p>
                             @isset($info->beneficiario1)
-                                <p class="text-white text-center small">{{ $info->beneficiario1 }}</p>
+                                <p class="text-white text-center small user-select-none">{{ $info->beneficiario1 }}</p>
                             @endisset
                             @isset($info->beneficiario2)
-                                <p class="text-white text-center small">{{ $info->beneficiario2 }}</p>
+                                <p class="text-white text-center small user-select-none">{{ $info->beneficiario2 }}</p>
                             @endisset
                         @endif
                     </div>
@@ -365,6 +368,11 @@
                             </div>
                         </div>
                         <!--end::Input group-->
+                    </div>
+                    <div class="col-7"></div>
+                    <div class="col-lg-5">
+                        <hr class="my-4 mx-4">
+                        <p class="text-muted small text-end me-4 user-select-none">*{{ __("If you require a change in the information please contact us.") }}</p>
                     </div>
                 </div>
             </div>

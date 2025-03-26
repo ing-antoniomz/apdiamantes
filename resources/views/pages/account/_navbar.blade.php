@@ -39,15 +39,15 @@
 
                         <!--begin::Info-->
                         <div class="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
-                            <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
-                                {!! theme()->getSvgIcon("icons/duotune/communication/com006.svg", "svg-icon-4 me-1") !!}
-                                Ocupación
+                            <a href="#" class="d-flex align-items-center text-gray-600 text-hover-primary me-5 mb-2">
+                                {!! theme()->getSvgIcon("icons/duotune/communication/com013.svg", "svg-icon-4 me-1 text-light") !!}
+                                {{ auth()->user()->roles->pluck('name')->first() }}
                             </a>
-                            <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
-                                {!! theme()->getSvgIcon("icons/duotune/general/gen018.svg", "svg-icon-4 me-1") !!}
-                                Direccion, corta
+                            <a href="#" class="d-flex align-items-center text-gray-600 text-hover-primary me-5 mb-2">
+                                {!! theme()->getSvgIcon("icons/duotune/general/gen018.svg", "svg-icon-4 me-1 text-light") !!}
+                                {{ $info->ciudad_fiscal }}, {{ $info->estado_fiscal }}
                             </a>
-                            <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
+                            <a href="#" class="d-flex align-items-center text-gray-600 text-hover-primary mb-2">
                                 {!! theme()->getSvgIcon("icons/duotune/communication/com011.svg", "svg-icon-4 me-1") !!}
                                 {{ auth()->user()->email }}
                             </a>

@@ -55,9 +55,9 @@
                 <!--end::Edit-->
 
                 <!--begin::Action-->
-                <div id="kt_signin_email_button" class="ms-auto">
+                {{-- <div id="kt_signin_email_button" class="ms-auto">
                     <button class="btn btn-bg-dark btn-active-secondary btn-active-color-white btn-color-gray-100">{{ __('Change E-Mail') }}</button>
-                </div>
+                </div> --}}
                 <!--end::Action-->
             </div>
             <!--end::Email Address-->
