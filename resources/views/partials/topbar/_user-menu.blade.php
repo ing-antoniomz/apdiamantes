@@ -49,10 +49,10 @@
     <!--end::Menu item-->
 
     <!--begin::Menu item-->
-    <div class="menu-item px-5" data-kt-menu-trigger="hover" data-kt-menu-placement="left-start">
+    <div class="menu-item px-5" data-kt-menu-trigger="hover" data-kt-menu-placement="left-end">
         <a href="#" class="menu-link px-5">
             <span class="menu-title">{{ __('My Subscription') }}</span>
-            <span class="menu-arrow"></span>
+            {{-- <span class="menu-arrow"></span> --}}
         </a>
 
         <!--begin::Menu sub-->
@@ -131,7 +131,7 @@
                 {{ __('Language') }}
 
                 <span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">
-                    {{ __('English') }} <img class="w-15px h-15px rounded-1 ms-2" src="{{ asset(theme()->getMediaUrlPath() . 'flags/united-states.svg') }}" alt="metronic"/>
+                    {{ __('Spanish') }} <img class="w-15px h-15px rounded-1 ms-2" src="{{ asset(theme()->getMediaUrlPath() . 'flags/mexico.svg') }}" alt="metronic"/>
                 </span>
             </span>
         </a>
@@ -142,53 +142,19 @@
             <div class="menu-item px-3">
                 <a href="#" class="menu-link d-flex px-5 active">
                     <span class="symbol symbol-20px me-4">
-                        <img class="rounded-1" src="{{ asset(theme()->getMediaUrlPath() . 'flags/united-states.svg') }}" alt="metronic"/>
-                    </span>
-                    {{ __('English') }}
-                </a>
-            </div>
-            <!--end::Menu item-->
-
-            <!--begin::Menu item-->
-            <div class="menu-item px-3">
-                <a href="#" class="menu-link d-flex px-5">
-                    <span class="symbol symbol-20px me-4">
-                        <img class="rounded-1" src="{{ asset(theme()->getMediaUrlPath() . 'flags/spain.svg') }}" alt="metronic"/>
+                        <img class="rounded-1" src="{{ asset(theme()->getMediaUrlPath() . 'flags/mexico.svg') }}" alt="metronic"/>
                     </span>
                     {{ __('Spanish') }}
                 </a>
             </div>
             <!--end::Menu item-->
-
             <!--begin::Menu item-->
             <div class="menu-item px-3">
                 <a href="#" class="menu-link d-flex px-5">
                     <span class="symbol symbol-20px me-4">
-                        <img class="rounded-1" src="{{ asset(theme()->getMediaUrlPath() . 'flags/germany.svg') }}" alt="metronic"/>
+                        <img class="rounded-1" src="{{ asset(theme()->getMediaUrlPath() . 'flags/united-states.svg') }}" alt="metronic"/>
                     </span>
-                    {{ __('German') }}
-                </a>
-            </div>
-            <!--end::Menu item-->
-
-            <!--begin::Menu item-->
-            <div class="menu-item px-3">
-                <a href="#" class="menu-link d-flex px-5">
-                    <span class="symbol symbol-20px me-4">
-                        <img class="rounded-1" src="{{ asset(theme()->getMediaUrlPath() . 'flags/japan.svg') }}" alt="metronic"/>
-                    </span>
-                    {{ __('Japanese') }}
-                </a>
-            </div>
-            <!--end::Menu item-->
-
-            <!--begin::Menu item-->
-            <div class="menu-item px-3">
-                <a href="#" class="menu-link d-flex px-5">
-                    <span class="symbol symbol-20px me-4">
-                        <img class="rounded-1" src="{{ asset(theme()->getMediaUrlPath() . 'flags/france.svg') }}" alt="metronic"/>
-                    </span>
-                    {{ __('French') }}
+                    {{ __('English') }}
                 </a>
             </div>
             <!--end::Menu item-->

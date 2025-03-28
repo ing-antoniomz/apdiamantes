@@ -56,7 +56,7 @@
 
             <!--begin::User menu-->
             <div class="ms-1">
-                <div class="btn btn-sm btn-icon btn-active-color-primary position-relative me-n2" data-kt-menu-trigger="hover" data-kt-menu-placement="top-end">
+                <div class="btn btn-sm btn-icon btn-active-color-primary position-relative me-n2" data-kt-menu-trigger="hover" data-kt-menu-placement="right-end">
                     {!! theme()->getSvgIcon("icons/duotune/coding/cod001.svg", "svg-icon-1") !!}
                 </div>
                 {{ theme()->getView('partials/topbar/_user-menu', array(

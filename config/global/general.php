@@ -92,11 +92,11 @@ return array(
         // Engage
         'engage'        => array(
             'demos'    => array(
-                'enabled'   => true,
+                'enabled'   => false,
                 'direction' => 'end',
             ),
             'explore'  => array(
-                'enabled'   => true,
+                'enabled'   => false,
                 'direction' => 'end',
             ),
             'help'     => array(
@@ -104,7 +104,7 @@ return array(
                 'direction' => 'end',
             ),
             'purchase' => array(
-                'enabled' => true,
+                'enabled' => false,
             ),
         ),
     ),
