@@ -113,7 +113,11 @@
                         <div class="mb-0">
                             <!--begin::Value-->
                             <div class="fs-lg-2hx fs-2x fw-bold text-white d-flex flex-center">
-                                <div class="min-w-70px" data-kt-countup="true" data-kt-countup-value="700" data-kt-countup-suffix="+">0</div>
+                                @auth
+                                    <div class="min-w-70px" data-kt-countup="true" data-kt-countup-value="700" data-kt-countup-suffix="+">0</div>
+                                @else
+                                    <div class="min-w-70px">700+</div>
+                                @endauth
                             </div>
                             <!--end::Value-->
 
@@ -150,7 +154,11 @@
                         <div class="mb-0">
                             <!--begin::Value-->
                             <div class="fs-lg-2hx fs-2x fw-bold text-white d-flex flex-center">
-                                <div class="min-w-70px" data-kt-countup="true" data-kt-countup-value="80" data-kt-countup-suffix="K+">0</div>
+                                @auth
+                                    <div class="min-w-70px" data-kt-countup="true" data-kt-countup-value="80" data-kt-countup-suffix="K+">0</div>
+                                @else
+                                    <div class="min-w-70px">80K+</div>
+                                @endauth
                             </div>
                             <!--end::Value-->
 
@@ -187,7 +195,11 @@
                         <div class="mb-0">
                             <!--begin::Value-->
                             <div class="fs-lg-2hx fs-2x fw-bold text-white d-flex flex-center">
-                                <div class="min-w-70px" data-kt-countup="true" data-kt-countup-value="35" data-kt-countup-suffix="M+">0</div>
+                                @auth
+                                    <div class="min-w-70px" data-kt-countup="true" data-kt-countup-value="35" data-kt-countup-suffix="M+">0</div>
+                                @else
+                                    <div class="min-w-70px">35M+</div>
+                                @endauth
                             </div>
                             <!--end::Value-->
 
