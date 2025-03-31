@@ -158,7 +158,7 @@ return array(
             'assets' => array(
                 'custom' => array(
                     'js' => array(
-                        'js/custom/account/settings/profile-details.js',
+                        //'js/custom/account/settings/profile-details.js',
                         'js/custom/account/settings/signin-methods.js',
                     ),
                 ),
@@ -166,7 +166,7 @@ return array(
         ),
     ),
 
-   /*  'nosotros' => array(
+    /*  'nosotros' => array(
         'title'       => 'Nosotros',
         'description' => '',
         'layout'      => array(
@@ -193,36 +193,6 @@ return array(
             'title' => 'Error 500',
         ),
     ), */
-
-    'account' => array(
-        'overview' => array(
-            'title'  => function () {
-                return trans('Account Overview');
-            },
-            'view'   => 'account/overview/overview',
-            'assets' => array(
-                'custom' => array(
-                    'js' => array(
-                        'js/custom/widgets.js',
-                    ),
-                ),
-            ),
-        ),
-
-        'settings' => array(
-            'title'  => function () {
-                return trans('Account Settings');
-            },
-            'assets' => array(
-                'custom' => array(
-                    'js' => array(
-                        'js/custom/account/settings/profile-details.js',
-                        'js/custom/account/settings/signin-methods.js',
-                    ),
-                ),
-            ),
-        ),
-    ),
 
     // Documentation pages
     'documentation' => array(

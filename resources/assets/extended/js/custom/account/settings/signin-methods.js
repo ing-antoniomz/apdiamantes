@@ -6,25 +6,25 @@ var KTAccountSettingsSigninMethods = function () {
     var initSettings = function () {
 
         // UI elements
-        var signInMainEl = document.getElementById('kt_signin_email');
-        var signInEditEl = document.getElementById('kt_signin_email_edit');
+        /* var signInMainEl = document.getElementById('kt_signin_email');
+        var signInEditEl = document.getElementById('kt_signin_email_edit'); */
         var passwordMainEl = document.getElementById('kt_signin_password');
         var passwordEditEl = document.getElementById('kt_signin_password_edit');
 
         // button elements
-        var signInChangeEmail = document.getElementById('kt_signin_email_button');
-        var signInCancelEmail = document.getElementById('kt_signin_cancel');
+        /* var signInChangeEmail = document.getElementById('kt_signin_email_button');
+        var signInCancelEmail = document.getElementById('kt_signin_cancel'); */
         var passwordChange = document.getElementById('kt_signin_password_button');
         var passwordCancel = document.getElementById('kt_password_cancel');
 
         // toggle UI
-        signInChangeEmail.querySelector('button').addEventListener('click', function () {
+        /* signInChangeEmail.querySelector('button').addEventListener('click', function () {
             toggleChangeEmail();
-        });
+        }); */
 
-        signInCancelEmail.addEventListener('click', function () {
+        /* signInCancelEmail.addEventListener('click', function () {
             toggleChangeEmail();
-        });
+        }); */
 
         passwordChange.querySelector('button').addEventListener('click', function () {
             toggleChangePassword();
@@ -34,11 +34,11 @@ var KTAccountSettingsSigninMethods = function () {
             toggleChangePassword();
         });
 
-        var toggleChangeEmail = function () {
+        /* var toggleChangeEmail = function () {
             signInMainEl.classList.toggle('d-none');
             signInChangeEmail.classList.toggle('d-none');
             signInEditEl.classList.toggle('d-none');
-        }
+        } */
 
         var toggleChangePassword = function () {
             passwordMainEl.classList.toggle('d-none');
@@ -305,7 +305,7 @@ var KTAccountSettingsSigninMethods = function () {
     return {
         init: function () {
             initSettings();
-            handleChangeEmail();
+            //handleChangeEmail();
             handleChangePassword();
         }
     }

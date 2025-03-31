@@ -364,7 +364,7 @@
                             <div class="col-lg-3">
                                 <label for="telefono_envios" class="form-label fw-bold fs-6 user-select-none text-center d-block">{{ __("Phone") }}</label>
                                 <input type="text" name="telefono_envios" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Teléfono"
-                                    value="{{ old('telefono_envios', $info->telefono_enviostelefono_envios ?? '') }}" readonly />
+                                    value="{{ old('telefono_envios', $info->telefono_envios ?? '') }}" readonly />
                             </div>
                         </div>
                         <!--end::Input group-->
