@@ -11,7 +11,7 @@
 
         <!--begin::Menu-->
         <ul class="menu menu-gray-600 menu-hover-primary fw-bold order-1 user-select-none">
-            <li class="menu-item"><a href="{{ theme()->getOption('general', 'about') }}" target="_blank" class="menu-link px-2">{{ __('About') }}</a></li>
+            <li class="menu-item"><a href="{{ theme()->getOption('general', 'about') }}"  class="menu-link px-2">{{ __('About') }}</a></li>
 
             <li class="menu-item"><a href="{{ theme()->getOption('general', 'support') }}" target="_blank" class="menu-link px-2">{{ __('Support') }}</a></li>
 

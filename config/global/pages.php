@@ -136,6 +136,55 @@ return array(
         ),
     ),
 
+    'account' => array(
+        'overview' => array(
+            'title'  => function () {
+                return trans('Account Overview');
+            },
+            'view'   => 'account/overview/overview',
+            'assets' => array(
+                'custom' => array(
+                    'js' => array(
+                        'js/custom/widgets.js',
+                    ),
+                ),
+            ),
+        ),
+
+        'settings' => array(
+            'title'  => function () {
+                return trans('Account Settings');
+            },
+            'assets' => array(
+                'custom' => array(
+                    'js' => array(
+                        'js/custom/account/settings/profile-details.js',
+                        'js/custom/account/settings/signin-methods.js',
+                    ),
+                ),
+            ),
+        ),
+    ),
+
+   /*  'nosotros' => array(
+        'title'       => 'Nosotros',
+        'description' => '',
+        'layout'      => array(
+            'page-title' => array(
+                'description' => false,
+                'breadcrumb'  => false,
+            ),
+        ),
+        'assets'      => array(
+            'custom'  => array(
+                'js' => array(
+                    'js/widgets.bundle.js',
+                ),
+            ),
+            'vendors' => array(),
+        ),
+    ), */
+
     /* 'error' => array(
         'error-404' => array(
             'title' => 'Error 404',

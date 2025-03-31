@@ -17,9 +17,9 @@
         <!--begin::Sidebar Nav-->
         <ul class="sidebar-nav nav nav-tabs mb-10" id="kt_sidebar_tabs" role="tablist">
             <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" data-kt-countup-tabs="true" href="#kt_sidebar_tab_1">
-                    {!! theme()->getSvgIcon("icons/duotune/abstract/abs038.svg") !!}
-                </a>
+                    <a class="nav-link" data-bs-toggle="tab" data-kt-countup-tabs="true" href="#kt_sidebar_tab_1">
+                        {!! theme()->getSvgIcon("icons/duotune/abstract/abs038.svg") !!}
+                    </a>
             </li>
 
             <li class="nav-item">

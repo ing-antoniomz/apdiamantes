@@ -19,7 +19,7 @@
                 <div class="d-flex flex-center flex-wrap px-5">
                     <!--begin::Links-->
                     <div class="d-flex fw-semibold text-primary fs-base">
-                        <a href="{{ $theme->getOption(" general", "about" ) }}" class="px-5 text-white user-select-none">{{ __('About') }}</a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#kt_modal_nosotros" class="px-5 text-white user-select-none">{{ __('About') }}</a>
                         <a href="{{ $theme->getOption('general', 'contact') }}" class="px-5 text-white user-select-none">{{ __('Contact Us') }}</a>
                         <a href="{{ $theme->getOption('product', 'purchase') }}" class="px-5 text-white user-select-none">{{ __('Purchase') }}</a>
                     </div>
@@ -52,5 +52,39 @@
             <!--end::Aside-->
         </div>
         <!--end::Authentication - Sign-in-->
+    </div>
+    <div class="modal fade" tabindex="-1" id="kt_modal_nosotros">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                {{-- <div class="modal-header">
+                    <h3 class="modal-title">{{ __('About') }}</h3>
+
+                    <!--begin::Close-->
+                    <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" />
+                            <path d="M6 18L18 6" stroke="currentColor" stroke-width="2" />
+                        </svg>
+                    </div>
+                    <!--end::Close-->
+                </div> --}}
+
+                <div class="modal-body mx-5">
+                    <div class="d-flex justify-content-end">
+                        <div class="btn btn-icon btn-sm btn-active-light-primary" data-bs-dismiss="modal" aria-label="Close">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" />
+                                <path d="M6 18L18 6" stroke="currentColor" stroke-width="2" />
+                            </svg>
+                        </div>
+                    </div>
+                    @include('pages.about._nosotros')
+                </div>
+
+                {{-- <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">{{ __('Close') }}</button>
+                </div> --}}
+            </div>
+        </div>
     </div>
 @endsection

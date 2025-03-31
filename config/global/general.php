@@ -45,7 +45,7 @@ return array(
     // General
     'general' => array(
         'website'             => 'https://apdiamantes.com',
-        'about'               => 'https://apdiamantes.com',
+        'about'               => 'https://apdiamantes-local.com/nosotros',
         'contact'             => 'mailto:apdiamantes@outlook.com',
         'support'             => 'https://apdiamantes.com',
         'bootstrap-docs-link' => 'https://apdiamantes.com',

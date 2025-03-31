@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\Admin\UsuariosController;
@@ -63,6 +64,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('users', UsuariosController::class)->only(['index', 'destroy']);
     });
+    Route::resource('nosotros', AboutController::class)->name('index', 'nosotros')->only(['index']);
 });
 
 // Lang files for datatables
@@ -89,3 +91,4 @@ Route::prefix('documentation')->group(function () {
     Route::get('getting-started/changelog', [PagesController::class, 'index']);
     Route::resource('layout-builder', LayoutBuilderController::class)->only(['store']);
 });
+
