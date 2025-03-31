@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\UsuariosController;
 use App\Http\Controllers\Logs\AuditLogsController;
 use App\Http\Controllers\Logs\SystemLogsController;
@@ -65,6 +66,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('users', UsuariosController::class)->only(['index', 'destroy']);
     });
     Route::resource('nosotros', AboutController::class)->name('index', 'nosotros')->only(['index']);
+    Route::resource('contacto', ContactController::class)->name('index', 'contacto')->only(['index']);
 });
 
 // Lang files for datatables

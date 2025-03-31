@@ -15,7 +15,7 @@
 
             <li class="menu-item"><a href="{{ theme()->getOption('general', 'support') }}" target="_blank" class="menu-link px-2">{{ __('Support') }}</a></li>
 
-            <li class="menu-item"><a href="{{ theme()->getOption('product', 'purchase') }}" target="_blank" class="menu-link px-2">{{ __('Contact Us') }}</a></li>
+            <li class="menu-item"><a href="{{ theme()->getOption('general', 'auth_contact') }}" class="menu-link px-2">{{ __('Contact Us') }}</a></li>
         </ul>
         <!--end::Menu-->
     </div>

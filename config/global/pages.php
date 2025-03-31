@@ -52,7 +52,11 @@ return array(
             'custom' => array(
                 'js' => array(
                     'js/custom/authentication/sign-in/general.js',
+                    '../apdiamantes/js/contacto/index.js',
                 ),
+            ),
+            'vendors' => array(
+                'leaflet',
             ),
         ),
         'layout' => array(
@@ -166,8 +170,10 @@ return array(
         ),
     ),
 
-    /*  'nosotros' => array(
-        'title'       => 'Nosotros',
+    'contacto' => array(
+        'title'       => function () {
+            return trans('Contact');
+        },
         'description' => '',
         'layout'      => array(
             'page-title' => array(
@@ -178,12 +184,35 @@ return array(
         'assets'      => array(
             'custom'  => array(
                 'js' => array(
-                    'js/widgets.bundle.js',
+                    '../apdiamantes/js/contacto/index.js',
+                ),
+            ),
+            'vendors' => array(
+                'leaflet',
+            ),
+        ),
+    ),
+
+    'nosotros' => array(
+        'title'       => function () {
+            return trans('About');
+        },
+        'description' => '',
+        'layout'      => array(
+            'page-title' => array(
+                'description' => false,
+                'breadcrumb'  => false,
+            ),
+        ),
+        'assets'      => array(
+            'custom'  => array(
+                'js' => array(
+
                 ),
             ),
             'vendors' => array(),
         ),
-    ), */
+    ),
 
     /* 'error' => array(
         'error-404' => array(
