@@ -96,11 +96,23 @@ class PermissionsSeeder extends Seeder
             ],
             15 => [
                 'name'        => 'submenu_invitar',
-                'descripcion' => 'Permite ver el submenu de ajustes de ceunta',
+                'descripcion' => 'Permite ver el submenu de invitar usuarios',
             ],
             16 => [
+                'name'        => 'menu_blog',
+                'descripcion' => 'Permite ver el menu del blog',
+            ],
+            17 => [
                 'name'        => 'submenu_blog',
-                'descripcion' => 'Permite ver el submenu de ajustes de ceunta',
+                'descripcion' => 'Permite ver el submenu de blog',
+            ],
+            18 => [
+                'name'        => 'menu_faq',
+                'descripcion' => 'Permite ver el menu de preguntas frecuentes',
+            ],
+            19 => [
+                'name'        => 'submenu_faq',
+                'descripcion' => 'Permite ver el submenu de preguntas frecuentes',
             ],
         ];
     }

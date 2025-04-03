@@ -246,6 +246,23 @@ return array(
                         ),
                     ),
                     array(
+                        'title'  => function () {
+                            return trans('Blog');
+                        },
+                        'path'       => '#',
+                        'bullet'     => '<span class="bullet bullet-dot"></span>',
+                        'permission' => ['submenu_blog'],
+                        'attributes' => array(
+                            'link' => array(
+                                "title"             => "Proximamnete",
+                                "data-bs-toggle"    => "tooltip",
+                                "data-bs-trigger"   => "hover",
+                                "data-bs-dismiss"   => "click",
+                                "data-bs-placement" => "right",
+                            ),
+                        ),
+                    ),
+                    array(
                         'title'      => function () {
                             return trans('Catalogs');
                         },
@@ -303,6 +320,14 @@ return array(
                         'path'   => 'admin/users',
                         'bullet' => '<span class="bullet bullet-dot"></span>',
                         'permission' => ['submenu_usuarios'],
+                    ),
+                    array(
+                        'title'  => function () {
+                            return trans('FAQ');
+                        },
+                        'path'   => 'admin/users',
+                        'bullet' => '<span class="bullet bullet-dot"></span>',
+                        'permission' => ['submenu_faq'],
                     ),
                 ),
             ),
@@ -453,7 +478,7 @@ return array(
                 return trans('Blog');
             },
             'path'       => '#',
-            'permission' => ['submenu_blog'],
+            'permission' => ['menu_blog'],
             'attributes' => array(
                 'link' => array(
                     "title"             => "Proximamnete",
@@ -489,6 +514,7 @@ return array(
                 return trans('FAQ');
             },
             'icon'  => theme()->getSvgIcon("demo3/media/icons/duotune/general/gen046.svg", "svg-icon-1 text-light"),
+            'permission' => ['menu_faq'],
             'path'  => 'faq',
         ),
 
