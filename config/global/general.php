@@ -105,7 +105,7 @@ return array(
                 'direction' => 'end',
             ),
             'purchase' => array(
-                'enabled' => false,
+                'enabled' => true,
             ),
         ),
     ),

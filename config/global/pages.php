@@ -222,6 +222,27 @@ return array(
             'title' => 'Error 500',
         ),
     ), */
+    //FAQ
+    'faq' => array(
+        'title'  => function () {
+            return trans('FAQ');
+        },
+        'view'   => 'faq/index',
+        'layout'      => array(
+            'page-title' => array(
+                'description' => false,
+                'breadcrumb'  => false,
+            ),
+        ),
+        'assets'      => array(
+            'custom'  => array(
+                'js' => array(
+                    //'js/widgets.bundle.js',
+                ),
+            ),
+            'vendors' => array('fslightbox'),
+        ),
+    ),
 
     // Documentation pages
     'documentation' => array(

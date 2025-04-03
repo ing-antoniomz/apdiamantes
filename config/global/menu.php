@@ -439,12 +439,21 @@ return array(
         ),
 
         // Documentation
-        array(
+        /* array(
             'title' => 'Documentación',
             'icon'  => theme()->getSvgIcon("demo3/media/icons/duotune/abstract/abs027.svg", "svg-icon-1 text-light"),
             'path'  => 'documentation/getting-started/overview',
             'permission' => ['menu_documentacion'],
+        ), */
+        // FAQ
+        array(
+            'title' => function () {
+                return trans('FAQ');
+            },
+            'icon'  => theme()->getSvgIcon("demo3/media/icons/duotune/general/gen046.svg", "svg-icon-1 text-light"),
+            'path'  => 'faq',
         ),
+
 
         // Changelog
         /* array(
