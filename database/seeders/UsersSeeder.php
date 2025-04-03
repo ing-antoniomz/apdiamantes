@@ -153,6 +153,7 @@ class UsersSeeder extends Seeder
     private function addDummyInfo(Generator $faker, User $user,$data=null)
     {
         $dummyInfo = [
+            'avatar' => !empty($data['avatar']) ? $data['avatar'] : 'demo3/media/avatars/300-11.jpg',
             'phone' => !empty($data['phone']) ? $data['phone'] : $faker->phoneNumber,
             'website' => !empty($data['website']) ? $data['website'] : $faker->url,
             'tipo_persona' => !empty($data['tipo_persona']) ? $data['tipo_persona'] : 'Fisica',
@@ -201,6 +202,7 @@ class UsersSeeder extends Seeder
     private function data():array
     {
         $data['apdiamantes'] = [
+            'avatar' => 'demo3/media/avatars/300-10.jpg',
             'phone' => '55 2884 4586',
             'website' => 'https://www.apdiamantes.com',
             'tipo_persona' => 'Moral',
@@ -238,6 +240,7 @@ class UsersSeeder extends Seeder
             'fecha_nacimiento' => '1980-02-13',
         ];
         $data['distribuidor'] = [
+            'avatar' => 'demo3/media/avatars/300-7.jpg',
             'phone' => '55 9054 2387',
             'website' => 'https://www.distribuidor.com',
             'tipo_persona' => 'Fisica',
@@ -275,6 +278,7 @@ class UsersSeeder extends Seeder
             'fecha_nacimiento' => '1988-02-13',
         ];
         $data['supervisor'] = [
+            'avatar' => 'demo3/media/avatars/300-3.jpg',
             'phone' => '55 1234 5678',
             'website' => 'https://www.supervisor.com',
             'tipo_persona' => 'Moral',
@@ -312,6 +316,7 @@ class UsersSeeder extends Seeder
             'fecha_nacimiento' => '1990-05-15',
         ];
         $data['gerente'] = [
+            'avatar' => 'demo3/media/avatars/300-29.jpg',
             'phone' => '55 2345 6789',
             'website' => 'https://www.gerente.com',
             'tipo_persona' => 'Moral',
@@ -349,6 +354,7 @@ class UsersSeeder extends Seeder
             'fecha_nacimiento' => '1985-08-22',
         ];
         $data['director'] = [
+            'avatar' => 'demo3/media/avatars/300-18.jpg',
             'phone' => '55 3456 7890',
             'website' => 'https://www.director.com',
             'tipo_persona' => 'Moral',
@@ -386,6 +392,7 @@ class UsersSeeder extends Seeder
             'fecha_nacimiento' => '1978-12-01',
         ];
         $data['oro'] = [
+            'avatar' => 'demo3/media/avatars/300-22.jpg',
             'phone' => '55 4567 8901',
             'website' => 'https://www.oro.com',
             'tipo_persona' => 'Moral',
@@ -423,6 +430,7 @@ class UsersSeeder extends Seeder
             'fecha_nacimiento' => '1985-03-25',
         ];
         $data['platino'] = [
+            'avatar' => 'demo3/media/avatars/300-8.jpg',
             'phone' => '55 5678 9012',
             'website' => 'https://www.platino.com',
             'tipo_persona' => 'Moral',
@@ -460,6 +468,7 @@ class UsersSeeder extends Seeder
             'fecha_nacimiento' => '1990-11-18',
         ];
         $data['diamante'] = [
+            'avatar' => 'demo3/media/avatars/300-7.jpg',
             'phone' => '55 6789 0123',
             'website' => 'https://www.diamante.com',
             'tipo_persona' => 'Moral',
@@ -497,6 +506,7 @@ class UsersSeeder extends Seeder
             'fecha_nacimiento' => '1980-07-10',
         ];
         $data['diamante_int'] = [
+            'avatar' => 'demo3/media/avatars/300-1.jpg',
             'phone' => '55 7890 1234',
             'website' => 'https://www.diamanteint.com',
             'tipo_persona' => 'Moral',

@@ -94,6 +94,14 @@ class PermissionsSeeder extends Seeder
                 'name'        => 'submenu_admin_grupos',
                 'descripcion' => 'Permite ver el submenu de administracion de grupos',
             ],
+            15 => [
+                'name'        => 'submenu_invitar',
+                'descripcion' => 'Permite ver el submenu de ajustes de ceunta',
+            ],
+            16 => [
+                'name'        => 'submenu_blog',
+                'descripcion' => 'Permite ver el submenu de ajustes de ceunta',
+            ],
         ];
     }
 }

@@ -36,7 +36,7 @@
             <div class="d-flex align-items-center">
                 <!--begin::Avatar-->
                 <div class="symbol symbol-circle symbol-40px">
-                    <img src="{{ auth()->user()->avatar_url }}" alt="photo"/>
+                    <img src="{{ auth()->user()->getAvatarUrlAttribute() }}" alt="photo"/>
                 </div>
                 <!--end::Avatar-->
 

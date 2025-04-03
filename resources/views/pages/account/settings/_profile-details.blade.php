@@ -198,7 +198,7 @@
                         <div class="pb-4 d-flex justify-content-center align-items-center">
                             <div class="image-input image-input-outline {{ isset($info) && $info->avatar ? '' : 'image-input-empty' }}" data-kt-image-input="true" style="background-image: url({{ asset(theme()->getMediaUrlPath() . 'avatars/blank.png') }})">
                                 <!--begin::Preview existing avatar-->
-                                <div class="image-input-wrapper w-125px h-125px" style="background-image: {{ isset($info) && $info->avatar_url ? 'url('.asset($info->avatar_url).')' : 'none' }};">
+                                <div class="image-input-wrapper w-125px h-125px" style="background-image: {{ isset($info) && $info->avatar ? 'url('.asset($info->avatar).')' : 'none' }};">
                                 </div>
                                 <!--end::Preview existing avatar-->
 

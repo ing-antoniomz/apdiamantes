@@ -426,8 +426,46 @@ return array(
                             ),
                         ),
                     ),
-
+                    array(
+                        'title'  => function () {
+                            return trans('Invite');
+                        },
+                        'path'       => '#',
+                        'bullet'     => '<span class="bullet bullet-dot"></span>',
+                        'permission' => ['submenu_invitar'],
+                        'attributes' => array(
+                            'link' => array(
+                                "title"             => "Proximamnete",
+                                "data-bs-toggle"    => "tooltip",
+                                "data-bs-trigger"   => "hover",
+                                "data-bs-dismiss"   => "click",
+                                "data-bs-placement" => "right",
+                            ),
+                        ),
+                    ),
                 ),
+            ),
+        ),
+
+        //Blog
+        array(
+            'title'  => function () {
+                return trans('Blog');
+            },
+            'path'       => '#',
+            'permission' => ['submenu_blog'],
+            'attributes' => array(
+                'link' => array(
+                    "title"             => "Proximamnete",
+                    "data-bs-toggle"    => "tooltip",
+                    "data-bs-trigger"   => "hover",
+                    "data-bs-dismiss"   => "click",
+                    "data-bs-placement" => "right",
+                ),
+            ),
+            'icon'       => array(
+                'svg'  => theme()->getSvgIcon("demo3/media/icons/duotune/communication/com007.svg", "svg-icon-1 text-light"),
+                'font' => '',
             ),
         ),
 
