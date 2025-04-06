@@ -90,9 +90,12 @@
         "toastr": "^2.1.4",
         "typed.js": "2.0.12",
         "vis-timeline": "^7.4.9",
+        "vue": "^3.5.13",
+        "vue-loader": "^17.4.2",
         "wnumb": "^1.2.0"
     },
     "devDependencies": {
+        "@vue/compiler-sfc": "^3.5.13",
         "alpinejs": "^3.7.1",
         "autoprefixer": "^10.4.2",
         "axios": "^1.7.7",
