@@ -482,18 +482,9 @@ return array(
                         'title'  => function () {
                             return trans('Invite');
                         },
-                        'path'       => '#',
+                        'path'       => 'grupo/invitar',
                         'bullet'     => '<span class="bullet bullet-dot"></span>',
                         'permission' => ['submenu_invitar'],
-                        'attributes' => array(
-                            'link' => array(
-                                "title"             => "Proximamnete",
-                                "data-bs-toggle"    => "tooltip",
-                                "data-bs-trigger"   => "hover",
-                                "data-bs-dismiss"   => "click",
-                                "data-bs-placement" => "right",
-                            ),
-                        ),
                     ),
                 ),
             ),

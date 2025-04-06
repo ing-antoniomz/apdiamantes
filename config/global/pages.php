@@ -280,6 +280,41 @@ return array(
         ), */
     ),
 
+    'grupo' => array(
+        /* 'overview' => array(
+            'title'  => function () {
+                return trans('Group');
+            },
+            'view'   => 'account/overview/overview',
+            'assets' => array(
+                'custom' => array(
+                    'js' => array(
+                    ),
+                ),
+            ),
+        ), */
+
+        'invitar' => array(
+            'title'  => function () {
+                return trans('Invite');
+            },
+            'description' => 'Agregar usuarios a tu grupo',
+            'layout'      => array(
+                'page-title' => array(
+                    'description' => true,
+                    'breadcrumb'  => false,
+                ),
+            ),
+            'view'   => 'group/invite/index',
+            'assets' => array(
+                'custom' => array(
+                    'js' => array(
+                    ),
+                ),
+            ),
+        ),
+    ),
+
     // Documentation pages
     'documentation' => array(
         '*' => array(

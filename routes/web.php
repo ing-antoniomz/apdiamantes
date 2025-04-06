@@ -5,6 +5,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Grupo\InvitarController;
 use App\Http\Controllers\Admin\UsuariosController;
 use App\Http\Controllers\Logs\AuditLogsController;
 use App\Http\Controllers\Logs\SystemLogsController;
@@ -67,6 +68,11 @@ Route::middleware('auth')->group(function () {
     });
     Route::resource('nosotros', AboutController::class)->name('index', 'nosotros')->only(['index']);
     Route::resource('contacto', ContactController::class)->name('index', 'contacto')->only(['index']);
+
+    // Admin pages
+    Route::prefix('grupo')->name('grupo.')->group(function () {
+        Route::resource('invitar', InvitarController::class)->only(['index','store', 'destroy']);
+    });
 });
 
 // Lang files for datatables
