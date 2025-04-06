@@ -314,6 +314,23 @@ return array(
                         ),
                     ),
                     array(
+                        'title'      => function () {
+                            return trans('Levels');
+                        },
+                        'path'       => '#',
+                        'bullet'     => '<span class="bullet bullet-dot"></span>',
+                        'permission' => ['submenu_admin_grupos'],
+                        'attributes' => array(
+                            'link' => array(
+                                "title"             => "Proximamnete",
+                                "data-bs-toggle"    => "tooltip",
+                                "data-bs-trigger"   => "hover",
+                                "data-bs-dismiss"   => "click",
+                                "data-bs-placement" => "right",
+                            ),
+                        ),
+                    ),
+                    array(
                         'title'  => function () {
                             return trans('Users');
                         },
@@ -325,9 +342,19 @@ return array(
                         'title'  => function () {
                             return trans('FAQ');
                         },
-                        'path'   => 'admin/users',
+                        'path'   => '#',
                         'bullet' => '<span class="bullet bullet-dot"></span>',
                         'permission' => ['submenu_faq'],
+                        'permission' => ['submenu_blog'],
+                        'attributes' => array(
+                            'link' => array(
+                                "title"             => "Proximamnete",
+                                "data-bs-toggle"    => "tooltip",
+                                "data-bs-trigger"   => "hover",
+                                "data-bs-dismiss"   => "click",
+                                "data-bs-placement" => "right",
+                            ),
+                        ),
                     ),
                 ),
             ),
@@ -477,21 +504,25 @@ return array(
             'title'  => function () {
                 return trans('Blog');
             },
-            'path'       => '#',
+            'path'       => 'blog',
             'permission' => ['menu_blog'],
-            'attributes' => array(
-                'link' => array(
-                    "title"             => "Proximamnete",
-                    "data-bs-toggle"    => "tooltip",
-                    "data-bs-trigger"   => "hover",
-                    "data-bs-dismiss"   => "click",
-                    "data-bs-placement" => "right",
-                ),
-            ),
             'icon'       => array(
                 'svg'  => theme()->getSvgIcon("demo3/media/icons/duotune/communication/com007.svg", "svg-icon-1 text-light"),
                 'font' => '',
             ),
+            /* 'sub'        => array(
+                'class' => '',
+                'items' => array(
+                    array(
+                        'title'  => function () {
+                            return trans('prueba');
+                        },
+                        'path'   => 'blog/prueba',
+                        'bullet' => '<span class="bullet bullet-dot"></span>',
+                        'permission' => ['menu_blog'],
+                    ),
+                ),
+            ), */
         ),
 
         //// Help

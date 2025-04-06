@@ -243,6 +243,42 @@ return array(
             'vendors' => array('fslightbox'),
         ),
     ),
+    //FAQ
+    'blog' => array(
+        'title'  => function () {
+            return trans('Blog');
+        },
+        'view'   => 'blog/index',
+        'layout'      => array(
+            'page-title' => array(
+                'description' => false,
+                'breadcrumb'  => false,
+            ),
+        ),
+        'assets'      => array(
+            'custom'  => array(
+                'js' => array(
+                    //'js/widgets.bundle.js',
+                ),
+            ),
+            'vendors' => array('fslightbox'),
+        ),
+        /* 'prueba' => array(
+            'title'  => function () {
+                return trans('Muestra Blog');
+            },
+            'view'   => 'blog/prueba',
+            'assets' => array(
+                'custom' => array(
+                    'js' => array(
+                        'js/custom/widgets.js',
+                    ),
+                ),
+                'vendors' => array('fslightbox'),
+            ),
+
+        ), */
+    ),
 
     // Documentation pages
     'documentation' => array(
