@@ -40,7 +40,7 @@ export default {
                 });
             } else {
                 Swal.fire({
-                    text: "Ha ocurrido algo inesperado.",
+                    text: dataMessage,
                     icon: "error",
                     buttonsStyling: false,
                     confirmButtonText: "Aceptar",

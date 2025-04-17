@@ -14,4 +14,4 @@ createApp({
     .use(errorHandlerPlugin)  // Usar el plugin de manejo de errores
     .component('invita-usuarios-component', InvitaUsuariosComponent)  // Registrar el componente
     .component('submit-button-component', SubmitButtonComponent)  // Registrar otro componente
-    .mount('#app_vue');  // Montar la aplicación en el DOM
+    .mount('#kt_wrapper');  // Montar la aplicación en el DOM
