@@ -28,14 +28,14 @@ class AuditLogsDataTable extends DataTable
                     return '';
                 }
 
-                if (isset($model->subject->name)) {
-                    return $model->subject->name;
+                if (isset($model->subject->nombre)) {
+                    return $model->subject->user;
                 }
 
-                return $model->subject->user()->first()->name;
+                return $model->subject->user()->first()->user;
             })
             ->editColumn('causer_id', function (Activity $model) {
-                return $model->causer ? $model->causer->first_name : __('System');
+                return $model->causer ? $model->causer->user : __('System');
             })
             ->editColumn('properties', function (Activity $model) {
                 $content = $model->properties;
@@ -74,7 +74,7 @@ class AuditLogsDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->stateSave(true)
-            ->orderBy(6)
+            //->orderBy(6)
             ->responsive()
             ->autoWidth(false)
             ->parameters([
@@ -96,11 +96,11 @@ class AuditLogsDataTable extends DataTable
     {
         return [
             Column::make('id')->title('Log ID')->addClass('ps-0'),
-            Column::make('log_name')->title(__('Location')),
+            //Column::make('log_name')->title(__('Log Name')),
             Column::make('description')->title(__('Description')),
-            Column::make('subject_type')->title(__('Type')),
-            Column::make('subject_id')->title(__('Subject')),
-            Column::make('causer_id')->title(__('Causer')),
+            Column::make('subject_type')->title('Clase'),
+            Column::make('subject_id')->title('Afecto a'),
+            Column::make('causer_id')->title('Ejecutó'),
             Column::make('created_at')->title(__('Created at')),
             Column::computed('action')
                 ->title(__('Actions'))
