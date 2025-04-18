@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Spatie\Permission\Traits\HasRoles;
 use App\Core\Traits\SpatieLogsActivity;
+use Spatie\Activitylog\Models\Activity;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\CustomResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -16,6 +17,25 @@ class User extends Authenticatable implements MustVerifyEmail
     use SpatieLogsActivity;
     use HasRoles;
 
+    protected static $logName = 'usuarios'; // log_name en la tabla de logs
+
+    public function tapActivity(Activity $activity, string $eventName)
+    {
+        $activity->log_name = 'usuarios';
+
+        switch ($eventName) {
+            case 'created':
+                $activity->description = "Se creó el usuario: {$this->user}";
+                break;
+            case 'updated':
+                $activity->description = "Se actualizó el usuario: {$this->user}";
+                break;
+            case 'deleted':
+                $activity->description = "Se eliminó el usuario: {$this->user}";
+                break;
+        }
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -26,6 +46,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'nombre',
         'apellido_paterno',
         'apellido_materno',
+        'status',
         'email',
         'api_token',
         'password',
@@ -102,5 +123,26 @@ class User extends Authenticatable implements MustVerifyEmail
     public function info()
     {
         return $this->hasOne(UserInfo::class);
+    }
+
+    /**
+     * Grupo del usuario
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function grupos()
+    {
+        return $this->belongsToMany(Grupo::class, 'grupo_usuario')
+            ->withPivot('rol', 'fecha_ingreso');
+    }
+
+    /**
+     * Grupos creados por el usuario
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function gruposCreados()
+    {
+        return $this->hasMany(Grupo::class, 'creador_id');
     }
 }

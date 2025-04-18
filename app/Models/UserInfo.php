@@ -5,10 +5,65 @@ namespace App\Models;
 use App\Core\Traits\SpatieLogsActivity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Activitylog\Models\Activity;
 
 class UserInfo extends Model
 {
     use SpatieLogsActivity;
+
+    protected static $logName = 'usuarios_info'; // log_name en la tabla de logs
+
+    public function tapActivity(Activity $activity, string $eventName)
+    {
+        $activity->log_name = 'usuarios_info';
+
+        switch ($eventName) {
+            case 'created':
+                $activity->description = "Nueva información: {$this->user->user}";
+                break;
+            case 'updated':
+                $activity->description = "Se actualizó información: {$this->user->user}";
+                break;
+            case 'deleted':
+                $activity->description = "Se eliminó información: {$this->user->user}";
+                break;
+        }
+    }
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'phone',
+        'rfc',
+        'company',
+        'persona_autorizada',
+        'beneficiario1',
+        'beneficiario2',
+        'tipo_persona',
+        'cosolicitante',
+        'cosolicitante_rfc',
+        'banco',
+        'cuenta',
+        'sucursal',
+        'titular_cuenta',
+        'calle_fiscal',
+        'numero_fiscal',
+        'colonia_fiscal',
+        'ciudad_fiscal',
+        'estado_fiscal',
+        'cp_fiscal',
+        'telefono_fiscal',
+        'calle_envios',
+        'numero_envios',
+        'colonia_envios',
+        'ciudad_envios',
+        'estado_envios',
+        'cp_envios',
+        'telefono_envios',
+        'avatar',
+    ];
 
     /**
      * Prepare proper error handling for url attribute

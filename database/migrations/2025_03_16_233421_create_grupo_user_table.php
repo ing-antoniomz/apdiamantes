@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('grupo_id');
             $table->unsignedBigInteger('user_id');
-            $table->enum('rol', ['miembro', 'admin'])->default('miembro');
+            $table->enum('rol', ['MIEMBRO', 'ADMINISTRADOR', 'ESTRELLA'])->default('miembro');
             $table->timestamp('fecha_ingreso')->useCurrent();
 
             $table->foreign('grupo_id')->references('id')->on('grupos')->onDelete('cascade');

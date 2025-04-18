@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('nombre',30);
             $table->string('apellido_paterno', 30);
             $table->string('apellido_materno', 30);
+            $table->string('cuenta_ap', 30)->nullable();
             $table->boolean('status');
             $table->string('email', 60)->unique();
             $table->timestamp('email_verified_at')->nullable();

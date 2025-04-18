@@ -3,14 +3,16 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use App\Models\UserInfo;
 use Faker\Generator;
+use App\Models\Grupo;
+use App\Models\UserInfo;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
 class UsersSeeder extends Seeder
 {
     private array $data;
+    private object $grupos;
 
     public function __construct()
     {
@@ -23,6 +25,7 @@ class UsersSeeder extends Seeder
      */
     public function run(Generator $faker)
     {
+
         $adminUser = User::create([
             'user'              => 'apdiamantes',
             'nombre'            => 'Andra',
@@ -36,6 +39,16 @@ class UsersSeeder extends Seeder
         ]);
         $this->addDummyInfo($faker, $adminUser, $this->data['apdiamantes']);
         $adminUser->assignRole('Administrador');
+        $grupo1 = Grupo::create([
+            'name' => 'Grupo Alpha',
+            'descripcion' => 'Grupo de desarrollo',
+            'creador_id' => 1,
+            'status' => true,
+        ]);
+        $grupo1->usuarios()->attach($adminUser->id, [
+            'rol' => 'ADMINISTRADOR',
+            'fecha_ingreso' => now(),
+        ]);
 
         $distribuidorUser = User::create([
             'user'              => 'distribuidor',
@@ -50,6 +63,10 @@ class UsersSeeder extends Seeder
         ]);
         $this->addDummyInfo($faker, $distribuidorUser, $this->data['distribuidor']);
         $distribuidorUser->assignRole('Distribuidor');
+        $grupo1->usuarios()->attach($distribuidorUser->id, [
+            'rol' => 'MIEMBRO',
+            'fecha_ingreso' => now(),
+        ]);
 
         $supervisorUser = User::create([
             'user'              => 'supervisor',
@@ -64,6 +81,10 @@ class UsersSeeder extends Seeder
         ]);
         $this->addDummyInfo($faker, $supervisorUser, $this->data['supervisor']);
         $supervisorUser->assignRole('Supervisor');
+        $grupo1->usuarios()->attach($supervisorUser->id, [
+            'rol' => 'MIEMBRO',
+            'fecha_ingreso' => now(),
+        ]);
 
         $gerenteUser = User::create([
             'user'              => 'gerente',
@@ -78,6 +99,10 @@ class UsersSeeder extends Seeder
         ]);
         $this->addDummyInfo($faker, $gerenteUser, $this->data['gerente']);
         $gerenteUser->assignRole('Gerente');
+        $grupo1->usuarios()->attach($gerenteUser->id, [
+            'rol' => 'MIEMBRO',
+            'fecha_ingreso' => now(),
+        ]);
 
         $directorUser = User::create([
             'user'              => 'director',
@@ -92,6 +117,10 @@ class UsersSeeder extends Seeder
         ]);
         $this->addDummyInfo($faker, $directorUser, $this->data['director']);
         $directorUser->assignRole('Director');
+        $grupo1->usuarios()->attach($directorUser->id, [
+            'rol' => 'MIEMBRO',
+            'fecha_ingreso' => now(),
+        ]);
 
         $oroUser = User::create([
             'user'              => 'oro',
@@ -106,6 +135,10 @@ class UsersSeeder extends Seeder
         ]);
         $this->addDummyInfo($faker, $oroUser, $this->data['oro']);
         $oroUser->assignRole('Oro');
+        $grupo1->usuarios()->attach($oroUser->id, [
+            'rol' => 'ESTRELLA',
+            'fecha_ingreso' => now(),
+        ]);
 
         $platinoUser = User::create([
             'user'              => 'platino',
@@ -120,20 +153,10 @@ class UsersSeeder extends Seeder
         ]);
         $this->addDummyInfo($faker, $platinoUser, $this->data['platino']);
         $platinoUser->assignRole('Platino');
-
-        $diamanteUser = User::create([
-            'user'              => 'diamante',
-            'nombre'            => 'Luis',
-            'apellido_paterno'  => 'Pérez',
-            'apellido_materno'  => 'González',
-            'email'             => 'diamante@gmail.com',
-            'status'            => true,
-            'password'          => Hash::make('diamante'),
-            'email_verified_at' => now(),
-            'api_token'         => Hash::make('luisperez@gmail'),
+        $grupo1->usuarios()->attach($platinoUser->id, [
+            'rol' => 'ESTRELLA',
+            'fecha_ingreso' => now(),
         ]);
-        $this->addDummyInfo($faker, $diamanteUser, $this->data['diamante']);
-        $diamanteUser->assignRole('Diamante');
 
         $diamanteIntUser = User::create([
             'user'              => 'diamante_int',
@@ -148,7 +171,54 @@ class UsersSeeder extends Seeder
         ]);
         $this->addDummyInfo($faker, $diamanteIntUser, $this->data['diamante_int']);
         $diamanteIntUser->assignRole('Diamante INT');
+        $grupo2 = Grupo::create([
+            'name' => 'Grupo Beta',
+            'descripcion' => 'Grupo de diseño',
+            'creador_id' => 8,
+            'status' => true,
+        ]);
+        $grupo2->usuarios()->attach($diamanteIntUser->id, [
+            'rol' => 'ADMINISTRADOR',
+            'fecha_ingreso' => now(),
+        ]);
+
+        $distribuidor2User = User::create([
+            'user'              => 'distribuidor2',
+            'nombre'            => 'Luis',
+            'apellido_paterno'  => 'Díaz',
+            'apellido_materno'  => 'González',
+            'email'             => 'distribuidor2@gmail.com',
+            'status'            => true,
+            'password'          => Hash::make('distribuidor2'),
+            'email_verified_at' => now(),
+            'api_token'         => Hash::make('luisdg2@gmail'),
+        ]);
+        $this->addDummyInfo($faker, $distribuidor2User, $this->data['distribuidor2']);
+        $distribuidor2User->assignRole('Distribuidor');
+        $grupo2->usuarios()->attach($distribuidor2User->id, [
+            'rol' => 'MIEMBRO',
+            'fecha_ingreso' => now(),
+        ]);
+
+        $diamanteUser = User::create([
+            'user'              => 'diamante',
+            'nombre'            => 'Luis',
+            'apellido_paterno'  => 'Pérez',
+            'apellido_materno'  => 'González',
+            'email'             => 'diamante@gmail.com',
+            'status'            => true,
+            'password'          => Hash::make('diamante'),
+            'email_verified_at' => now(),
+            'api_token'         => Hash::make('luisperez@gmail'),
+        ]);
+        $this->addDummyInfo($faker, $diamanteUser, $this->data['diamante']);
+        $diamanteUser->assignRole('Diamante');
+        $grupo2->usuarios()->attach($diamanteUser->id, [
+            'rol' => 'ESTRELLA',
+            'fecha_ingreso' => now(),
+        ]);
     }
+
 
     private function addDummyInfo(Generator $faker, User $user,$data=null)
     {
@@ -156,9 +226,8 @@ class UsersSeeder extends Seeder
             'avatar' => !empty($data['avatar']) ? $data['avatar'] : 'demo3/media/avatars/300-11.jpg',
             'phone' => !empty($data['phone']) ? $data['phone'] : $faker->phoneNumber,
             'website' => !empty($data['website']) ? $data['website'] : $faker->url,
-            'tipo_persona' => !empty($data['tipo_persona']) ? $data['tipo_persona'] : 'Fisica',
+            'tipo_persona' => !empty($data['tipo_persona']) ? $data['tipo_persona'] : 'FISICA',
             'company' => !empty($data['company']) ? $data['company'] : $faker->company,
-            'membresia' => !empty($data['membresia']) ? $data['membresia'] : $faker->word,
             'rfc' => !empty($data['rfc']) ? $data['rfc'] : $faker->word,
             'cosolicitante' => !empty($data['cosolicitante']) ? $data['cosolicitante'] : $faker->name,
             'cosolicitante_rfc' => !empty($data['cosolicitante_rfc']) ? $data['cosolicitante_rfc'] : $faker->word,
@@ -205,9 +274,8 @@ class UsersSeeder extends Seeder
             'avatar' => 'demo3/media/avatars/300-10.jpg',
             'phone' => '55 2884 4586',
             'website' => 'https://www.apdiamantes.com',
-            'tipo_persona' => 'Moral',
+            'tipo_persona' => 'MORAL',
             'company' => 'AP Diamantes',
-            'membresia' => 'AP0000001',
             'rfc' => 'APO1802139A1',
             'cosolicitante' => 'Luisa Pérez Ortega',
             'cosolicitante_rfc' => 'PEOL1802139A1',
@@ -243,9 +311,8 @@ class UsersSeeder extends Seeder
             'avatar' => 'demo3/media/avatars/300-7.jpg',
             'phone' => '55 9054 2387',
             'website' => 'https://www.distribuidor.com',
-            'tipo_persona' => 'Fisica',
+            'tipo_persona' => 'FISICA',
             'company' => 'AP Distribuidor',
-            'membresia' => 'AP0000002',
             'rfc' => 'APO1802139A2',
             'cosolicitante' => 'Juan Rodríguez Pérez',
             'cosolicitante_rfc' => 'ROPO1802132A1',
@@ -281,9 +348,8 @@ class UsersSeeder extends Seeder
             'avatar' => 'demo3/media/avatars/300-3.jpg',
             'phone' => '55 1234 5678',
             'website' => 'https://www.supervisor.com',
-            'tipo_persona' => 'Moral',
+            'tipo_persona' => 'MORAL',
             'company' => 'Supervisor Co.',
-            'membresia' => 'SUP000001',
             'rfc' => 'SUP1802139A1',
             'cosolicitante' => 'Juan Pérez',
             'cosolicitante_rfc' => 'JPEO1802139A1',
@@ -319,9 +385,8 @@ class UsersSeeder extends Seeder
             'avatar' => 'demo3/media/avatars/300-29.jpg',
             'phone' => '55 2345 6789',
             'website' => 'https://www.gerente.com',
-            'tipo_persona' => 'Moral',
+            'tipo_persona' => 'MORAL',
             'company' => 'Gerente Co.',
-            'membresia' => 'GER000001',
             'rfc' => 'GER1802139A1',
             'cosolicitante' => 'María Gómez',
             'cosolicitante_rfc' => 'MGOE1802139A1',
@@ -357,9 +422,8 @@ class UsersSeeder extends Seeder
             'avatar' => 'demo3/media/avatars/300-18.jpg',
             'phone' => '55 3456 7890',
             'website' => 'https://www.director.com',
-            'tipo_persona' => 'Moral',
+            'tipo_persona' => 'MORAL',
             'company' => 'Director Co.',
-            'membresia' => 'DIR000001',
             'rfc' => 'DIR1802139A1',
             'cosolicitante' => 'Carlos Martínez',
             'cosolicitante_rfc' => 'CMA1802139A1',
@@ -395,9 +459,8 @@ class UsersSeeder extends Seeder
             'avatar' => 'demo3/media/avatars/300-22.jpg',
             'phone' => '55 4567 8901',
             'website' => 'https://www.oro.com',
-            'tipo_persona' => 'Moral',
+            'tipo_persona' => 'MORAL',
             'company' => 'Oro Co.',
-            'membresia' => 'ORO000001',
             'rfc' => 'ORO1802139A1',
             'cosolicitante' => 'Roberto Díaz',
             'cosolicitante_rfc' => 'RDO1802139A1',
@@ -433,9 +496,8 @@ class UsersSeeder extends Seeder
             'avatar' => 'demo3/media/avatars/300-8.jpg',
             'phone' => '55 5678 9012',
             'website' => 'https://www.platino.com',
-            'tipo_persona' => 'Moral',
+            'tipo_persona' => 'MORAL',
             'company' => 'Platino Co.',
-            'membresia' => 'PLA000001',
             'rfc' => 'PLA1802139A1',
             'cosolicitante' => 'Elena Gómez',
             'cosolicitante_rfc' => 'EGO1802139A1',
@@ -471,9 +533,8 @@ class UsersSeeder extends Seeder
             'avatar' => 'demo3/media/avatars/300-7.jpg',
             'phone' => '55 6789 0123',
             'website' => 'https://www.diamante.com',
-            'tipo_persona' => 'Moral',
+            'tipo_persona' => 'MORAL',
             'company' => 'Diamante Co.',
-            'membresia' => 'DIA000001',
             'rfc' => 'DIA1802139A1',
             'cosolicitante' => 'Luis Pérez',
             'cosolicitante_rfc' => 'LPEO1802139A1',
@@ -509,9 +570,8 @@ class UsersSeeder extends Seeder
             'avatar' => 'demo3/media/avatars/300-1.jpg',
             'phone' => '55 7890 1234',
             'website' => 'https://www.diamanteint.com',
-            'tipo_persona' => 'Moral',
+            'tipo_persona' => 'MORAL',
             'company' => 'Diamante Internacional Co.',
-            'membresia' => 'DIAM000001',
             'rfc' => 'DIAM1802139A1',
             'cosolicitante' => 'Sofía Rodríguez',
             'cosolicitante_rfc' => 'SRO1802139A1',
@@ -542,6 +602,43 @@ class UsersSeeder extends Seeder
             'credencial_elector' => 'diamante_int_credencial_elector.jpg',
             'comprobante_domicilio' => 'diamante_int_comprobante_domicilio.jpg',
             'fecha_nacimiento' => '1975-09-05',
+        ];
+        $data['distribuidor2'] = [
+            'avatar' => 'demo3/media/avatars/300-7.jpg',
+            'phone' => '55 9054 2387',
+            'website' => 'https://www.distribuidor.com',
+            'tipo_persona' => 'FISICA',
+            'company' => 'AP Distribuidor',
+            'rfc' => 'APO1802139A2',
+            'cosolicitante' => 'Juan Rodríguez Pérez',
+            'cosolicitante_rfc' => 'ROPO1802132A1',
+            'persona_autorizada' => 'Elena Pérez Rodríguez',
+            'calle_fiscal' => 'Calle 2',
+            'numero_fiscal' => '2',
+            'colonia_fiscal' => 'Colonia 2',
+            'ciudad_fiscal' => 'Ciudad 2',
+            'estado_fiscal' => 'Estado 3',
+            'cp_fiscal' => '12345',
+            'telefono_fiscal' => '55 3457 2342',
+            'calle_envios' => 'Calle 3',
+            'numero_envios' => '3',
+            'colonia_envios' => 'Colonia 3',
+            'ciudad_envios' => 'Ciudad 3',
+            'estado_envios' => 'Estado 3',
+            'cp_envios' => '54321',
+            'telefono_envios' => '55 6784 2345',
+            'banco' => 'Banamex',
+            'cuenta' => '2456543675',
+            'sucursal' => '1234',
+            'titular_cuenta' => 'Luis Diaz González',
+            'beneficiario1' => 'Elena Pérez Rodríguez',
+            'beneficiario1_parentesco' => 'Hija',
+            'beneficiario2' => '',
+            'beneficiario2_parentesco' => '',
+            'inscripcion' => 'distribuidor_inscripcion.jpg',
+            'credencial_elector' => 'distribuidor_credencial_elector.jpg',
+            'comprobante_domicilio' => 'distribuidor_comprobante_domicilio.jpg',
+            'fecha_nacimiento' => '1988-02-13',
         ];
         return $data;
     }
