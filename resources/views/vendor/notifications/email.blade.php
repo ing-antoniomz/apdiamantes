@@ -11,7 +11,7 @@
 {{-- Intro Lines --}}
 @foreach ($introLines as $line)
     @if ($loop->first)
-        <p style="font-size: 18px; font-weight: bold; margin-bottom: 10px; color:black;">{{ $line }}</p>
+        <p style="font-size: 18px; font-weight: bold; margin-bottom: 10px; color:#3d4852;">{{ $line }}</p>
     @else
         {{ $line }} <br>
     @endif

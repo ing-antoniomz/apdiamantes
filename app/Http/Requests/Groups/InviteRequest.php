@@ -4,13 +4,14 @@ namespace App\Http\Requests\Groups;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Validation\Rule;
 
 class InviteRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * Determina si el usuario está autorizado para realizar esta solicitud.
      *
-     * @return bool
+     * @return bool `true` si el usuario está autorizado, de lo contrario `false`.
      */
     public function authorize()
     {
@@ -18,41 +19,124 @@ class InviteRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Obtiene las reglas de validación que se aplican a la solicitud.
      *
-     * @return array
+     * Este método define las reglas de validación para los diferentes campos de la solicitud,
+     * incluyendo validaciones condicionales según el tipo de persona (FÍSICA o MORAL).
+     *
+     * @return array<string, mixed> Un arreglo asociativo con las reglas de validación.
      */
     public function rules()
     {
-        return [
-            'nombre' => 'required|string|max:5',
-            'apellido_paterno' => 'required|string|max:5',
-            'apellido_materno' => 'required|string|max:30',
+        $rules = [
+            // Usuario
+            'user' => ['required', 'string', 'alpha_dash', 'min:4', 'max:30', 'unique:users,user'], // Validación para el nombre de usuario
+            'correo' => ['required', 'email'], // Validación para el correo electrónico
+            'telefono' => [
+                'required',
+                'regex:/^\+?\d{1,3}?[-\s]?(\d{1,4}[-\s]?){1,4}$/',
+                function ($attribute, $value, $fail) {
+                    $numbersOnly = preg_replace('/\D/', '', $value);
+                    if (strlen($numbersOnly) > 12) {
+                        $fail('El número debe tener como máximo 12 dígitos.');
+                    }
+                }
+            ], // Validación para el teléfono
+            'nombre' => ['required', 'string', 'min:3', 'max:30'], // Validación para el nombre
+            'apellido_paterno' => ['required', 'string', 'min:3', 'max:30'], // Validación para el apellido paterno
+            'apellido_materno' => ['required', 'string', 'min:3', 'max:30'], // Validación para el apellido materno
+            'radioPersona' => ['required', 'in:FISICA,MORAL'], // Validación para el tipo de persona
+            'rfc' => ['required', 'regex:/^([A-ZÑ&]{3,4})\d{6}(?:[A-Z\d]{3})?$/', 'min:12', 'max:13'], // Validación para el RFC
+            'beneficiario1' => ['required', 'string'], // Validación para el primer beneficiario
+            'beneficiario2' => ['nullable', 'string', 'min:3', 'max:60'], // Validación para el segundo beneficiario
+            'nivel' => ['required', 'string'], // Validación para el nivel
+            'grupo' => ['required', 'string'], // Validación para el grupo
+            'aviso_privacidad' => ['required'], // Validación para el aviso de privacidad
+
+            // Información bancaria
+            'banco' => ['required', 'string', 'min:5', 'max:30'], // Validación para el banco
+            'cuenta' => ['required', 'regex:/^\d{18}$/', 'size:18'], // Validación para la cuenta bancaria
+            'sucursal' => ['nullable', 'string', 'min:3', 'max:60'], // Validación para la sucursal
+            'titular_cuenta' => ['required', 'string', 'min:5', 'max:60'], // Validación para el titular de la cuenta
+
+            // Dirección fiscal
+            'direccion_fiscal_calle' => ['required', 'string', 'min:5', 'max:80'], // Validación para la calle fiscal
+            'direccion_fiscal_numero' => ['required', 'string', 'min:2', 'max:30'], // Validación para el número fiscal
+            'direccion_fiscal_colonia' => ['required', 'string', 'min:5', 'max:30'], // Validación para la colonia fiscal
+            'direccion_fiscal_ciudad' => ['required', 'string', 'min:5', 'max:30'], // Validación para la ciudad fiscal
+            'direccion_fiscal_estado' => ['required', 'string', 'min:5', 'max:30'], // Validación para el estado fiscal
+            'direccion_fiscal_codigo_postal' => ['required', 'regex:/^\d{5}$/'], // Validación para el código postal fiscal
+            'direccion_fiscal_telefono_fiscal' => [
+                'nullable',
+                'regex:/^\+?\d{1,3}?[-\s]?(\d{1,4}[-\s]?){1,4}$/',
+                function ($attribute, $value, $fail) {
+                    $numbersOnly = preg_replace('/\D/', '', $value);
+                    if (strlen($numbersOnly) > 12) {
+                        $fail('El número debe tener como máximo 12 dígitos.');
+                    }
+                }
+            ], // Validación para el teléfono fiscal
+
+            // Dirección de envío
+            'direccion_envio_calle' => ['required', 'string', 'min:5', 'max:80'], // Validación para la calle de envío
+            'direccion_envio_numero' => ['required', 'string', 'min:2', 'max:30'], // Validación para el número de envío
+            'direccion_envio_colonia' => ['required', 'string', 'min:5', 'max:30'], // Validación para la colonia de envío
+            'direccion_envio_ciudad' => ['required', 'string', 'min:5', 'max:30'], // Validación para la ciudad de envío
+            'direccion_envio_estado' => ['required', 'string', 'min:5', 'max:30'], // Validación para el estado de envío
+            'direccion_envio_codigo_postal' => ['required', 'regex:/^\d{5}$/'], // Validación para el código postal de envío
+            'direccion_envio_telefono_fiscal' => [
+                'nullable',
+                'regex:/^\+?\d{1,3}?[-\s]?(\d{1,4}[-\s]?){1,4}$/',
+                function ($attribute, $value, $fail) {
+                    $numbersOnly = preg_replace('/\D/', '', $value);
+                    if (strlen($numbersOnly) > 12) {
+                        $fail('El número debe tener como máximo 12 dígitos.');
+                    }
+                }
+            ], // Validación para el teléfono de envío
+
+            'grupo_rol' => ['required', 'in:MIEMBRO,ESTRELLA,CREADOR'], // Validación para el rol en el grupo
+
+            // Imagen
+            'avatar' => ['nullable', 'file', 'mimes:jpeg,jpg,png', 'max:2048'], // Validación para el avatar
         ];
+
+        // Validaciones condicionales según el tipo de persona
+        if ($this->input('radioPersona') === 'FISICA') {
+            $rules['cosolicitante'] = ['required', 'string', 'min:3', 'max:60']; // Validación para el co-solicitante
+            $rules['cosolicitante_rfc'] = ['required', 'regex:/^([A-ZÑ&]{3,4})\d{6}(?:[A-Z\d]{3})?$/', 'min:12', 'max:13']; // Validación para el RFC del co-solicitante
+        } elseif ($this->input('radioPersona') === 'MORAL') {
+            $rules['persona_autorizada'] = ['required', 'string', 'min:3', 'max:60']; // Validación para la persona autorizada
+            $rules['company'] = ['required', 'string', 'min:3', 'max:30']; // Validación para la empresa
+        }
+
+        return $rules;
     }
 
-
     /**
-     * Get custom attributes for validator errors.
+     * Obtiene los nombres personalizados de los atributos para los mensajes de error de validación.
      *
-     * @return array
+     * @return array<string, string> Un arreglo asociativo donde las claves son los nombres de los atributos
+     *                               y los valores son los nombres personalizados traducidos.
      */
     public function attributes()
     {
         return [
-            'nombre' => __('Name'),
-            'apellido_paterno' => __('First Last Name'),
-            'apellido_materno' => __('Second Last Name'),
+            'nombre' => __('Name'), // Traducción para el atributo 'nombre'
+            'apellido_paterno' => __('First Last Name'), // Traducción para el atributo 'apellido_paterno'
+            'apellido_materno' => __('Second Last Name'), // Traducción para el atributo 'apellido_materno'
         ];
     }
 
     /**
-     * Handle a failed validation attempt.
+     * Maneja un intento fallido de validación.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
+     * Este método personaliza el mensaje de error que se devuelve cuando la validación falla.
+     *
+     * @param \Illuminate\Contracts\Validation\Validator $validator El validador que falló.
      * @return void
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws \Illuminate\Validation\ValidationException Si la validación falla.
      */
     protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
     {

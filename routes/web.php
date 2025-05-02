@@ -83,9 +83,18 @@ Route::get('lang/datatables/{locale}.json', function ($locale) {
     }
     $translations = require $path;
     return Response::json($translations);
-});
+})->middleware('auth');
 
-//Route::resource('users', UsersController::class);
+// aviso de privacidad
+Route::get('/descargar-aviso', function () {
+    $path = public_path('apdiamantes/media/aviso_de_privacidad.pdf');
+
+    if (!file_exists($path)) {
+        abort(404);
+    }
+
+    return response()->download($path, 'aviso_privacidad.pdf');
+})->middleware('auth')->name('descargar.aviso');
 
 /**
  * Socialite login using Google service

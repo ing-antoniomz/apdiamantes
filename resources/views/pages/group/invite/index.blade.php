@@ -8,9 +8,10 @@
         <!--begin::Card body-->
         <div class="card-body pt-6 mx-5 mb-5 mt-8">
             <invita-usuarios-component
-                :ruta="'{{ route('grupo.invitar.store') }}'">
+                :ruta="'{{ route('grupo.invitar.store') }}'"
+                :grupo='@json(auth()->user()->grupos)'
+                :url-descarga-aviso="'{{ route('descargar.aviso') }}'">
             </invita-usuarios-component>
-            {{-- @include('pages.group.invite._invite') --}}
         </div>
         <!--end::Card body-->
     </div>
