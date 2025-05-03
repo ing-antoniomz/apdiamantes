@@ -19,7 +19,7 @@ class AuditLogsDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->rawColumns(['description', 'properties', 'action'])
+            ->rawColumns(['description', 'properties'/* , 'action' */])
             ->editColumn('id', function (Activity $model) {
                 return $model->id;
             })
@@ -45,9 +45,9 @@ class AuditLogsDataTable extends DataTable
             ->editColumn('created_at', function (Activity $model) {
                 return $model->created_at->format('Y-m-d H:i:s');
             })
-            ->addColumn('action', function (Activity $model) {
+            /* ->addColumn('action', function (Activity $model) {
                 return view('pages.log.audit._action-menu', compact('model'));
-            });
+            }) */;
     }
 
     /**
@@ -102,12 +102,12 @@ class AuditLogsDataTable extends DataTable
             Column::make('subject_id')->title('Afecto a'),
             Column::make('causer_id')->title('Ejecutó'),
             Column::make('created_at')->title(__('Created at')),
-            Column::computed('action')
+            /* Column::computed('action')
                 ->title(__('Actions'))
                 ->exportable(false)
                 ->printable(false)
                 ->addClass('text-center')
-                ->responsivePriority(-1),
+                ->responsivePriority(-1), */
             Column::make('properties')->addClass('none'),
         ];
     }

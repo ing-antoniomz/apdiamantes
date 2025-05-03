@@ -58,7 +58,7 @@ Route::middleware('auth')->group(function () {
 
     // Logs pages
     Route::prefix('log')->name('log.')->group(function () {
-        Route::resource('system', SystemLogsController::class)->only(['index', 'destroy']);
+        Route::resource('system', SystemLogsController::class)->only(['index']);
         Route::resource('audit', AuditLogsController::class)->only(['index', 'destroy']);
     });
 

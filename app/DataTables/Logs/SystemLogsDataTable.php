@@ -4,8 +4,7 @@ namespace App\DataTables\Logs;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Jackiedo\LogReader\Exceptions\UnableToRetrieveLogFilesException;
-use Jackiedo\LogReader\LogReader;
+use Illuminate\Support\Facades\File;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
@@ -22,7 +21,7 @@ class SystemLogsDataTable extends DataTable
     {
         return datatables()
             ->collection($query)
-            ->rawColumns(['action', 'level'])
+            ->rawColumns(['level', 'date'])
             ->editColumn('id', function (Collection $model) {
                 return Str::limit($model->get('id'), 5, '');
             })
@@ -30,10 +29,10 @@ class SystemLogsDataTable extends DataTable
                 return Str::limit($model->get('file_path'));
             })
             ->editColumn('message', function (Collection $model) {
-                return Str::limit($model->get('context')->message, 95);
+                return Str::limit($model->get('context')->message, 200);
             })
             ->editColumn('date', function (Collection $model) {
-                return $model->get('date')->format('Y-m-d H:i:s');
+                return $model->get('date');
             })
             ->editColumn('level', function (Collection $model) {
                 $styles = [
@@ -58,9 +57,6 @@ class SystemLogsDataTable extends DataTable
                 $content = $model->get('context');
 
                 return view('pages.log.system._details', compact('content'));
-            })
-            ->addColumn('action', function (Collection $model) {
-                return view('pages.log.system._action-menu', compact('model'));
             });
     }
 
@@ -71,7 +67,7 @@ class SystemLogsDataTable extends DataTable
      *
      * @return Collection
      */
-    public function query(LogReader $model)
+    /* public function query(LogReader $model)
     {
         $data = collect();
 
@@ -87,7 +83,59 @@ class SystemLogsDataTable extends DataTable
         });
 
         return $data;
+    } */
+    public function query()
+    {
+        $logsPath = storage_path('logs');
+        $files = File::files($logsPath);
+        $data = collect();
+
+        foreach ($files as $file) {
+            // Solo procesa archivos .log
+            if ($file->getExtension() !== 'log') {
+                continue;
+            }
+
+            $lines = explode("\n", File::get($file));
+            $logEntry = [];
+            $id = 0;
+
+            foreach ($lines as $line) {
+
+                // Detecta inicio de entrada de log: [2025-04-16 23:41:26] local.INFO: mensaje
+                if (preg_match('/^\[(.*?)\].*?([a-zA-Z]+):\s(.*)$/', $line, $matches)) {
+                    if (!empty($logEntry)) {
+                        $data->push(collect($logEntry));
+                        $logEntry = [];
+                    }
+
+                    $id++;
+                    //dd($matches);
+                    $logEntry = [
+                        'id'          => (string) $id,
+                        'date'        => (string) $matches[1],
+                        'level'       => strtolower($matches[2]),
+                        'message'     => trim($matches[3]),
+                        'environment' => app()->environment(),
+                        'file_path'   => $file->getPathname(),
+                        'context'     => (object)['message' => trim($matches[3])],
+                    ];
+                } else {
+                    // Agrega líneas adicionales al contexto
+                    if (!empty($logEntry)) {
+                        $logEntry['context']->message .= "\n" . $line;
+                    }
+                }
+            }
+
+            if (!empty($logEntry)) {
+                $data->push(collect($logEntry));
+            }
+        }
+
+        return $data;
     }
+
 
     /**
      * Optional method if you want to use html builder.
@@ -101,7 +149,7 @@ class SystemLogsDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->stateSave(true)
-            ->orderBy(3)
+            ->orderBy(0)
             ->responsive()
             ->autoWidth(false)
             ->parameters([
@@ -126,12 +174,6 @@ class SystemLogsDataTable extends DataTable
             Column::make('message')->title(__('Message')),
             Column::make('level')->title(__('Level')),
             Column::make('date')->width(200)->title(__('Date')),
-            Column::computed('action')
-                ->title(__('Actions'))
-                ->exportable(false)
-                ->printable(false)
-                ->addClass('text-center')
-                ->responsivePriority(-1),
             Column::make('environment')->addClass('none'),
             Column::make('file_path')->title(__('Log Path'))->addClass('none'),
             Column::make('context')->addClass('none'),
