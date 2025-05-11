@@ -22,9 +22,7 @@ return array(
 
     'admin' => array(
         'users'  => array(
-            'title'  => function () {
-                return trans('Users');
-            },
+            'title'  => 'Usuarios',
             'description' => '',
             'layout'      => array(
                 'page-title' => array(
@@ -109,9 +107,7 @@ return array(
 
     'log' => array(
         'audit'  => array(
-            'title'  => function () {
-                return trans('Audit Log');
-            },
+            'title'  => 'Log de Auditoria',
             'assets' => array(
                 'custom' => array(
                     'css' => array(
@@ -124,9 +120,7 @@ return array(
             ),
         ),
         'system' => array(
-            'title'  => function () {
-                return trans('System Log');
-            },
+            'title'  => 'Log de Sistema',
             'assets' => array(
                 'custom' => array(
                     'css' => array(
@@ -142,9 +136,7 @@ return array(
 
     'account' => array(
         'overview' => array(
-            'title'  => function () {
-                return trans('Account Overview');
-            },
+            'title'  => 'Descripción General',
             'view'   => 'account/overview/overview',
             'assets' => array(
                 'custom' => array(
@@ -156,9 +148,7 @@ return array(
         ),
 
         'settings' => array(
-            'title'  => function () {
-                return trans('Account Settings');
-            },
+            'title'  => 'Ajustes de Cuenta',
             'assets' => array(
                 'custom' => array(
                     'js' => array(
@@ -171,9 +161,7 @@ return array(
     ),
 
     'contacto' => array(
-        'title'       => function () {
-            return trans('Contact');
-        },
+        'title'       => 'Contacto',
         'description' => '',
         'layout'      => array(
             'page-title' => array(
@@ -194,9 +182,7 @@ return array(
     ),
 
     'nosotros' => array(
-        'title'       => function () {
-            return trans('About');
-        },
+        'title'       => 'Nosotros',
         'description' => '',
         'layout'      => array(
             'page-title' => array(
@@ -224,9 +210,7 @@ return array(
     ), */
     //FAQ
     'faq' => array(
-        'title'  => function () {
-            return trans('FAQ');
-        },
+        'title'  => 'FAQ',
         'view'   => 'faq/index',
         'layout'      => array(
             'page-title' => array(
@@ -245,9 +229,7 @@ return array(
     ),
     //FAQ
     'blog' => array(
-        'title'  => function () {
-            return trans('Blog');
-        },
+        'title'  => 'Blog',
         'view'   => 'blog/index',
         'layout'      => array(
             'page-title' => array(
@@ -264,9 +246,7 @@ return array(
             'vendors' => array('fslightbox'),
         ),
         /* 'prueba' => array(
-            'title'  => function () {
-                return trans('Muestra Blog');
-            },
+            'title'  => 'Muestra Blog',
             'view'   => 'blog/prueba',
             'assets' => array(
                 'custom' => array(
@@ -282,9 +262,7 @@ return array(
 
     'grupo' => array(
         /* 'overview' => array(
-            'title'  => function () {
-                return trans('Group');
-            },
+            'title'  => 'Grupo',
             'view'   => 'account/overview/overview',
             'assets' => array(
                 'custom' => array(
@@ -295,9 +273,7 @@ return array(
         ), */
 
         'invitar' => array(
-            'title'  => function () {
-                return trans('Invite');
-            },
+            'title'  => 'Invitar',
             'description' => 'Agregar usuarios a tu grupo',
             'layout'      => array(
                 'page-title' => array(

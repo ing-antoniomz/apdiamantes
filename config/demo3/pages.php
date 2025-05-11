@@ -1,9 +1,7 @@
 <?php
 return array(
    '' => array(
-      'title' => function () {
-         return trans('Hello').', '. auth()->user()->nombre;
-      },
+      'title' => '¡Bienvenid@!',
       'description' => 'You’ve got 24 New Sales',
       'view' => 'index',
       'layout' => array(
