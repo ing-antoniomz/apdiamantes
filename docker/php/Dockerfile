@@ -24,6 +24,7 @@ RUN apt-get update && apt-get install -y \
     git \
     curl \
     libzip-dev \
+    supervisor \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install pdo pdo_pgsql zip gd \
     && pecl install redis && docker-php-ext-enable redis
@@ -35,6 +36,9 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
+# Copiar archivo de configuración de Supervisor
+COPY docker/php/supervisord.conf /etc/supervisord.conf
+
 WORKDIR /var/www/html
 
 # Copiar archivos del proyecto
@@ -42,4 +46,10 @@ COPY . .
 
 # Instalar dependencias PHP
 RUN composer install --no-dev --optimize-autoloader --no-scripts
+
+# Crear carpeta para logs de supervisor
+RUN mkdir -p /var/log/supervisor
+
+# Comando por defecto: iniciar Supervisor
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
 
