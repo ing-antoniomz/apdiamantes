@@ -47,3 +47,6 @@ _ide_helper.php
 # Ignorar configuraciones del sistema operativo y de editores
 .DS_Store
 Thumbs.db
+
+#supervisor docker generated files
+supervisord.pid
