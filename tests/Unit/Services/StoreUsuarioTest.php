@@ -20,7 +20,7 @@ class StoreUsuarioTest extends TestCase
         Storage::fake('public');
 
         // Crear un grupo para asociarlo
-        $grupo = Grupo::factory()->create(['name' => 'grupo_prueba']);
+        //$grupo = Grupo::factory()->create(['name' => 'grupo_prueba']);
 
         $data = [
             'user' => 'usuario_test',
@@ -58,12 +58,12 @@ class StoreUsuarioTest extends TestCase
             'direccion_envio_telefono_fiscal' => '5598765432',
             'avatar' => UploadedFile::fake()->image('avatar.jpg'),
             'nivel' => 'Distribuidor', // Asegúrate de que este rol exista
-            'grupo' => $grupo->name,
+            'grupo' => 'Grupo Alpha',
             'grupo_rol' => 'MIEMBRO',
         ];
 
         // Si usas Spatie Laravel-permission asegúrate de que el rol exista
-        \Spatie\Permission\Models\Role::create(['name' => 'Distribuidor','descripcion' => 'prueba','volumen'=> '5000','imagen' => 'roles/role_distribuidor.png']);
+        //\Spatie\Permission\Models\Role::create(['name' => 'Distribuidor','descripcion' => 'prueba','volumen'=> '5000','imagen' => 'roles/role_distribuidor.png']);
 
         $user = UserServices::storeUsuario($data);
 
@@ -85,7 +85,7 @@ class StoreUsuarioTest extends TestCase
         // Verifica que está en el grupo con el rol correcto
         $this->assertDatabaseHas('grupo_usuario', [
             'user_id' => $user->id,
-            'grupo_id' => $grupo->id,
+            'grupo_id' => 1,
             'rol' => 'MIEMBRO',
         ]);
     }
