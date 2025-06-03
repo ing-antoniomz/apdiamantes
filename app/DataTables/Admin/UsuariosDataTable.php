@@ -77,12 +77,17 @@ class UsuariosDataTable extends DataTable
                     [
                         'text' => '<i class="fas fa-plus"></i> '.__('Add User'),
                         'className' => 'btn btn-primary',
-                    'action' => 'function() {
-                        // Limpiar los campos del formulario antes de mostrar el modal
-                        $("#userForm")[0].reset();  // Esto limpia el formulario
-                        $("#userModal").modal("show");
-                    }'
-                                        ]
+                        'attr' => [
+                            'id' => 'add-user-btn', // Agregar el ID al botón
+                            'name' => 'add-user-btn',
+                            'data-bs-toggle' => 'modal', // Agregar el ID al botón
+                            'data-bs-target' => '#userModal'
+
+                        ]/* ,
+                        'action' => 'function() {
+                            showModalUser();
+                        }' */
+                    ]
                 ],
                 'drawCallback' => 'function() { KTMenu.createInstances(); }',
             ])

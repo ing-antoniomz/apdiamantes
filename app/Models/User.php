@@ -47,6 +47,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'apellido_paterno',
         'apellido_materno',
         'status',
+        'cuenta_ap',
         'email',
         'api_token',
         'password',

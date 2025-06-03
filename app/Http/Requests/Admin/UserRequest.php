@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Groups;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Validation\Rule;
 
-class InviteRequest extends FormRequest
+class UserRequest extends FormRequest
 {
     /**
      * Determina si el usuario está autorizado para realizar esta solicitud.
@@ -45,13 +45,17 @@ class InviteRequest extends FormRequest
             'nombre' => ['required', 'string', 'min:3', 'max:30'], // Validación para el nombre
             'apellido_paterno' => ['required', 'string', 'min:3', 'max:30'], // Validación para el apellido paterno
             'apellido_materno' => ['required', 'string', 'min:3', 'max:30'], // Validación para el apellido materno
-            'radioPersona' => ['required', 'in:FISICA,MORAL'], // Validación para el tipo de persona
             'rfc' => ['required', 'regex:/^([A-ZÑ&]{3,4})\d{6}(?:[A-Z\d]{3})?$/', 'min:12', 'max:13'], // Validación para el RFC
             'beneficiario1' => ['required', 'string'], // Validación para el primer beneficiario
             'beneficiario2' => ['nullable', 'string', 'min:3', 'max:60'], // Validación para el segundo beneficiario
+            'cuenta_apdiamantes' => ['required', 'string', 'min:3', 'max:60'], // Validación para el segundo beneficiario
+            'parentescoBeneficiario1' => ['nullable', 'string', 'min:3', 'max:60'], // Validación para el segundo beneficiario
+            'parentescoBeneficiario2' => ['nullable', 'string', 'min:3', 'max:60'], // Validación para el segundo beneficiario
+            'estatus' => ['nullable', 'in:on'],
+            'radioPersona' => ['required', 'in:FISICA,MORAL'], // Validación para el tipo de persona
             'nivel' => ['required', 'string'], // Validación para el nivel
             'grupo' => ['required', 'string'], // Validación para el grupo
-            'aviso_privacidad' => ['required'], // Validación para el aviso de privacidad
+            'pociscion' => ['required', 'string'], // Validación para el nivel
 
             // Información bancaria
             'banco' => ['required', 'string', 'min:5', 'max:30'], // Validación para el banco
@@ -95,10 +99,11 @@ class InviteRequest extends FormRequest
                 }
             ], // Validación para el teléfono de envío
 
-            'pociscion' => ['required', 'in:MIEMBRO,ESTRELLA,CREADOR'], // Validación para el rol en el grupo
-
             // Imagen
             'avatar' => ['nullable', 'file', 'mimes:jpeg,jpg,png', 'max:2048'], // Validación para el avatar
+            'inscripcion' => ['nullable', 'file', 'mimes:jpeg,jpg,pdf', 'max:2048'],
+            'ine' => ['nullable', 'file', 'mimes:jpeg,jpg,pdf', 'max:2048'],
+            'comprobante_domicilio' => ['nullable', 'file', 'mimes:jpeg,jpg,pdf', 'max:2048'],
         ];
 
         // Validaciones condicionales según el tipo de persona

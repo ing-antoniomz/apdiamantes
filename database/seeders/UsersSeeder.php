@@ -225,7 +225,6 @@ class UsersSeeder extends Seeder
         $dummyInfo = [
             'avatar' => !empty($data['avatar']) ? $data['avatar'] : 'demo3/media/avatars/300-11.jpg',
             'phone' => !empty($data['phone']) ? $data['phone'] : $faker->phoneNumber,
-            'website' => !empty($data['website']) ? $data['website'] : $faker->url,
             'tipo_persona' => !empty($data['tipo_persona']) ? $data['tipo_persona'] : 'FISICA',
             'company' => !empty($data['company']) ? $data['company'] : $faker->company,
             'rfc' => !empty($data['rfc']) ? $data['rfc'] : $faker->word,
@@ -257,7 +256,6 @@ class UsersSeeder extends Seeder
             'inscripcion' => !empty($data['inscripcion']) ? $data['inscripcion'] : $faker->imageUrl(),
             'credencial_elector' => !empty($data['credencial_elector']) ? $data['credencial_elector'] : $faker->imageUrl(),
             'comprobante_domicilio' => !empty($data['comprobante_domicilio']) ? $data['comprobante_domicilio'] : $faker->imageUrl(),
-            'fecha_nacimiento' => !empty($data['fecha_nacimiento']) ? $data['fecha_nacimiento'] : $faker->date(),
         ];
 
         $info = new UserInfo();
@@ -273,7 +271,6 @@ class UsersSeeder extends Seeder
         $data['apdiamantes'] = [
             'avatar' => 'demo3/media/avatars/300-10.jpg',
             'phone' => '55 2884 4586',
-            'website' => 'https://www.apdiamantes.com',
             'tipo_persona' => 'MORAL',
             'company' => 'AP Diamantes',
             'rfc' => 'APO1802139A1',
@@ -305,12 +302,10 @@ class UsersSeeder extends Seeder
             'inscripcion' => 'apdiamantes_inscripcion.jpg',
             'credencial_elector' => 'apdiamantes_credencial_elector.jpg',
             'comprobante_domicilio' => 'apdiamantes_comprobante_domicilio.jpg',
-            'fecha_nacimiento' => '1980-02-13',
         ];
         $data['distribuidor'] = [
             'avatar' => 'demo3/media/avatars/300-7.jpg',
             'phone' => '55 9054 2387',
-            'website' => 'https://www.distribuidor.com',
             'tipo_persona' => 'FISICA',
             'company' => 'AP Distribuidor',
             'rfc' => 'APO1802139A2',
@@ -342,12 +337,10 @@ class UsersSeeder extends Seeder
             'inscripcion' => 'distribuidor_inscripcion.jpg',
             'credencial_elector' => 'distribuidor_credencial_elector.jpg',
             'comprobante_domicilio' => 'distribuidor_comprobante_domicilio.jpg',
-            'fecha_nacimiento' => '1988-02-13',
         ];
         $data['supervisor'] = [
             'avatar' => 'demo3/media/avatars/300-3.jpg',
             'phone' => '55 1234 5678',
-            'website' => 'https://www.supervisor.com',
             'tipo_persona' => 'MORAL',
             'company' => 'Supervisor Co.',
             'rfc' => 'SUP1802139A1',
@@ -379,12 +372,10 @@ class UsersSeeder extends Seeder
             'inscripcion' => 'supervisor_inscripcion.jpg',
             'credencial_elector' => 'supervisor_credencial_elector.jpg',
             'comprobante_domicilio' => 'supervisor_comprobante_domicilio.jpg',
-            'fecha_nacimiento' => '1990-05-15',
         ];
         $data['gerente'] = [
             'avatar' => 'demo3/media/avatars/300-29.jpg',
             'phone' => '55 2345 6789',
-            'website' => 'https://www.gerente.com',
             'tipo_persona' => 'MORAL',
             'company' => 'Gerente Co.',
             'rfc' => 'GER1802139A1',
@@ -416,12 +407,10 @@ class UsersSeeder extends Seeder
             'inscripcion' => 'gerente_inscripcion.jpg',
             'credencial_elector' => 'gerente_credencial_elector.jpg',
             'comprobante_domicilio' => 'gerente_comprobante_domicilio.jpg',
-            'fecha_nacimiento' => '1985-08-22',
         ];
         $data['director'] = [
             'avatar' => 'demo3/media/avatars/300-18.jpg',
             'phone' => '55 3456 7890',
-            'website' => 'https://www.director.com',
             'tipo_persona' => 'MORAL',
             'company' => 'Director Co.',
             'rfc' => 'DIR1802139A1',
@@ -453,12 +442,10 @@ class UsersSeeder extends Seeder
             'inscripcion' => 'director_inscripcion.jpg',
             'credencial_elector' => 'director_credencial_elector.jpg',
             'comprobante_domicilio' => 'director_comprobante_domicilio.jpg',
-            'fecha_nacimiento' => '1978-12-01',
         ];
         $data['oro'] = [
             'avatar' => 'demo3/media/avatars/300-22.jpg',
             'phone' => '55 4567 8901',
-            'website' => 'https://www.oro.com',
             'tipo_persona' => 'MORAL',
             'company' => 'Oro Co.',
             'rfc' => 'ORO1802139A1',
@@ -490,12 +477,10 @@ class UsersSeeder extends Seeder
             'inscripcion' => 'oro_inscripcion.jpg',
             'credencial_elector' => 'oro_credencial_elector.jpg',
             'comprobante_domicilio' => 'oro_comprobante_domicilio.jpg',
-            'fecha_nacimiento' => '1985-03-25',
         ];
         $data['platino'] = [
             'avatar' => 'demo3/media/avatars/300-8.jpg',
             'phone' => '55 5678 9012',
-            'website' => 'https://www.platino.com',
             'tipo_persona' => 'MORAL',
             'company' => 'Platino Co.',
             'rfc' => 'PLA1802139A1',
@@ -527,12 +512,10 @@ class UsersSeeder extends Seeder
             'inscripcion' => 'platino_inscripcion.jpg',
             'credencial_elector' => 'platino_credencial_elector.jpg',
             'comprobante_domicilio' => 'platino_comprobante_domicilio.jpg',
-            'fecha_nacimiento' => '1990-11-18',
         ];
         $data['diamante'] = [
             'avatar' => 'demo3/media/avatars/300-7.jpg',
             'phone' => '55 6789 0123',
-            'website' => 'https://www.diamante.com',
             'tipo_persona' => 'MORAL',
             'company' => 'Diamante Co.',
             'rfc' => 'DIA1802139A1',
@@ -564,12 +547,10 @@ class UsersSeeder extends Seeder
             'inscripcion' => 'diamante_inscripcion.jpg',
             'credencial_elector' => 'diamante_credencial_elector.jpg',
             'comprobante_domicilio' => 'diamante_comprobante_domicilio.jpg',
-            'fecha_nacimiento' => '1980-07-10',
         ];
         $data['diamante_int'] = [
             'avatar' => 'demo3/media/avatars/300-1.jpg',
             'phone' => '55 7890 1234',
-            'website' => 'https://www.diamanteint.com',
             'tipo_persona' => 'MORAL',
             'company' => 'Diamante Internacional Co.',
             'rfc' => 'DIAM1802139A1',
@@ -601,12 +582,10 @@ class UsersSeeder extends Seeder
             'inscripcion' => 'diamante_int_inscripcion.jpg',
             'credencial_elector' => 'diamante_int_credencial_elector.jpg',
             'comprobante_domicilio' => 'diamante_int_comprobante_domicilio.jpg',
-            'fecha_nacimiento' => '1975-09-05',
         ];
         $data['distribuidor2'] = [
             'avatar' => 'demo3/media/avatars/300-7.jpg',
             'phone' => '55 9054 2387',
-            'website' => 'https://www.distribuidor.com',
             'tipo_persona' => 'FISICA',
             'company' => 'AP Distribuidor',
             'rfc' => 'APO1802139A2',
@@ -638,7 +617,6 @@ class UsersSeeder extends Seeder
             'inscripcion' => 'distribuidor_inscripcion.jpg',
             'credencial_elector' => 'distribuidor_credencial_elector.jpg',
             'comprobante_domicilio' => 'distribuidor_comprobante_domicilio.jpg',
-            'fecha_nacimiento' => '1988-02-13',
         ];
         return $data;
     }

@@ -18,7 +18,6 @@ class CreateUserInfosTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->text('avatar')->nullable();
             $table->string('phone', 15);
-            $table->string('website', 100)->nullable();
             $table->enum('tipo_persona', ['FISICA', 'MORAL']);
             $table->string('company', 50)->nullable();
             $table->string('rfc',20);
@@ -50,7 +49,6 @@ class CreateUserInfosTable extends Migration
             $table->text('inscripcion')->nullable();
             $table->text('credencial_elector')->nullable();
             $table->text('comprobante_domicilio')->nullable();
-            $table->date('fecha_nacimiento')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

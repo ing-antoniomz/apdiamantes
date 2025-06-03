@@ -50,10 +50,26 @@ class UserServices
         try {
             DB::beginTransaction();
 
-            // Procesar el avatar si se proporciona
+            // Procesar archivos si se proporcionan
             $avatarPath = null;
+            $inscripcionPath = null;
+            $credencialElectorPath = null;
+            $comprobanteDomicilioPath = null;
+
             if (isset($data['avatar']) && $data['avatar'] instanceof UploadedFile) {
                 $avatarPath = $data['avatar']->store('avatars', 'public');
+            }
+
+            if (isset($data['inscripcion']) && $data['inscripcion'] instanceof UploadedFile) {
+                $inscripcionPath = $data['inscripcion']->store('inscripciones', 'public');
+            }
+
+            if (isset($data['ine']) && $data['ine'] instanceof UploadedFile) {
+                $credencialElectorPath = $data['ine']->store('credenciales', 'public');
+            }
+
+            if (isset($data['comprobante_domicilio']) && $data['comprobante_domicilio'] instanceof UploadedFile) {
+                $comprobanteDomicilioPath = $data['comprobante_domicilio']->store('comprobantes', 'public');
             }
 
             // Crear usuario
@@ -62,8 +78,8 @@ class UserServices
                 'nombre' => $data['nombre'] ?? null,
                 'apellido_paterno' => $data['apellido_paterno'] ?? null,
                 'apellido_materno' => $data['apellido_materno'] ?? null,
-                'cuenta_ap' => $data['cuenta_ap'] ?? null,
-                'status' => false,
+                'cuenta_ap' => $data['cuenta_apdiamantes'] ?? null,
+                'status' => isset($data['estatus']) ? true : false,
                 'password' => Hash::make('APDiamantes2025'),
                 'email' => $data['correo'] ?? null,
             ]);
@@ -76,6 +92,8 @@ class UserServices
                 'persona_autorizada' => $data['persona_autorizada'] ?? null,
                 'beneficiario1' => $data['beneficiario1'] ?? null,
                 'beneficiario2' => $data['beneficiario2'] ?? null,
+                'beneficiario1_parentesco' => $data['parentescoBeneficiario1'] ?? null,
+                'beneficiario2_parentesco' => $data['parentescoBeneficiario2'] ?? null,
                 'tipo_persona' => $data['radioPersona'] ?? null,
                 'cosolicitante' => $data['cosolicitante'] ?? null,
                 'cosolicitante_rfc' => $data['cosolicitante_rfc'] ?? null,
@@ -98,6 +116,9 @@ class UserServices
                 'cp_envios' => $data['direccion_envio_codigo_postal'] ?? null,
                 'telefono_envios' => $data['direccion_envio_telefono_fiscal'] ?? null,
                 'avatar' => $avatarPath ?? null,
+                'inscripcion' => $inscripcionPath ?? null,
+                'credencial_elector' => $credencialElectorPath ?? null,
+                'comprobante_domicilio' => $comprobanteDomicilioPath ?? null,
             ]);
 
             // Asignar rol
@@ -111,7 +132,7 @@ class UserServices
 
                 if ($grupo) {
                     $user->grupos()->attach($grupo->id, [
-                        'rol' => $data['grupo_rol'] ?? null, // o lo que venga en $data['rol']
+                        'rol' => $data['pociscion'] ?? null, // o lo que venga en $data['rol']
                         'fecha_ingreso' => now(),
                     ]);
                 }

@@ -1,15 +1,27 @@
+@section('scripts')
+    <script src="{{ mix('js/app.js') }}"></script>
+    {{ $dataTable->scripts() }}
+@endsection
+
 <x-base-layout>
 
     <!--begin::Card-->
     <div class="card">
         <!--begin::Card body-->
         <div class="card-body pt-6">
-            @include('pages.admin._table')
+            <!--begin::Table-->
+                {{ $dataTable->table() }}
+            <!--end::Table-->
         </div>
         <!--end::Card body-->
     </div>
     <!--end::Card-->
 
-    @include('pages.admin._add-user-modal')
+    <usuarios-component
+        :ruta="'{{ route("admin.users.store") }}'"
+        :grupos='{{ $grupos }}'
+        :niveles='{{ $niveles }}'
+        :avatarUrl="'{{ asset('demo3/media/avatars/blank.png') }}'">
+    </usuarios-component>
 
 </x-base-layout>
