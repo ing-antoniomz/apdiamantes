@@ -132,7 +132,7 @@ class UserServices
 
                 if ($grupo) {
                     $user->grupos()->attach($grupo->id, [
-                        'rol' => $data['pociscion'] ?? null, // o lo que venga en $data['rol']
+                        'rol' => $data['posicion'] ?? null, // o lo que venga en $data['rol']
                         'fecha_ingreso' => now(),
                     ]);
                 }

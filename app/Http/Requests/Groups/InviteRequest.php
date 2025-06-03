@@ -95,7 +95,7 @@ class InviteRequest extends FormRequest
                 }
             ], // Validación para el teléfono de envío
 
-            'pociscion' => ['required', 'in:MIEMBRO,ESTRELLA,CREADOR'], // Validación para el rol en el grupo
+            'posicion' => ['required', 'in:MIEMBRO,ESTRELLA,CREADOR'], // Validación para el rol en el grupo
 
             // Imagen
             'avatar' => ['nullable', 'file', 'mimes:jpeg,jpg,png', 'max:2048'], // Validación para el avatar

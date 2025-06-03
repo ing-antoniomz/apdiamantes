@@ -19,10 +19,10 @@ class CreateUserInfosTable extends Migration
             $table->text('avatar')->nullable();
             $table->string('phone', 15);
             $table->enum('tipo_persona', ['FISICA', 'MORAL']);
-            $table->string('company', 50)->nullable();
             $table->string('rfc',20);
             $table->string('cosolicitante', 150)->nullable();
             $table->string('cosolicitante_rfc',20)->nullable();
+            $table->string('company', 50)->nullable();
             $table->string('persona_autorizada',150)->nullable();
             $table->string('calle_fiscal',100);
             $table->string('numero_fiscal',50);

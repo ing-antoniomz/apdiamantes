@@ -4,12 +4,15 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title text-center text-white user-select-none fs-1">
-                        <i class="me-4 text-white fs-1 fa-solid fa-user-group"></i>Registrar Usuario
+                        <i class="me-4 text-white fa-duotone fs-1 fa-solid fa-user-plus"></i>Registrar Usuario
                     </h3>
 
                     <!--begin::Close-->
-                    <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
-                        <i class="ki-duotone ki-cross fs-2x"><span class="path1"></span><span class="path2"></span></i>
+                    <div class="btn btn-icon btn-sm btn-active-light-primary" data-bs-dismiss="modal" aria-label="Close">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" />
+                            <path d="M6 18L18 6" stroke="currentColor" stroke-width="2" />
+                        </svg>
                     </div>
                     <!--end::Close-->
                 </div>
@@ -232,7 +235,7 @@
                                         name="estatus"
                                         id="estatus"
                                     />
-                                    <label class="form-check-label" for="estatus">
+                                    <label class="form-check-label user-select-none" for="estatus">
                                         Activo
                                     </label>
                                 </div>
@@ -342,7 +345,7 @@
                                 <span class="required">Posición</span>
                             </label>
                             <div class="col-lg-3 fv-row">
-                                <select v-model="form.pociscion" id="pociscion" name="pociscion" class="form-select">
+                                <select v-model="form.posicion" id="posicion" name="posicion" class="form-select">
                                     <option value="" disabled>Selecciona una posición</option>
                                     <option value="MIEMBRO">Miembro</option>
                                     <option value="ADMINISTRADOR">Administrador</option>
@@ -385,7 +388,7 @@
 
                         <div class="row">
                             <div class="col-lg-12 fv-row text-end">
-                                <p class="text-gray-700 user-select-none">Solo archivos pdf,jpg,jpeg.</p>
+                                <p class="text-gray-700 user-select-none">Solo archivos pdf, jpg, jpeg.</p>
                             </div>
                         </div>
 
@@ -770,7 +773,7 @@ export default {
                 nivel: "",
                 parentescoBeneficiario1: "",
                 parentescoBeneficiario2: "",
-                pociscion: "",
+                posicion: "",
                 grupo: "",
                 inscripcion: "",
                 ine: "",
@@ -984,7 +987,7 @@ export default {
                             }
                         }
                     },
-                    pociscion: {
+                    posicion: {
                         validators: {
                             notEmpty: {
                                 message: 'Debe eligir una pocisión',
@@ -1320,7 +1323,7 @@ export default {
                         nivel: "",
                         parentescoBeneficiario1: "",
                         parentescoBeneficiario2: "",
-                        pociscion: "",
+                        posicion: "",
                         grupo: "",
                         inscripcion: "",
                         ine: "",
@@ -1328,6 +1331,22 @@ export default {
                     };
                     this.usarMismaDireccion = false;
                     this.validator.resetForm(true); // Limpiar validaciones
+
+                    // Restablecer la imagen del avatar
+                    const imageInput = document.querySelector('[data-kt-image-input="true"]');
+                    if (imageInput) {
+                        const cancelButton = imageInput.querySelector('[data-kt-image-input-action="cancel"]');
+                        if (cancelButton) {
+                            cancelButton.click(); // Simula el clic en el botón de cancelar
+                        }
+                    }
+                    this.file = null;
+
+                    // Cerrar el modal userModal
+                    const modalInstance = bootstrap.Modal.getInstance(document.getElementById('userModal'));
+                    if (modalInstance) {
+                        modalInstance.hide();
+                    }
                 } catch (error) {
                     this.$handleError(error);
                 } finally {

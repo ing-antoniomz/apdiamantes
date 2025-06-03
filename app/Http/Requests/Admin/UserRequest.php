@@ -31,7 +31,7 @@ class UserRequest extends FormRequest
         $rules = [
             // Usuario
             'user' => ['required', 'string', 'alpha_dash', 'min:4', 'max:30', 'unique:users,user'], // Validación para el nombre de usuario
-            'correo' => ['required', 'email'], // Validación para el correo electrónico
+            'correo' => ['required', 'email','unique:users,email'], // Validación para el correo electrónico
             'telefono' => [
                 'required',
                 'regex:/^\+?\d{1,3}?[-\s]?(\d{1,4}[-\s]?){1,4}$/',
@@ -45,21 +45,21 @@ class UserRequest extends FormRequest
             'nombre' => ['required', 'string', 'min:3', 'max:30'], // Validación para el nombre
             'apellido_paterno' => ['required', 'string', 'min:3', 'max:30'], // Validación para el apellido paterno
             'apellido_materno' => ['required', 'string', 'min:3', 'max:30'], // Validación para el apellido materno
-            'rfc' => ['required', 'regex:/^([A-ZÑ&]{3,4})\d{6}(?:[A-Z\d]{3})?$/', 'min:12', 'max:13'], // Validación para el RFC
+            'rfc' => ['required', 'regex:/^([A-ZÑ&]{3,4})\d{6}(?:[A-Z\d]{3})?$/', 'min:12', 'max:13','unique:user_infos,rfc'], // Validación para el RFC
             'beneficiario1' => ['required', 'string'], // Validación para el primer beneficiario
             'beneficiario2' => ['nullable', 'string', 'min:3', 'max:60'], // Validación para el segundo beneficiario
-            'cuenta_apdiamantes' => ['required', 'string', 'min:3', 'max:60'], // Validación para el segundo beneficiario
+            'cuenta_apdiamantes' => ['required', 'string', 'min:3', 'max:60','unique:users,cuenta_ap'], // Validación para el segundo beneficiario
             'parentescoBeneficiario1' => ['nullable', 'string', 'min:3', 'max:60'], // Validación para el segundo beneficiario
             'parentescoBeneficiario2' => ['nullable', 'string', 'min:3', 'max:60'], // Validación para el segundo beneficiario
             'estatus' => ['nullable', 'in:on'],
             'radioPersona' => ['required', 'in:FISICA,MORAL'], // Validación para el tipo de persona
             'nivel' => ['required', 'string'], // Validación para el nivel
             'grupo' => ['required', 'string'], // Validación para el grupo
-            'pociscion' => ['required', 'string'], // Validación para el nivel
+            'posicion' => ['required', 'string'], // Validación para el nivel
 
             // Información bancaria
             'banco' => ['required', 'string', 'min:5', 'max:30'], // Validación para el banco
-            'cuenta' => ['required', 'regex:/^\d{18}$/', 'size:18'], // Validación para la cuenta bancaria
+            'cuenta' => ['required', 'regex:/^\d{18}$/', 'size:18','unique:user_infos,cuenta'], // Validación para la cuenta bancaria
             'sucursal' => ['nullable', 'string', 'min:3', 'max:60'], // Validación para la sucursal
             'titular_cuenta' => ['required', 'string', 'min:5', 'max:60'], // Validación para el titular de la cuenta
 
@@ -100,10 +100,10 @@ class UserRequest extends FormRequest
             ], // Validación para el teléfono de envío
 
             // Imagen
-            'avatar' => ['nullable', 'file', 'mimes:jpeg,jpg,png', 'max:2048'], // Validación para el avatar
-            'inscripcion' => ['nullable', 'file', 'mimes:jpeg,jpg,pdf', 'max:2048'],
-            'ine' => ['nullable', 'file', 'mimes:jpeg,jpg,pdf', 'max:2048'],
-            'comprobante_domicilio' => ['nullable', 'file', 'mimes:jpeg,jpg,pdf', 'max:2048'],
+            'avatar' => ['nullable', 'file', 'mimes:jpeg,jpg,png', 'max:10240'], // Validación para el avatar
+            'inscripcion' => ['nullable', 'file', 'mimes:jpeg,jpg,pdf', 'max:10240'],
+            'ine' => ['nullable', 'file', 'mimes:jpeg,jpg,pdf', 'max:10240'],
+            'comprobante_domicilio' => ['nullable', 'file', 'mimes:jpeg,jpg,pdf', 'max:10240'],
         ];
 
         // Validaciones condicionales según el tipo de persona

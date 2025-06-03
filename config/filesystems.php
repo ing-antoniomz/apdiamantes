@@ -52,6 +52,12 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
         ],
 
+        'sensitive' => [
+            'driver' => 'local',
+            'root' => storage_path('app/sensitive'),
+            'visibility' => 'private',
+        ],
+
     ],
 
     /*

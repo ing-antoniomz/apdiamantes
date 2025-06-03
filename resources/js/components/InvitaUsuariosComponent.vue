@@ -696,7 +696,7 @@ export default {
                 direccion_envio_codigo_postal: "",
                 direccion_envio_telefono_fiscal: "",
                 aviso_privacidad: "",
-                pociscion: "MIEMBRO",
+                posicion: "MIEMBRO",
                 nivel: "Distribuidor",
                 grupo: this.grupo[0].name,
             },
@@ -1086,7 +1086,7 @@ export default {
             const result = await this.validator.validate(); // Validar formulario
             const form = this.$refs.formRef; // Accede al formulario usando ref
             const formData = new FormData(form); // Pasa el formulario al constructor de FormData
-            formData.append('pociscion', this.form.pociscion);
+            formData.append('posicion', this.form.posicion);
 
             // Adjuntar el archivo solo si es válido
             if (this.file instanceof File) {

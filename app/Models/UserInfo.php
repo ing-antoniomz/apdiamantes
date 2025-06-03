@@ -41,6 +41,8 @@ class UserInfo extends Model
         'persona_autorizada',
         'beneficiario1',
         'beneficiario2',
+        'beneficiario1_parentesco',
+        'beneficiario2_parentesco',
         'tipo_persona',
         'cosolicitante',
         'cosolicitante_rfc',
@@ -63,6 +65,9 @@ class UserInfo extends Model
         'cp_envios',
         'telefono_envios',
         'avatar',
+        'inscripcion',
+        'credencial_elector',
+        'comprobante_domicilio',
     ];
 
     /**
