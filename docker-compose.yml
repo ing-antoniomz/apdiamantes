@@ -17,6 +17,7 @@ services:
       APP_ENV: local
     networks:
       - laravel
+    restart: always
 
   nginx:
     image: nginx:alpine
@@ -30,6 +31,7 @@ services:
       - app
     networks:
       - laravel
+    restart: always
 
   postgres:
     image: postgres:15
@@ -48,9 +50,9 @@ services:
       postgres
       -c 'config_file=/etc/postgresql/postgresql.conf'
       -c 'hba_file=/etc/postgresql/pg_hba.conf'
-
     networks:
       - laravel
+    restart: always
 
 
   redis:
@@ -64,6 +66,7 @@ services:
     command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
     networks:
       - laravel
+    restart: always
 
 
 volumes:
