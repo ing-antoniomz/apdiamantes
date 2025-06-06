@@ -7,6 +7,8 @@ services:
     volumes:
       - .:/var/www/html
       - ./docker/php/php-dev.ini:/usr/local/etc/php/conf.d/99-custom.ini
+      - ./docker/bashrc/.bashrc_root:/root/.bashrc:ro
+      - ./docker/nano/nanorc:/root/.nanorc
       - ./docker/bash_history/.bash_history:/root/.bash_history
     depends_on:
       - postgres
