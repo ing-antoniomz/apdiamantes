@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     zip \
     unzip \
+    nano \
     git \
     curl \
     libzip-dev \

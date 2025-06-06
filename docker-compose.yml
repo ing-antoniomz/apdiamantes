@@ -6,11 +6,12 @@ services:
     container_name: laravel-app
     volumes:
       - .:/var/www/html
+      - ./docker/php/php-dev.ini:/usr/local/etc/php/conf.d/99-custom.ini
     depends_on:
       - postgres
       - redis
     environment:
-      APP_ENV: production
+      APP_ENV: local
     networks:
       - laravel
 
@@ -34,10 +35,17 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+      - ./docker/postgres/postgresql.conf:/etc/postgresql/postgresql.conf
+      - ./docker/postgres/pg_hba.conf:/etc/postgresql/pg_hba.conf
     environment:
       POSTGRES_DB: apdiamantes
       POSTGRES_USER: tonho
       POSTGRES_PASSWORD: 2305
+    command: >
+      postgres
+      -c 'config_file=/etc/postgresql/postgresql.conf'
+      -c 'hba_file=/etc/postgresql/pg_hba.conf'
+
     networks:
       - laravel
 
@@ -45,12 +53,15 @@ services:
   redis:
     image: redis:alpine
     container_name: laravel-redis
-    ports:
-      - "6379:6379"
+    #ports:
+    #  - "6379:6379"
     volumes:
       - redisdata:/data
+      - ./docker/redis/redis.conf:/usr/local/etc/redis/redis.conf
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
     networks:
       - laravel
+
 
 volumes:
   pgdata:
