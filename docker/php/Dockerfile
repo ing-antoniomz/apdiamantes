@@ -35,8 +35,8 @@ RUN apt-get update && apt-get install -y \
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Copiar el entrypoint y dar permisos de ejecución
-COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
+#COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+#RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # Copiar archivo de configuración de Supervisor
 COPY docker/php/supervisord.conf /etc/supervisord.conf
