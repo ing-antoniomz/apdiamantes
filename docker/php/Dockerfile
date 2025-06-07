@@ -52,6 +52,10 @@ RUN composer install --no-dev --optimize-autoloader --no-scripts
 # Crear carpeta para logs de supervisor
 RUN mkdir -p /var/log/supervisor
 
+# Establece la zona horaria del sistema
+ENV TZ=America/Mexico_City
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 # Comando por defecto: iniciar Supervisor
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
 
