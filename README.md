@@ -13,9 +13,9 @@
 - METRONIC    => 8.1.4 - demo3
 - BOOTSTRAP   => 5.2.0
 - DOCKER      => 28.2.2
-   NGINX      => 1.27.5
-   REDIS      => 8.0.2
-   POSTGRESQL  => 15.13
+  - NGINX      => 1.27.5
+  - REDIS      => 8.0.2
+  - POSTGRESQL  => 15.13
 
 ## Desplegar
 
@@ -36,7 +36,7 @@ docker compose up -d
 
 Corre las migraciones y los seeders dentro del contenedor `laravel-app` de ser necesario.
 ```bash
-php artisan migrate:fresh --seed
+ docker exec laravel-app php artisan migrate:fresh --seed
 ```
 
 La aplicacion estara corriendo en http://localhost:8000
