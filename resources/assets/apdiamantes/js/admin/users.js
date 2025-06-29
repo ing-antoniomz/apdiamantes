@@ -2,41 +2,67 @@
 
 // Class definition
 var adminUsers = function () {
-    // Variables privadas
-    var activationButton; // Variable para almacenar el selector del botón
 
-    // Función para manejar la activación del usuario
     var sendActivation = function () {
-        // Delegación de eventos para capturar clicks en los botones dentro de DataTables
         document.addEventListener('click', function (e) {
-            if (e.target && e.target.matches(activationButton)) { // Usa la variable
+            const btn = e.target.closest('.send-activation-btn');
+            if (e.target && btn) {
                 e.preventDefault();
-
-                var user_id = e.target.getAttribute('data-user-id'); // Obtiene el ID del usuario
-
-                // Mostrar SweetAlert
+                var user_name = e.target.getAttribute('data-user-name');
                 Swal.fire({
                     title: 'Activar Usuario',
-                    text: '¿Estás seguro de que deseas activar el usuario con ID ' + user_id + '?',
+                    text: 'Se enviará el correo de activación al usuario ' + user_name + '. ¿Deseas continuar?',
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonText: 'Sí, Activar',
-                    cancelButtonText: 'Cancelar'
+                    cancelButtonText: 'Cancelar',
+                    customClass: {
+                        confirmButton: 'btn btn-light btn-active-light-primary text-white',    // Cambia aquí la clase del botón de confirmar
+                        cancelButton: 'btn btn-light btn-active-light-danger text-white'        // Cambia aquí la clase del botón de cancelar
+                    },
+                    buttonsStyling: false
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        Swal.fire('Activado', 'El usuario ha sido activado.', 'success');
+                        window.dispatchEvent(new CustomEvent('activar-usuario', { detail: user_name }));
                     }
                 });
             }
         });
     }
 
+    var editUser = function () {
+        document.addEventListener('click', function (e) {
+            const btn = e.target.closest('.edit-user-btn');
+            if (e.target && btn) {
+                e.preventDefault();
+
+                try {
+                    const userJson = e.target.getAttribute('data-user');
+                    const userData = JSON.parse(userJson);
+
+                    window.dispatchEvent(new CustomEvent('editar-usuario', { detail: userData }));
+                } catch (error) {
+                    console.error('Error al parsear los datos del usuario:', error);
+                }
+            }
+        });
+    }
+
+    var newUser = function () {
+        document.addEventListener('click', function (e) {
+            const btn = e.target.closest('#add-user-btn'); // Busca el ancestro con ese ID
+            if (btn) {
+                window.dispatchEvent(new CustomEvent('nuevo-usuario'));
+            }
+        });
+    }
 
     // Public methods
     return {
         init: function () {
-            activationButton = '.send-activation-btn'; // Se asigna el selector aquí
-            sendActivation(); // Inicia la función
+            sendActivation();
+            editUser();
+            newUser();
         }
     }
 }();

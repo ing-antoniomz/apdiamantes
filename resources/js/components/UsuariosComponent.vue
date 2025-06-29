@@ -4,11 +4,13 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title text-center text-white user-select-none fs-1">
-                        <i class="me-4 text-white fa-duotone fs-1 fa-solid fa-user-plus"></i>Registrar Usuario
+                        <i class="me-4 text-white fa-duotone fs-1 fa-solid" :class="modoEdicion ? 'fa-user-pen' : 'fa-user-plus'"></i>
+                        {{ modoEdicion ? 'Editar Usuario' : 'Registrar Usuario' }}
                     </h3>
 
+
                     <!--begin::Close-->
-                    <div class="btn btn-icon btn-sm btn-active-light-primary" data-bs-dismiss="modal" aria-label="Close">
+                    <div class="btn btn-icon btn-sm btn-active-light-danger" data-bs-dismiss="modal" aria-label="Close">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" />
                             <path d="M6 18L18 6" stroke="currentColor" stroke-width="2" />
@@ -35,7 +37,7 @@
 
                         <!-- Datos varios-->
                         <div class="row mb-0 mb-lg-3">
-                            <label class="col-lg-1 col-form-label fw-bold fs-6 user-select-none text-start text-lg-end d-flex align-items-center mb-lg-5 mb-0">
+                            <label for="user" class="col-lg-1 col-form-label fw-bold fs-6 user-select-none text-start text-lg-end d-flex align-items-center mb-lg-5 mb-0">
                                 <span class="required">Usuario</span>
                             </label>
                             <div class="col-lg-3 fv-row">
@@ -43,11 +45,12 @@
                                     type="text"
                                     v-model="form.user"
                                     class="form-control form-control-lg"
+                                    id="user"
                                     name="user"
                                     placeholder="Debe ser único"
                                 />
                             </div>
-                            <label class="col-lg-1 col-form-label fw-bold fs-6 user-select-none text-start text-lg-end d-flex align-items-center mb-lg-5 mb-0">
+                            <label for="correo"  class="col-lg-1 col-form-label fw-bold fs-6 user-select-none text-start text-lg-end d-flex align-items-center mb-lg-5 mb-0">
                                 <span class="me-1 mb-4 d-flex align-items-start" data-bs-toggle="tooltip" title="A este correo le llegará la activación.">
                                     <i class="fa-sharp-duotone fa-solid fa-circle-question text-gray-500 fs-6"></i>
                                 </span>
@@ -59,10 +62,11 @@
                                     v-model="form.correo"
                                     class="form-control form-control-lg"
                                     name="correo"
+                                    id="correo"
                                     placeholder="usuario@correo.com"
                                 />
                             </div>
-                            <label class="col-lg-1 col-form-label fw-bold fs-6 user-select-none text-start text-lg-end d-flex align-items-center mb-lg-5 mb-0">
+                            <label for="telefono"  class="col-lg-1 col-form-label fw-bold fs-6 user-select-none text-start text-lg-end d-flex align-items-center mb-lg-5 mb-0">
                                 <span class="required">Teléfono</span>
                             </label>
                             <div class="col-lg-3 fv-row">
@@ -71,6 +75,7 @@
                                     v-model="form.telefono"
                                     class="form-control form-control-lg"
                                     name="telefono"
+                                    id="telefono"
                                     placeholder="55 4554 4454"
                                 />
                             </div>
@@ -82,7 +87,7 @@
 
                                 <!-- Nombre completo -->
                                 <div class="row">
-                                    <label class="col-lg-2 col-form-label fw-bold fs-6 user-select-none required text-start text-lg-center">Nombre Completo</label>
+                                    <label for="nombre" class="col-lg-2 col-form-label fw-bold fs-6 user-select-none required text-start text-lg-center">Nombre Completo</label>
                                     <div class="col-lg-10 mb-2 mb-lg-6">
                                         <div class="row">
                                             <div class="col-lg-4 fv-row">
@@ -91,6 +96,7 @@
                                                     v-model="form.nombre"
                                                     class="form-control form-control-lg"
                                                     name="nombre"
+                                                    id="nombre"
                                                     placeholder="Nombre"
                                                 />
                                             </div>
@@ -125,6 +131,7 @@
                                             v-model="form.rfc"
                                             @input="form.rfc = form.rfc.toUpperCase()"
                                             name="rfc"
+                                            id="rfc"
                                             class="form-control form-control-lg mb-3 mb-lg-0"
                                             placeholder="XXXX943101XDFRXN01"
                                         />
@@ -136,12 +143,13 @@
                                             v-model="form.company"
                                             @input="form.company = form.company.toUpperCase()"
                                             name="company"
+                                            id="company"
                                             class="form-control form-control-lg mb-3 mb-lg-0"
                                             placeholder="Compañia"
                                         />
                                     </div>
                                     <div class="col-lg-4 fv-row" v-show="tipoPersona === 'MORAL'">
-                                        <label class="form-label fw-bold fs-6 user-select-none text-center d-flex align-items-center">
+                                        <label for="persona_autorizada" class="form-label fw-bold fs-6 user-select-none text-center d-flex align-items-center">
                                             <span class="me-1 mb-4 d-flex align-items-start" data-bs-toggle="tooltip" title="Se tendrá que identificar con el mismo nombre.">
                                                 <i class="fa-sharp-duotone fa-solid fa-circle-question text-gray-500 fs-6"></i>
                                             </span>
@@ -151,6 +159,7 @@
                                             type="text"
                                             v-model="form.persona_autorizada"
                                             name="persona_autorizada"
+                                            id="persona_autorizada"
                                             class="form-control form-control-lg mb-3 mb-lg-0"
                                             placeholder="Nombre Completo"
                                         />
@@ -160,7 +169,7 @@
                                 <!-- Beneficiarios -->
                                 <div class="row mb-6 mt-0 mt-lg-3">
                                     <div class="col-lg-4 fv-row d-flex flex-column justify-content-center align-items-center">
-                                        <label class="form-label fw-bold fs-6 user-select-none text-center d-flex align-items-center">
+                                        <label for="beneficiario1" class="form-label fw-bold fs-6 user-select-none text-center d-flex align-items-center">
                                             <span class="me-1 mb-4 d-flex align-items-start" data-bs-toggle="tooltip" title="Persona beneficiaria en caso de algún imprevisto.">
                                                 <i class="fa-sharp-duotone fa-solid fa-circle-question text-gray-500 fs-6"></i>
                                             </span>
@@ -170,6 +179,7 @@
                                             type="text"
                                             v-model="form.beneficiario1"
                                             name="beneficiario1"
+                                            id="beneficiario1"
                                             class="form-control form-control-lg mb-3 mb-lg-0"
                                             placeholder="Nombre Completo"
                                         />
@@ -180,6 +190,7 @@
                                             type="text"
                                             v-model="form.beneficiario2"
                                             name="beneficiario2"
+                                            id="beneficiario2"
                                             class="form-control form-control-lg  mb-3 mb-lg-0"
                                             placeholder="Nombre Completo"
                                         />
@@ -191,6 +202,7 @@
                                             v-model="form.cuenta_apdiamantes"
                                             @input="form.cuenta_apdiamantes = form.cuenta_apdiamantes.toUpperCase()"
                                             name="cuenta_apdiamantes"
+                                            id="cuenta_apdiamantes"
                                             class="form-control form-control-lg  mb-3 mb-lg-0"
                                             placeholder="Número de cuenta única"
                                         />
@@ -200,7 +212,7 @@
                                 <!-- Beneficiarios Parentesco-->
                                 <div class="row mb-6 mt-0 mt-lg-3">
                                     <div class="col-lg-4 fv-row d-flex flex-column justify-content-center align-items-center">
-                                        <label class="form-label fw-bold fs-6 user-select-none text-center d-flex align-items-center">
+                                        <label for="parentescoBeneficiario1" class="form-label fw-bold fs-6 user-select-none text-center d-flex align-items-center">
                                             <span class="me-1 mb-4 d-flex align-items-start" data-bs-toggle="tooltip" title="Parentesco con el primer Beneficiario.">
                                                 <i class="fa-sharp-duotone fa-solid fa-circle-question text-gray-500 fs-6"></i>
                                             </span>
@@ -210,6 +222,7 @@
                                             type="text"
                                             v-model="form.parentescoBeneficiario1"
                                             name="parentescoBeneficiario1"
+                                            id="parentescoBeneficiario1"
                                             class="form-control form-control-lg mb-3 mb-lg-0"
                                             placeholder="Nombre Completo"
                                         />
@@ -220,6 +233,7 @@
                                             type="text"
                                             v-model="form.parentescoBeneficiario2"
                                             name="parentescoBeneficiario2"
+                                            id="parentescoBeneficiario2"
                                             class="form-control form-control-lg  mb-3 mb-lg-0"
                                             placeholder="Nombre Completo"
                                         />
@@ -289,7 +303,7 @@
                                         <!--end::Label-->
 
                                         <!--begin::Cancel-->
-                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                        <span class="btn btn-icon btn-circle btn-active-color-danger w-25px h-25px bg-body shadow"
                                             data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
                                             <i class="bi bi-x fs-2"></i>
                                         </span>
@@ -314,7 +328,7 @@
                         <!-- Grupo y perfil -->
                         <div class="row mb-6 align-items-center">
                             <!-- filepath: /var/www/html/resources/js/components/UsuariosComponent.vue -->
-                            <label class="col-lg-1 col-form-label fw-bold fs-6 user-select-none text-start text-lg-end d-flex align-items-center">
+                            <label for="nivel" class="col-lg-1 col-form-label fw-bold fs-6 user-select-none text-start text-lg-end d-flex align-items-center">
                                 <span class="me-1 mb-4 d-flex align-items-start" data-bs-toggle="tooltip" title="Determinado por sus ventas.">
                                     <i class="fa-sharp-duotone fa-solid fa-circle-question text-gray-500 fs-6"></i>
                                 </span>
@@ -326,7 +340,7 @@
                                     <option v-for="(nombre, id) in niveles" :key="id" :value="nombre">{{ nombre }}</option>
                                 </select>
                             </div>
-                            <label class="col-lg-1 col-form-label fw-bold fs-6 user-select-none text-start text-lg-end d-flex align-items-center">
+                            <label for="grupo" class="col-lg-1 col-form-label fw-bold fs-6 user-select-none text-start text-lg-end d-flex align-items-center">
                                 <span class="me-1 mb-4 d-flex align-items-start" data-bs-toggle="tooltip" title="Cualquier grupo registrado en el sistema.">
                                     <i class="fa-sharp-duotone fa-solid fa-circle-question text-gray-500 fs-6"></i>
                                 </span>
@@ -338,7 +352,7 @@
                                     <option v-for="(nombre, id) in grupos" :key="id" :value="nombre">{{ nombre }}</option>
                                 </select>
                             </div>
-                            <label class="col-lg-1 col-form-label fw-bold fs-6 user-select-none text-start text-lg-end d-flex align-items-center">
+                            <label for="posicion" class="col-lg-1 col-form-label fw-bold fs-6 user-select-none text-start text-lg-end d-flex align-items-center">
                                 <span class="me-1 mb-4 d-flex align-items-start" data-bs-toggle="tooltip" title="Posición en el grupo.">
                                     <i class="fa-sharp-duotone fa-solid fa-circle-question text-gray-500 fs-6"></i>
                                 </span>
@@ -362,6 +376,7 @@
                                 <input
                                     type="file"
                                     name="inscripcion"
+                                    id="inscripcion"
                                     class="form-control form-control-lg"
                                     accept=".pdf, .jpg, .jpeg"
                                 />
@@ -371,6 +386,7 @@
                                 <input
                                     type="file"
                                     name="ine"
+                                    id="ine"
                                     class="form-control form-control-lg"
                                     accept=".pdf, .jpg, .jpeg"
                                 />
@@ -380,6 +396,7 @@
                                 <input
                                     type="file"
                                     name="comprobante_domicilio"
+                                    id="comprobante_domicilio"
                                     class="form-control form-control-lg"
                                     accept=".pdf, .jpg, .jpeg"
                                 />
@@ -406,12 +423,13 @@
                         </div>
 
                         <div class="row mb-6" v-show="tipoPersona === 'FISICA'">
-                            <label class="col-lg-2 col-form-label fw-bold fs-6 user-select-none required text-start text-lg-end">Nombre Completo</label>
+                            <label for="cosolicitante" class="col-lg-2 col-form-label fw-bold fs-6 user-select-none required text-start text-lg-end">Nombre Completo</label>
                             <div class="col-lg-5 fv-row">
                                 <input
                                     type="text"
                                     v-model="form.cosolicitante"
                                     name="cosolicitante"
+                                    id="cosolicitante"
                                     class="form-control form-control-lg"
                                     placeholder="Co-solicitante"
                                 />
@@ -423,6 +441,7 @@
                                     v-model="form.cosolicitante_rfc"
                                     @input="form.cosolicitante_rfc = form.cosolicitante_rfc.toUpperCase()"
                                     name="cosolicitante_rfc"
+                                    id="cosolicitante_rfc"
                                     class="form-control form-control-lg"
                                     placeholder="XXXX943101XDFRXN01"
                                 />
@@ -449,12 +468,13 @@
                                     type="text"
                                     v-model="form.banco"
                                     name="banco"
+                                    id="banco"
                                     class="form-control form-control-lg  mb-3 mb-lg-0"
                                     placeholder="Banco"
                                 />
                             </div>
                             <div class="col-lg-3 fv-row d-flex flex-column justify-content-center align-items-center">
-                                <label class="form-label fw-bold fs-6 user-select-none text-center d-flex align-items-center">
+                                <label for="cuenta" class="form-label fw-bold fs-6 user-select-none text-center d-flex align-items-center">
                                     <span class="me-1 mb-4 d-flex align-items-start" data-bs-toggle="tooltip" title="Cuenta CLABE">
                                         <i class="fa-sharp-duotone fa-solid fa-circle-question text-gray-500 fs-6"></i>
                                     </span>
@@ -465,6 +485,7 @@
                                     v-model="form.cuenta"
                                     @input="form.cuenta = form.cuenta.toUpperCase()"
                                     name="cuenta"
+                                    id="cuenta"
                                     class="form-control form-control-lg  mb-3 mb-lg-0"
                                     placeholder="Cuenta"
                                 />
@@ -475,6 +496,7 @@
                                     type="text"
                                     v-model="form.sucursal"
                                     name="sucursal"
+                                    id="sucursal"
                                     class="form-control form-control-lg  mb-3 mb-lg-0"
                                     placeholder="Sucursal"
                                 />
@@ -485,6 +507,7 @@
                                     type="text"
                                     v-model="form.titular_cuenta"
                                     name="titular_cuenta"
+                                    id="titular_cuenta"
                                     class="form-control form-control-lg mb-3 mb-lg-0"
                                     placeholder="Titular"
                                 />
@@ -518,6 +541,7 @@
                                             type="text"
                                             class="form-control form-control-lg mb-3 mb-lg-0"
                                             name="direccion_fiscal_calle"
+                                            id="direccion_fiscal_calle"
                                             v-model="form.direccion_fiscal_calle"
                                         />
                                     </div>
@@ -527,17 +551,19 @@
                                             type="text"
                                             class="form-control form-control-lg mb-3 mb-lg-0"
                                             name="direccion_fiscal_numero"
+                                            id="direccion_fiscal_numero"
                                             v-model="form.direccion_fiscal_numero"
                                         />
                                     </div>
                                 </div>
 
                                 <div class="fv-row mb-3">
-                                    <label class="form-label required fw-bold fs-6 user-select-none">Colonia</label>
+                                    <label for="direccion_fiscal_colonia" class="form-label required fw-bold fs-6 user-select-none">Colonia</label>
                                     <input
                                     type="text"
                                     class="form-control form-control-lg mb-3 mb-lg-0"
                                     name="direccion_fiscal_colonia"
+                                    id="direccion_fiscal_colonia"
                                     v-model="form.direccion_fiscal_colonia"
                                     />
                                 </div>
@@ -549,6 +575,7 @@
                                             type="text"
                                             class="form-control form-control-lg mb-3 mb-lg-0"
                                             name="direccion_fiscal_ciudad"
+                                            id="direccion_fiscal_ciudad"
                                             v-model="form.direccion_fiscal_ciudad"
                                         />
                                     </div>
@@ -558,6 +585,7 @@
                                             type="text"
                                             class="form-control form-control-lg mb-3 mb-lg-0"
                                             name="direccion_fiscal_estado"
+                                            id="direccion_fiscal_estado"
                                             v-model="form.direccion_fiscal_estado"
                                         />
                                     </div>
@@ -570,6 +598,7 @@
                                             type="text"
                                             class="form-control form-control-lg mb-3 mb-lg-0"
                                             name="direccion_fiscal_codigo_postal"
+                                            id="direccion_fiscal_codigo_postal"
                                             v-model="form.direccion_fiscal_codigo_postal"
                                         />
                                     </div>
@@ -579,6 +608,7 @@
                                             type="text"
                                             class="form-control form-control-lg mb-3 mb-lg-0"
                                             name="direccion_fiscal_telefono_fiscal"
+                                            id="direccion_fiscal_telefono_fiscal"
                                             v-model="form.direccion_fiscal_telefono_fiscal"
                                         />
                                     </div>
@@ -607,6 +637,7 @@
                                             type="text"
                                             class="form-control form-control-lg mb-3 mb-lg-0"
                                             name="direccion_envio_calle"
+                                            id="direccion_envio_calle"
                                             v-model="form.direccion_envio_calle"
                                         />
                                     </div>
@@ -616,17 +647,19 @@
                                             type="text"
                                             class="form-control form-control-lg mb-3 mb-lg-0"
                                             name="direccion_envio_numero"
+                                            id="direccion_envio_numero"
                                             v-model="form.direccion_envio_numero"
                                         />
                                     </div>
                                 </div>
 
                                 <div class="fv-row mb-3">
-                                    <label class="form-label required fw-bold fs-6 user-select-none">Colonia</label>
+                                    <label for="direccion_envio_colonia" class="form-label required fw-bold fs-6 user-select-none">Colonia</label>
                                     <input
                                         type="text"
                                         class="form-control form-control-lg mb-3 mb-lg-0"
                                         name="direccion_envio_colonia"
+                                        id="direccion_envio_colonia"
                                         v-model="form.direccion_envio_colonia"
                                     />
                                 </div>
@@ -638,6 +671,7 @@
                                             type="text"
                                             class="form-control form-control-lg mb-3 mb-lg-0"
                                             name="direccion_envio_ciudad"
+                                            id="direccion_envio_ciudad"
                                             v-model="form.direccion_envio_ciudad"
                                         />
                                     </div>
@@ -647,6 +681,7 @@
                                             type="text"
                                             class="form-control form-control-lg mb-3 mb-lg-0"
                                             name="direccion_envio_estado"
+                                            id="direccion_envio_estado"
                                             v-model="form.direccion_envio_estado"
                                         />
                                     </div>
@@ -659,6 +694,7 @@
                                             type="text"
                                             class="form-control form-control-lg mb-3 mb-lg-0"
                                             name="direccion_envio_codigo_postal"
+                                            id="direccion_envio_codigo_postal"
                                             v-model="form.direccion_envio_codigo_postal"
                                         />
                                     </div>
@@ -668,6 +704,7 @@
                                             type="text"
                                             class="form-control form-control-lg mb-3 mb-lg-0"
                                             name="direccion_envio_telefono_fiscal"
+                                            id="direccion_envio_telefono_fiscal"
                                             v-model="form.direccion_envio_telefono_fiscal"
                                         />
                                     </div>
@@ -684,10 +721,10 @@
 
                         <div class="row mb-6">
                             <div class="col-lg-12 fv-row text-end">
-                                <button type="button" class="btn btn-light-danger text-white me-5" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-light btn-active-light-danger text-white me-5" data-bs-dismiss="modal">Cerrar</button>
                                 <submit-button-component
                                 :is-submitting="isSubmitting"
-                                :label="isSubmitting ? 'Por favor Espera' : 'Invitar'"
+                                :label="isSubmitting ? 'Por favor Espera' : (modoEdicion ? 'Editar' : 'Registrar')"
                                 :disabled="isSubmitting"
                             />
                             </div>
@@ -780,6 +817,8 @@ export default {
                 comprobante_domicilio: "",
             },
             usarMismaDireccion: false,
+            //usuario: null,
+            modoEdicion: false,
             file: null,
             tipoPersona: 'FISICA', // 'moral' o 'fisica'
             isSubmitting: false, // Estado para manejar el indicador de carga
@@ -789,6 +828,15 @@ export default {
     mounted() {
         this.initValidator();
         this.onTipoPersonaChange();
+        window.addEventListener('editar-usuario', (event) => {
+            this.openEditUser(event.detail);
+        });
+        window.addEventListener('nuevo-usuario', (event) => {
+            this.openAddUser();
+        });
+        window.addEventListener('activar-usuario', (event) => {
+            this.inviteUser(event.detail);
+        });
     },
     watch: {
         usarMismaDireccion(nuevoValor) {
@@ -1380,6 +1428,73 @@ export default {
         handleFileUpload(event) {
             const file = event.target.files[0];
             this.file = file instanceof File ? file : null;
+        },
+        openEditUser(usuario) {
+            this.form = usuario;
+            this.modoEdicion = true;
+            // ejemplo: abrir modal
+            $('#userModal').modal('show'); // si usas Bootstrap
+        },
+        openAddUser() {
+            this.form = {
+                nombre: "",
+                apellido_paterno: "",
+                apellido_materno: "",
+                radioPersona: "",
+                estatus: "",
+                rfc: "",
+                avatar: "",
+                company: "",
+                persona_autorizada: "",
+                cuenta_apdiamantes: "",
+                user: "",
+                correo: "",
+                telefono: "",
+                beneficiario1: "",
+                beneficiario2: "",
+                cosolicitante: "",
+                cosolicitante_rfc: "",
+                banco: "",
+                cuenta: "",
+                sucursal: "",
+                titular_cuenta: "",
+                direccion_fiscal_calle: "",
+                direccion_fiscal_numero: "",
+                direccion_fiscal_colonia: "",
+                direccion_fiscal_ciudad: "",
+                direccion_fiscal_estado: "",
+                direccion_fiscal_codigo_postal: "",
+                direccion_fiscal_telefono_fiscal: "",
+                direccion_envio_calle: "",
+                direccion_envio_numero: "",
+                direccion_envio_colonia: "",
+                direccion_envio_ciudad: "",
+                direccion_envio_estado: "",
+                direccion_envio_codigo_postal: "",
+                direccion_envio_telefono_fiscal: "",
+                nivel: "",
+                parentescoBeneficiario1: "",
+                parentescoBeneficiario2: "",
+                posicion: "",
+                grupo: "",
+                inscripcion: "",
+                ine: "",
+                comprobante_domicilio: "",
+            };
+            this.modoEdicion = false;
+            // ejemplo: abrir modal
+            $('#userModal').modal('show'); // si usas Bootstrap
+        },
+        inviteUser(username) {
+            Swal.fire({
+                text: `Usuario ${username} invitado exitosamente.`,
+                icon: "success",
+                confirmButtonText: "Aceptar",
+                customClass: {
+                    confirmButton: "btn btn-light btn-active-light-success text-white",
+                },
+                buttonsStyling: false
+            });
         },
     },
 };

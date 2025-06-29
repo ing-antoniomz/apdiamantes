@@ -133,7 +133,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function grupos()
     {
-        return $this->belongsToMany(Grupo::class, 'grupo_usuario')
+        return $this->belongsToMany(Grupo::class, 'grupo_usuario', 'user_id', 'grupo_id')
             ->withPivot('rol', 'fecha_ingreso');
     }
 

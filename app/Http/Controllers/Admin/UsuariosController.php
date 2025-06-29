@@ -38,8 +38,6 @@ class UsuariosController extends Controller
      */
     public function store(UserRequest $request)
     {
-        //dd($request->validated());
-        //
         // Creamos el usuario, asignándole su rol y grupo
         $user = UserServices::storeUsuario($request->validated());
 
