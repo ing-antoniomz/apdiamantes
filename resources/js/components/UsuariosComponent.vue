@@ -1485,17 +1485,31 @@ export default {
             // ejemplo: abrir modal
             $('#userModal').modal('show'); // si usas Bootstrap
         },
-        inviteUser(username) {
-            Swal.fire({
-                text: `Usuario ${username} invitado exitosamente.`,
-                icon: "success",
-                confirmButtonText: "Aceptar",
-                customClass: {
-                    confirmButton: "btn btn-light btn-active-light-success text-white",
-                },
-                buttonsStyling: false
-            });
-        },
+        async inviteUser(username) {
+            try {
+                const response = await axios.post(`/admin/users/${username}/activate`);
+
+                Swal.fire({
+                    text: response.data.message || `Usuario ${username} invitado exitosamente.`,
+                    icon: "success",
+                    confirmButtonText: "Aceptar",
+                    customClass: {
+                        confirmButton: "btn btn-light btn-active-light-success text-white",
+                    },
+                    buttonsStyling: false
+                });
+            } catch (error) {
+                Swal.fire({
+                    text: error.response?.data?.message || `No se pudo invitar al usuario ${username}.`,
+                    icon: "error",
+                    confirmButtonText: "Aceptar",
+                    customClass: {
+                        confirmButton: "btn btn-light btn-active-light-danger text-white",
+                    },
+                    buttonsStyling: false
+                });
+            }
+        }
     },
 };
 </script>

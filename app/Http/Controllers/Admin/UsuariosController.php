@@ -26,14 +26,6 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(UserRequest $request)
@@ -50,22 +42,6 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
@@ -74,17 +50,48 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     * @param  int  $id
+     * Envia Correo de activacion de usuario
+     * @param  string  $username
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(string $id)
+    public function activationEmail(string $username)
     {
-        //
-        $activity = User::find($id);
+        try {
+            $user = User::where('user', $username)->firstOrFail();
 
-        // Delete from db
-        $activity->delete();
+            if ($user->hasVerifiedEmail()) {
+                return response()->json(['message' => 'El correo ya está verificado.'], 400);
+            }
+
+            $user->sendEmailVerificationNotification();
+
+            // Registrar en activity log
+            activity()
+                ->causedBy(auth()->user() ?? $user) // si está logueado, usa el usuario actual; si no, el mismo usuario
+                ->performedOn($user)
+                ->withProperties([
+                    'accion' => 'reenviar_correo_verificacion',
+                    'ip' => request()->ip(),
+                    'user_agent' => request()->userAgent(),
+                    'fecha' => now()->toDateTimeString(),
+                ])
+                ->log('Se reenvió el correo de verificación al usuario');
+
+            return response()->json(['message' => 'Correo de verificación enviado.']);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            \Illuminate\Support\Facades\Log::warning('Usuario no encontrado para enviar verificación', [
+                'username' => $username,
+                'error' => $e->getMessage(),
+            ]);
+            return response()->json(['message' => 'Usuario no encontrado.'], 404);
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('Error al enviar correo de verificación', [
+                'username' => $username,
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+            ]);
+            return response()->json(['message' => 'Error al enviar el correo de verificación.'], 500);
+        }
     }
 }

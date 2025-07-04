@@ -64,14 +64,15 @@ Route::middleware('auth')->group(function () {
 
     // Admin pages
     Route::prefix('admin')->name('admin.')->group(function () {
-        Route::resource('users', UsuariosController::class)->only(['index', 'store', 'destroy']);
+        Route::resource('users', UsuariosController::class)->only(['index', 'store', 'update']);
+        Route::post('/users/{username}/activate', [UsuariosController::class, 'activationEmail'])->name('users.activate');
     });
     Route::resource('nosotros', AboutController::class)->name('index', 'nosotros')->only(['index']);
     Route::resource('contacto', ContactController::class)->name('index', 'contacto')->only(['index']);
 
-    // Admin pages
+    // grupo pages
     Route::prefix('grupo')->name('grupo.')->group(function () {
-        Route::resource('invitar', InvitarController::class)->only(['index','store', 'destroy']);
+        Route::resource('invitar', InvitarController::class)->only(['index','store']);
     });
 });
 
@@ -96,11 +97,6 @@ Route::get('/descargar-aviso', function () {
     return response()->download($path, 'aviso_privacidad.pdf');
 })->middleware('auth')->name('descargar.aviso');
 
-/**
- * Socialite login using Google service
- * https://laravel.com/docs/8.x/socialite
- */
-//Route::get('/auth/redirect/{provider}', [SocialiteLoginController::class, 'redirect']);
 
 // Documentations pages
 Route::prefix('documentation')->group(function () {

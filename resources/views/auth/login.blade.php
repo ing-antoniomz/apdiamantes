@@ -10,6 +10,32 @@
             <img class="w-275px w-md-300px w-lg-400px w-xl-500px mb-10 mb-lg-20 pe-0 pe-xl-20 d-none d-lg-block ps-10 ps-xl-0"
                 src="{{ asset('apdiamantes/media/apdiamantes-dark.svg') }}" alt="">
             <!--begin::Title-->
+            @if (session('status'))
+                {{-- <div class="alert alert-success">
+                    {{ session('status') }}
+                </div> --}}
+                <!--begin::Alert-->
+                <div class="alert alert-primary d-flex align-items-center p-5">
+                    <!--begin::Icon-->
+                    <i class="fa-solid fa-check text-primary me-3 fs-1"></i>
+                    <!--end::Icon-->
+
+                    <!--begin::Wrapper-->
+                    <div class="d-flex flex-column">
+                        <!--begin::Title-->
+                        <h4 class="my-auto text-dark">{{ session('status') }}</h4>
+                        <!--end::Title-->
+
+                        <!--begin::Content-->
+                        {{-- <span>The alert component can be used to highlight certain parts of your page for higher content
+                            visibility.</span> --}}
+                        <!--end::Content-->
+                    </div>
+                    <!--end::Wrapper-->
+                </div>
+                <!--end::Alert-->
+
+            @endif
             <h1 class="text-dark fw-bolder mb-3 user-select-none">{{ __('Sign In') }}</h1>
             <!--end::Title-->
             <!--begin::Subtitle-->
