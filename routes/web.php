@@ -65,7 +65,7 @@ Route::middleware('auth')->group(function () {
     // Admin pages
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('users', UsuariosController::class)->only(['index', 'store', 'update']);
-        Route::post('/users/{username}/activate', [UsuariosController::class, 'activationEmail'])->name('users.activate');
+        Route::post('/users/{username}/activate', [UsuariosController::class, 'activate'])->name('users.activate');
     });
     Route::resource('nosotros', AboutController::class)->name('index', 'nosotros')->only(['index']);
     Route::resource('contacto', ContactController::class)->name('index', 'contacto')->only(['index']);

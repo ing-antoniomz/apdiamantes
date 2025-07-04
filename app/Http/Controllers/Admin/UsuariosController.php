@@ -55,43 +55,15 @@ class UsuariosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function activationEmail(string $username)
+    public function activate(string $username)
     {
-        try {
-            $user = User::where('user', $username)->firstOrFail();
+        $user = UserServices::activateUser($username);
 
-            if ($user->hasVerifiedEmail()) {
-                return response()->json(['message' => 'El correo ya está verificado.'], 400);
-            }
-
-            $user->sendEmailVerificationNotification();
-
-            // Registrar en activity log
-            activity()
-                ->causedBy(auth()->user() ?? $user) // si está logueado, usa el usuario actual; si no, el mismo usuario
-                ->performedOn($user)
-                ->withProperties([
-                    'accion' => 'reenviar_correo_verificacion',
-                    'ip' => request()->ip(),
-                    'user_agent' => request()->userAgent(),
-                    'fecha' => now()->toDateTimeString(),
-                ])
-                ->log('Se reenvió el correo de verificación al usuario');
-
-            return response()->json(['message' => 'Correo de verificación enviado.']);
-        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            \Illuminate\Support\Facades\Log::warning('Usuario no encontrado para enviar verificación', [
-                'username' => $username,
-                'error' => $e->getMessage(),
-            ]);
-            return response()->json(['message' => 'Usuario no encontrado.'], 404);
-        } catch (\Exception $e) {
-            \Illuminate\Support\Facades\Log::error('Error al enviar correo de verificación', [
-                'username' => $username,
-                'error' => $e->getMessage(),
-                'trace' => $e->getTraceAsString(),
-            ]);
-            return response()->json(['message' => 'Error al enviar el correo de verificación.'], 500);
+        if ($user) {
+            return response()->json(['message' => $user['message']], $user['code']);
         }
+
+        // Retornamos un error si no se ejecuto correctamente
+        return response()->json(['error' => 'No se pudo activar el usuario.'], 500);
     }
 }

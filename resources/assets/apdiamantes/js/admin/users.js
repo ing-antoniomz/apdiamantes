@@ -8,7 +8,7 @@ var adminUsers = function () {
             const btn = e.target.closest('.send-activation-btn');
             if (e.target && btn) {
                 e.preventDefault();
-                var user_name = e.target.getAttribute('data-user-name');
+                var user_name = btn.getAttribute('data-user-name');
                 Swal.fire({
                     title: 'Activar Usuario',
                     text: 'Se enviará el correo de activación al usuario ' + user_name + '. ¿Deseas continuar?',

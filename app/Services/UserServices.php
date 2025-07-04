@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Grupo;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
+use App\Jobs\SendVerificationEmail;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class UserServices
@@ -146,6 +147,70 @@ class UserServices
 
             \Log::error('US-001 - Registrar usuario | '. __METHOD__. " Archivo: " . $e->getFile() . ' Linea: '. $e->getLine() . PHP_EOL. '-------> '.$e->getMessage() . PHP_EOL . $e->getTraceAsString());
             throw new HttpException(500, 'US-001 - Error al registrar el usuario');
+        }
+    }
+
+    /**
+     * Envia Correo de activacion de usuario
+     * @param  string  $username
+     *
+     * @return array El usuario activado
+     */
+
+    public static function activateUser(string $username): array
+    {
+        try {
+            $user = User::where('user', $username)->firstOrFail();
+
+            if ($user->hasVerifiedEmail()) {
+                return [
+                    'success' => false,
+                    'message' => 'El correo ya está verificado.',
+                    'code' => '400',
+                    'user' => $user,
+                ];
+            }
+
+            // Enviar correo de verificación de forma asincrónica
+            dispatch(new SendVerificationEmail($user));
+
+            // Registrar en activity log
+            activity()
+                ->causedBy(auth()->user() ?? $user)
+                ->performedOn($user)
+                ->withProperties([
+                    'accion' => 'reenviar_correo_verificacion',
+                    'ip' => request()->ip(),
+                    'user_agent' => request()->userAgent(),
+                    'fecha' => now()->toDateTimeString(),
+                ])
+                ->log('Se envió el correo de verificación al usuario');
+
+            return [
+                'success' => true,
+                'message' => 'Correo de verificación en proceso de envío.',
+                'code' => '200',
+                'user' => $user,
+            ];
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            \Log::warning('Usuario no encontrado para enviar verificación.', [
+                'username' => $username,
+                'error' => $e->getMessage(),
+            ]);
+            return [
+                'success' => false,
+                'message' => 'Usuario no encontrado.',
+                'code' => '404',
+                'user' => null,
+            ];
+        } catch (\Exception $e) {
+            \Log::error('US-002 - Error al procesar el correo de verificación | '. __METHOD__. " Archivo: " . $e->getFile() . ' Linea: '. $e->getLine() . PHP_EOL. '-------> '.$e->getMessage() . PHP_EOL . $e->getTraceAsString());\Log::error('US-002 - Error al procesar el correo de verificación | '. __METHOD__. " Archivo: " . $e->getFile() . ' Linea: '. $e->getLine() . PHP_EOL. '-------> '.$e->getMessage() . PHP_EOL . $e->getTraceAsString());
+            return [
+                'success' => false,
+                'message' => 'Error al enviar el correo de verificación.',
+                'code' => '500',
+                'user' => null,
+            ];
         }
     }
 }
