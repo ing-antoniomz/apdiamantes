@@ -14,7 +14,7 @@
     <!--begin::Content-->
     <div id="kt_account_profile_details" class="collapse">
         <!--begin::Form-->
-        <form id="kt_account_profile_details_form" class="form" method="POST" action="{{ route('settings.update') }}" enctype="multipart/form-data">
+        <form id="kt_account_profile_details_form" class="form" method="POST" action="" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <!--begin::Card body-->

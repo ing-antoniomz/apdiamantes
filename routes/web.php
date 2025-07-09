@@ -3,14 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\PagesController;
-use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Grupo\InvitarController;
-use App\Http\Controllers\Admin\UsuariosController;
-use App\Http\Controllers\Logs\AuditLogsController;
-use App\Http\Controllers\Logs\SystemLogsController;
 use App\Http\Controllers\Account\SettingsController;
-use App\Http\Controllers\Auth\SocialiteLoginController;
 use App\Http\Controllers\Documentation\ReferencesController;
 use App\Http\Controllers\Documentation\LayoutBuilderController;
 
@@ -25,8 +20,13 @@ use App\Http\Controllers\Documentation\LayoutBuilderController;
 |
 */
 
+//rutas de autenticacion
 require __DIR__ . '/auth.php';
 
+//rutas de administracion
+require __DIR__ . '/admin.php';
+
+//funcion de paginas de metronic
 $menu = theme()->getMenu();
 array_walk($menu, function ($val) {
     if (isset($val['path'])) {
@@ -46,28 +46,21 @@ array_walk($menu, function ($val) {
     }
 });
 
+//rutas autenticadas
 Route::middleware('auth')->group(function () {
 
     // Account pages
-    Route::prefix('account')->group(function () {
-        Route::get('settings', [SettingsController::class, 'index'])->name('settings.index');
-        Route::put('settings', [SettingsController::class, 'update'])->name('settings.update');
-        Route::put('settings/email', [SettingsController::class, 'changeEmail'])->name('settings.changeEmail');
-        Route::put('settings/password', [SettingsController::class, 'changePassword'])->name('settings.changePassword');
+    Route::prefix('cuenta')->group(function () {
+        Route::get('ajustes', [SettingsController::class, 'index'])->name('settings.index');
+        //Route::put('ajustes', [SettingsController::class, 'update'])->name('settings.update');
+        //Route::put('ajustes/email', [SettingsController::class, 'changeEmail'])->name('settings.changeEmail');
+        Route::put('ajustes/password', [SettingsController::class, 'changePassword'])->name('settings.changePassword');
     });
 
-    // Logs pages
-    Route::prefix('log')->name('log.')->group(function () {
-        Route::resource('system', SystemLogsController::class)->only(['index']);
-        Route::resource('audit', AuditLogsController::class)->only(['index', 'destroy']);
-    });
-
-    // Admin pages
-    Route::prefix('admin')->name('admin.')->group(function () {
-        Route::resource('users', UsuariosController::class)->only(['index', 'store', 'update']);
-        Route::post('/users/{username}/activate', [UsuariosController::class, 'activate'])->name('users.activate');
-    });
+    //nosotros
     Route::resource('nosotros', AboutController::class)->name('index', 'nosotros')->only(['index']);
+
+    //contacto
     Route::resource('contacto', ContactController::class)->name('index', 'contacto')->only(['index']);
 
     // grupo pages
@@ -96,6 +89,10 @@ Route::get('/descargar-aviso', function () {
 
     return response()->download($path, 'aviso_privacidad.pdf');
 })->middleware('auth')->name('descargar.aviso');
+
+
+
+
 
 
 // Documentations pages

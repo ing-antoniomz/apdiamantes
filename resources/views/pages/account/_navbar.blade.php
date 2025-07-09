@@ -1,7 +1,7 @@
 @php
     $nav = array(
-        array('title' => __('Overview'), 'view' => 'account/overview'),
-        array('title' => __('Settings'), 'view' => 'account/settings'),
+        array('title' => __('Resumen'), 'view' => 'cuenta/resumen'),
+        array('title' => __('Ajustes'), 'view' => 'cuenta/ajustes'),
         // array('title' => 'Security', 'view' => ''),
     );
 @endphp

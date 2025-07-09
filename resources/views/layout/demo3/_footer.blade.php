@@ -11,11 +11,11 @@
 
         <!--begin::Menu-->
         <ul class="menu menu-gray-600 menu-hover-primary fw-bold order-1 user-select-none">
-            <li class="menu-item"><a href="{{ theme()->getOption('general', 'about') }}"  class="menu-link px-2">{{ __('About') }}</a></li>
+            <li class="menu-item"><a href="{{ route('nosotros') }}"  class="menu-link px-2">{{ __('About') }}</a></li>
 
             <li class="menu-item"><a href="#" data-bs-toggle="modal" data-bs-target="#kt_modal_soporte" class="menu-link px-2">{{ __('Support') }}</a></li>
 
-            <li class="menu-item"><a href="{{ theme()->getOption('general', 'auth_contact') }}" class="menu-link px-2">{{ __('Contact Us') }}</a></li>
+            <li class="menu-item"><a href="{{ route('contacto') }}" class="menu-link px-2">{{ __('Contact Us') }}</a></li>
         </ul>
         <!--end::Menu-->
     </div>
@@ -40,7 +40,7 @@
 
             <div class="modal-body">
                 <div class="d-flex justify-content-between pb-5">
-                    <h3 class="modal-title user-select-none"><img alt="Logo" src="https://apdiamantes-local.com/apdiamantes/media/logo_blanco_2.png" class="h-30px mb-0 me-4">{{ __('Do you have any problems?') }}</h3>
+                    <h3 class="modal-title user-select-none"><img alt="Logo" src="{{ asset('apdiamantes/media/logo_blanco_2.png') }}"" class="h-30px mb-0 me-4">{{ __('Do you have any problems?') }}</h3>
                     <div class="btn btn-icon btn-sm btn-active-light-primary" data-bs-dismiss="modal" aria-label="Close">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" />

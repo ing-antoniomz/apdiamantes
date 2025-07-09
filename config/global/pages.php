@@ -41,101 +41,39 @@ return array(
                     ),
                 ),
             ),
-        )
-    ),
-
-    'login'           => array(
-        'title'  => 'Login',
-        'assets' => array(
-            'custom' => array(
-                'js' => array(
-                    'js/custom/authentication/sign-in/general.js',
-                    '../apdiamantes/js/contacto/index.js',
-                ),
-            ),
-            'vendors' => array(
-                'leaflet',
-            ),
         ),
-        'layout' => array(
-            'main' => array(
-                'type' => 'blank', // Set blank layout
-                'body' => array(
-                    'class' => theme()->isDarkMode() ? '' : 'bg-body',
-                ),
-            ),
-        ),
-    ),
-
-    'register'        => array(
-        'title'  => 'Register',
-        'assets' => array(
-            'custom' => array(
-                'js' => array(
-                    'js/custom/authentication/sign-up/general.js',
-                ),
-            ),
-        ),
-        'layout' => array(
-            'main' => array(
-                'type' => 'blank', // Set blank layout
-                'body' => array(
-                    'class' => theme()->isDarkMode() ? '' : 'bg-body',
-                ),
-            ),
-        ),
-    ),
-
-    'forgot-password' => array(
-        'title'  => 'Forgot Password',
-        'assets' => array(
-            'custom' => array(
-                'js' => array(
-                    'js/custom/authentication/password-reset/password-reset.js',
-                ),
-            ),
-        ),
-        'layout' => array(
-            'main' => array(
-                'type' => 'blank', // Set blank layout
-                'body' => array(
-                    'class' => theme()->isDarkMode() ? '' : 'bg-body',
-                ),
-            ),
-        ),
-    ),
-
-    'log' => array(
-        'audit'  => array(
-            'title'  => 'Log de Auditoria',
-            'assets' => array(
-                'custom' => array(
-                    'css' => array(
-                        'plugins/custom/datatables/datatables.bundle.css',
-                    ),
-                    'js'  => array(
-                        'plugins/custom/datatables/datatables.bundle.js',
+        'log' => array(
+            'auditoria'  => array(
+                'title'  => 'Log de Auditoria',
+                'assets' => array(
+                    'custom' => array(
+                        'css' => array(
+                            'plugins/custom/datatables/datatables.bundle.css',
+                        ),
+                        'js'  => array(
+                            'plugins/custom/datatables/datatables.bundle.js',
+                        ),
                     ),
                 ),
             ),
-        ),
-        'system' => array(
-            'title'  => 'Log de Sistema',
-            'assets' => array(
-                'custom' => array(
-                    'css' => array(
-                        'plugins/custom/datatables/datatables.bundle.css',
-                    ),
-                    'js'  => array(
-                        'plugins/custom/datatables/datatables.bundle.js',
+            'sistema' => array(
+                'title'  => 'Log de Sistema',
+                'assets' => array(
+                    'custom' => array(
+                        'css' => array(
+                            'plugins/custom/datatables/datatables.bundle.css',
+                        ),
+                        'js'  => array(
+                            'plugins/custom/datatables/datatables.bundle.js',
+                        ),
                     ),
                 ),
             ),
         ),
     ),
 
-    'account' => array(
-        'overview' => array(
+    'cuenta' => array(
+        'resumen' => array(
             'title'  => 'Descripción General',
             'view'   => 'account/overview/overview',
             'assets' => array(
@@ -147,7 +85,7 @@ return array(
             ),
         ),
 
-        'settings' => array(
+        'ajustes' => array(
             'title'  => 'Ajustes de Cuenta',
             'assets' => array(
                 'custom' => array(
@@ -159,75 +97,25 @@ return array(
             ),
         ),
     ),
-
-    'contacto' => array(
-        'title'       => 'Contacto',
-        'description' => '',
-        'layout'      => array(
-            'page-title' => array(
-                'description' => false,
-                'breadcrumb'  => false,
-            ),
-        ),
-        'assets'      => array(
-            'custom'  => array(
-                'js' => array(
-                    '../apdiamantes/js/contacto/index.js',
+    'grupo' => array(
+        'invitar' => array(
+            'title'  => 'Invitar',
+            'description' => 'Agregar usuarios a tu grupo',
+            'layout'      => array(
+                'page-title' => array(
+                    'description' => true,
+                    'breadcrumb'  => false,
                 ),
             ),
-            'vendors' => array(
-                'leaflet',
+            'view'   => 'group/invite/index',
+            'assets' => array(
+                'custom' => array(
+                    'js' => array(
+                    ),
+                ),
             ),
         ),
     ),
-
-    'nosotros' => array(
-        'title'       => 'Nosotros',
-        'description' => '',
-        'layout'      => array(
-            'page-title' => array(
-                'description' => false,
-                'breadcrumb'  => false,
-            ),
-        ),
-        'assets'      => array(
-            'custom'  => array(
-                'js' => array(
-
-                ),
-            ),
-            'vendors' => array(),
-        ),
-    ),
-
-    /* 'error' => array(
-        'error-404' => array(
-            'title' => 'Error 404',
-        ),
-        'error-500' => array(
-            'title' => 'Error 500',
-        ),
-    ), */
-    //FAQ
-    'faq' => array(
-        'title'  => 'FAQ',
-        'view'   => 'faq/index',
-        'layout'      => array(
-            'page-title' => array(
-                'description' => false,
-                'breadcrumb'  => false,
-            ),
-        ),
-        'assets'      => array(
-            'custom'  => array(
-                'js' => array(
-                    //'js/widgets.bundle.js',
-                ),
-            ),
-            'vendors' => array('fslightbox'),
-        ),
-    ),
-    //FAQ
     'blog' => array(
         'title'  => 'Blog',
         'view'   => 'blog/index',
@@ -259,37 +147,105 @@ return array(
 
         ), */
     ),
-
-    'grupo' => array(
-        /* 'overview' => array(
-            'title'  => 'Grupo',
-            'view'   => 'account/overview/overview',
-            'assets' => array(
-                'custom' => array(
-                    'js' => array(
-                    ),
+    'faq' => array(
+        'title'  => 'FAQ',
+        'view'   => 'faq/index',
+        'layout'      => array(
+            'page-title' => array(
+                'description' => false,
+                'breadcrumb'  => false,
+            ),
+        ),
+        'assets'      => array(
+            'custom'  => array(
+                'js' => array(
+                    //'js/widgets.bundle.js',
                 ),
             ),
-        ), */
+            'vendors' => array('fslightbox'),
+        ),
+    ),
 
-        'invitar' => array(
-            'title'  => 'Invitar',
-            'description' => 'Agregar usuarios a tu grupo',
-            'layout'      => array(
-                'page-title' => array(
-                    'description' => true,
-                    'breadcrumb'  => false,
+
+    'login'           => array(
+        'title'  => 'Login',
+        'assets' => array(
+            'custom' => array(
+                'js' => array(
+                    'js/custom/authentication/sign-in/general.js',
+                    '../apdiamantes/js/contacto/index.js',
                 ),
             ),
-            'view'   => 'group/invite/index',
-            'assets' => array(
-                'custom' => array(
-                    'js' => array(
-                    ),
+            'vendors' => array(
+                'leaflet',
+            ),
+        ),
+        'layout' => array(
+            'main' => array(
+                'type' => 'blank', // Set blank layout
+                'body' => array(
+                    'class' => theme()->isDarkMode() ? '' : 'bg-body',
                 ),
             ),
         ),
     ),
+    'forgot-password' => array(
+        'title'  => 'Forgot Password',
+        'assets' => array(
+            'custom' => array(
+                'js' => array(
+                    'js/custom/authentication/password-reset/password-reset.js',
+                ),
+            ),
+        ),
+        'layout' => array(
+            'main' => array(
+                'type' => 'blank', // Set blank layout
+                'body' => array(
+                    'class' => theme()->isDarkMode() ? '' : 'bg-body',
+                ),
+            ),
+        ),
+    ),
+    'contacto' => array(
+        'title'       => 'Contacto',
+        'description' => '',
+        'layout'      => array(
+            'page-title' => array(
+                'description' => false,
+                'breadcrumb'  => false,
+            ),
+        ),
+        'assets'      => array(
+            'custom'  => array(
+                'js' => array(
+                    '../apdiamantes/js/contacto/index.js',
+                ),
+            ),
+            'vendors' => array(
+                'leaflet',
+            ),
+        ),
+    ),
+    'nosotros' => array(
+        'title'       => 'Nosotros',
+        'description' => '',
+        'layout'      => array(
+            'page-title' => array(
+                'description' => false,
+                'breadcrumb'  => false,
+            ),
+        ),
+        'assets'      => array(
+            'custom'  => array(
+                'js' => array(
+
+                ),
+            ),
+            'vendors' => array(),
+        ),
+    ),
+
 
     // Documentation pages
     'documentation' => array(

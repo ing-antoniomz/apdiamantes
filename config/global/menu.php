@@ -205,15 +205,17 @@ return array(
             ),
         ),
 
-        // Modules
+        // Separador Administración
         array(
             'classes' => array('content' => 'pt-8 pb-2'),
-            'content' => '<span class="menu-section text-muted text-uppercase fs-8 ls-1">Menú</span>',
+            'content' =>
+                '<span class="menu-section text-muted text-uppercase fs-8 ls-1">ADMINISTRACIÓN</span>',
+            'permission' => ['menu_admin_sistema'],
         ),
 
-        // Administracion
+        // Administracion Catalogos
         array(
-            'title'      => 'Administración',
+            'title'      => 'Catalogos',
             'icon'       => array(
                 'svg'  => theme()->getSvgIcon("demo3/media/icons/duotune/general/gen025.svg", "svg-icon-1 text-light"),
                 'font' => '',
@@ -222,7 +224,7 @@ return array(
             'attributes' => array(
                 "data-kt-menu-trigger" => "click",
             ),
-            'permission' => ['menu_admin'],
+            'permission' => ['menu_admin_catalogos'],
             'sub'        => array(
                 'class' => 'menu-sub-accordion menu-active-bg',
                 'items' => array(
@@ -230,7 +232,7 @@ return array(
                         'title'      => 'Anuncios',
                         'path'       => '#',
                         'bullet'     => '<span class="bullet bullet-dot"></span>',
-                        'permission' => ['submenu_anuncios'],
+                        'permission' => ['submenu_admin_anuncios'],
                         'attributes' => array(
                             'link' => array(
                                 "title"             => "Proximamnete",
@@ -245,7 +247,7 @@ return array(
                         'title'  => 'Blog',
                         'path'       => '#',
                         'bullet'     => '<span class="bullet bullet-dot"></span>',
-                        'permission' => ['submenu_blog'],
+                        'permission' => ['submenu_admin_blog'],
                         'attributes' => array(
                             'link' => array(
                                 "title"             => "Proximamnete",
@@ -260,7 +262,57 @@ return array(
                         'title'      => 'Catalogos',
                         'path'       => '#',
                         'bullet'     => '<span class="bullet bullet-dot"></span>',
-                        'permission' => ['submenu_catalogos'],
+                        'permission' => ['submenu_admin_catalogos'],
+                        'attributes' => array(
+                            'link' => array(
+                                "title"             => "Proximamnete",
+                                "data-bs-toggle"    => "tooltip",
+                                "data-bs-trigger"   => "hover",
+                                "data-bs-dismiss"   => "click",
+                                "data-bs-placement" => "right",
+                            ),
+                        ),
+                    ),
+
+                    array(
+                        'title'  => 'FAQ',
+                        'path'   => '#',
+                        'bullet' => '<span class="bullet bullet-dot"></span>',
+                        'permission' => ['submenu_admin_faq'],
+                        'attributes' => array(
+                            'link' => array(
+                                "title"             => "Proximamnete",
+                                "data-bs-toggle"    => "tooltip",
+                                "data-bs-trigger"   => "hover",
+                                "data-bs-dismiss"   => "click",
+                                "data-bs-placement" => "right",
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+
+        // Admnistracion System
+        array(
+            'title'      => 'Sistema',
+            'icon'       => array(
+                'svg'  => theme()->getSvgIcon("demo3/media/icons/duotune/technology/teh001.svg", "svg-icon-1 text-light"),
+                'font' => '',
+            ),
+            'classes'    => array('item' => 'menu-accordion'),
+            'attributes' => array(
+                "data-kt-menu-trigger" => "click",
+            ),
+            'permission' => ['menu_admin_sistema'],
+            'sub'        => array(
+                'class' => 'menu-sub-accordion menu-active-bg',
+                'items' => array(
+                    array(
+                        'title'      => 'E-mail',
+                        'path'       => '#',
+                        'bullet'     => '<span class="bullet bullet-dot"></span>',
+                        'permission' => ['submenu_admin_correo'],
                         'attributes' => array(
                             'link' => array(
                                 "title"             => "Proximamnete",
@@ -272,10 +324,57 @@ return array(
                         ),
                     ),
                     array(
-                        'title'      => 'E-mail',
+                        'title'  => 'Log de Auditoria',
+                        'path'   => 'admin/log/auditoria',
+                        'bullet' => '<span class="bullet bullet-dot"></span>',
+                        'permission' => ['submenu_admin_log_auditoria'],
+                    ),
+                    array(
+                        'title'  => 'Log de Sistema',
+                        'path'   => 'admin/log/sistema',
+                        'bullet' => '<span class="bullet bullet-dot"></span>',
+                        'permission' => ['submenu_admin_log_sistema'],
+                    ),
+
+                ),
+            ),
+        ),
+
+        // Administración Usuarios
+        array(
+            'title'      => 'Usuarios',
+            'icon'       => array(
+                'svg'  => '<div class="overflow-hidden">' . theme()->getSvgIcon("demo3/media/icons/duotune/communication/com014.svg", "svg-icon-1 text-light") . '</div>',
+                'font' => '',
+            ),
+            'classes'    => array('item' => 'menu-accordion'),
+            'attributes' => array(
+                "data-kt-menu-trigger" => "click",
+            ),
+            'permission' => ['menu_admin_usuarios'],
+            'sub'        => array(
+                'class' => 'menu-sub-accordion menu-active-bg',
+                'items' => array(
+                    array(
+                        'title'      => 'Bonos',
                         'path'       => '#',
                         'bullet'     => '<span class="bullet bullet-dot"></span>',
-                        'permission' => ['submenu_correo'],
+                        'permission' => ['submenu_admin_bonos'],
+                        'attributes' => array(
+                            'link' => array(
+                                "title"             => "Proximamnete",
+                                "data-bs-toggle"    => "tooltip",
+                                "data-bs-trigger"   => "hover",
+                                "data-bs-dismiss"   => "click",
+                                "data-bs-placement" => "right",
+                            ),
+                        ),
+                    ),
+                    array(
+                        'title'      => 'Descuentos',
+                        'path'       => '#',
+                        'bullet'     => '<span class="bullet bullet-dot"></span>',
+                        'permission' => ['submenu_admin_descuentos'],
                         'attributes' => array(
                             'link' => array(
                                 "title"             => "Proximamnete",
@@ -305,7 +404,7 @@ return array(
                         'title'      => 'Niveles',
                         'path'       => '#',
                         'bullet'     => '<span class="bullet bullet-dot"></span>',
-                        'permission' => ['submenu_admin_grupos'],
+                        'permission' => ['submenu_admin_niveles'],
                         'attributes' => array(
                             'link' => array(
                                 "title"             => "Proximamnete",
@@ -320,70 +419,22 @@ return array(
                         'title'  => 'Usuarios',
                         'path'   => 'admin/users',
                         'bullet' => '<span class="bullet bullet-dot"></span>',
-                        'permission' => ['submenu_usuarios'],
-                    ),
-                    array(
-                        'title'  => 'FAQ',
-                        'path'   => '#',
-                        'bullet' => '<span class="bullet bullet-dot"></span>',
-                        'permission' => ['submenu_faq'],
-                        'permission' => ['submenu_blog'],
-                        'attributes' => array(
-                            'link' => array(
-                                "title"             => "Proximamnete",
-                                "data-bs-toggle"    => "tooltip",
-                                "data-bs-trigger"   => "hover",
-                                "data-bs-dismiss"   => "click",
-                                "data-bs-placement" => "right",
-                            ),
-                        ),
+                        'permission' => ['submenu_admin_usuarios'],
                     ),
                 ),
             ),
         ),
 
-        // System
+        // Separador Menu
         array(
-            'title'      => 'Sistema',
-            'icon'       => array(
-                'svg'  => theme()->getSvgIcon("demo3/media/icons/duotune/technology/teh001.svg", "svg-icon-1 text-light"),
-                'font' => '',
-            ),
-            'classes'    => array('item' => 'menu-accordion'),
-            'attributes' => array(
-                "data-kt-menu-trigger" => "click",
-            ),
-            'permission' => ['menu_sistema'],
-            'sub'        => array(
-                'class' => 'menu-sub-accordion menu-active-bg',
-                'items' => array(
-                    array(
-                        'title'  => 'Log de Auditoria',
-                        'path'   => 'log/audit',
-                        'bullet' => '<span class="bullet bullet-dot"></span>',
-                        'permission' => ['submenu_log_auditoria'],
-                    ),
-                    array(
-                        'title'  => 'Log de Sistema',
-                        'path'   => 'log/system',
-                        'bullet' => '<span class="bullet bullet-dot"></span>',
-                        'permission' => ['submenu_log_sistema'],
-                    ),
-                    /* array(
-                        'title'  => 'Error 404',
-                        'path'   => 'error/error-404',
-                        'bullet' => '<span class="bullet bullet-dot"></span>',
-                    ),
-                    array(
-                        'title'  => 'Error 500',
-                        'path'   => 'error/error-500',
-                        'bullet' => '<span class="bullet bullet-dot"></span>',
-                    ), */
-                ),
-            ),
+            'classes' => array('content' => 'pt-8 pb-2'),
+            'content' =>
+            '<span class="menu-section text-muted text-uppercase fs-8 ls-1">
+                MENÚ
+            </span>',
         ),
 
-        // Account
+        // Cuenta
         array(
             'title'      => 'Cuenta',
             'icon'       => array(
@@ -400,13 +451,13 @@ return array(
                 'items' => array(
                     array(
                         'title'  => 'Ajustes',
-                        'path'   => 'account/settings',
+                        'path'   => 'cuenta/ajustes',
                         'bullet' => '<span class="bullet bullet-dot"></span>',
                         'permission' => ['submenu_ajustes'],
                     ),
                     array(
                         'title'  => 'Resumen',
-                        'path'   => 'account/overview',
+                        'path'   => 'cuenta/resumen',
                         'bullet' => '<span class="bullet bullet-dot"></span>',
                         'permission' => ['submenu_resumen'],
                     ),
@@ -476,151 +527,18 @@ return array(
             ), */
         ),
 
-        //// Help
+        // Separador Ayuda
         array(
             'classes' => array('content' => 'pt-8 pb-2'),
             'content' => '<span class="menu-section text-muted text-uppercase fs-8 ls-1">Ayuda</span>',
-            'permission' => ['menu_documentacion'],
         ),
 
-        // Documentation
-        /* array(
-            'title' => 'Documentación',
-            'icon'  => theme()->getSvgIcon("demo3/media/icons/duotune/abstract/abs027.svg", "svg-icon-1 text-light"),
-            'path'  => 'documentation/getting-started/overview',
-            'permission' => ['menu_documentacion'],
-        ), */
         // FAQ
         array(
             'title' => 'FAQ',
             'icon'  => theme()->getSvgIcon("demo3/media/icons/duotune/general/gen046.svg", "svg-icon-1 text-light"),
             'permission' => ['menu_faq'],
             'path'  => 'faq',
-        ),
-
-
-        // Changelog
-        /* array(
-            'title' => 'Changelog v'.theme()->getVersion(),
-            'icon'  => theme()->getSvgIcon("demo3/media/icons/duotune/coding/cod003.svg", "svg-icon-2"),
-            'path'  => 'documentation/getting-started/changelog',
-        ), */
-
-    ),
-
-    // Horizontal menu
-    'horizontal'    => array(
-        // Dashboard
-        array(
-            'title'   => 'Dashboard',
-            'path'    => '',
-            'classes' => array('item' => 'me-lg-1'),
-        ),
-
-        // Resources
-        array(
-            'title'      => 'Resources',
-            'classes'    => array('item' => 'menu-lg-down-accordion me-lg-1', 'arrow' => 'd-lg-none'),
-            'attributes' => array(
-                'data-kt-menu-trigger'   => "click",
-                'data-kt-menu-placement' => "bottom-start",
-            ),
-            'sub'        => array(
-                'class' => 'menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px',
-                'items' => array(
-                    // Documentation
-                    array(
-                        'title' => 'Documentation',
-                        'icon'  => theme()->getSvgIcon("demo3/media/icons/duotune/abstract/abs027.svg", "svg-icon-2"),
-                        'path'  => 'documentation/getting-started/overview',
-                    ),
-
-                    // Changelog
-                    array(
-                        'title' => 'Changelog v'.theme()->getVersion(),
-                        'icon'  => theme()->getSvgIcon("demo3/media/icons/duotune/general/gen005.svg", "svg-icon-2"),
-                        'path'  => 'documentation/getting-started/changelog',
-                    ),
-                ),
-            ),
-        ),
-
-        // Account
-        array(
-            'title'      => 'Account',
-            'classes'    => array('item' => 'menu-lg-down-accordion me-lg-1', 'arrow' => 'd-lg-none'),
-            'attributes' => array(
-                'data-kt-menu-trigger'   => "click",
-                'data-kt-menu-placement' => "bottom-start",
-            ),
-            'sub'        => array(
-                'class' => 'menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px',
-                'items' => array(
-                    array(
-                        'title'  => 'Overview',
-                        'path'   => 'account/overview',
-                        'bullet' => '<span class="bullet bullet-dot"></span>',
-                    ),
-                    array(
-                        'title'  => 'Settings',
-                        'path'   => 'account/settings',
-                        'bullet' => '<span class="bullet bullet-dot"></span>',
-                    ),
-                    array(
-                        'title'      => 'Security',
-                        'path'       => '#',
-                        'bullet'     => '<span class="bullet bullet-dot"></span>',
-                        'attributes' => array(
-                            'link' => array(
-                                "title"             => "Coming soon",
-                                "data-bs-toggle"    => "tooltip",
-                                "data-bs-trigger"   => "hover",
-                                "data-bs-dismiss"   => "click",
-                                "data-bs-placement" => "right",
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-
-        // System
-        array(
-            'title'      => 'System',
-            'classes'    => array('item' => 'menu-lg-down-accordion me-lg-1', 'arrow' => 'd-lg-none'),
-            'attributes' => array(
-                'data-kt-menu-trigger'   => "click",
-                'data-kt-menu-placement' => "bottom-start",
-            ),
-            'sub'        => array(
-                'class' => 'menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px',
-                'items' => array(
-                    array(
-                        'title'      => 'Settings',
-                        'path'       => '#',
-                        'bullet'     => '<span class="bullet bullet-dot"></span>',
-                        'attributes' => array(
-                            'link' => array(
-                                "title"             => "Coming soon",
-                                "data-bs-toggle"    => "tooltip",
-                                "data-bs-trigger"   => "hover",
-                                "data-bs-dismiss"   => "click",
-                                "data-bs-placement" => "right",
-                            ),
-                        ),
-                    ),
-                    array(
-                        'title'  => 'Audit Log',
-                        'path'   => 'log/audit',
-                        'bullet' => '<span class="bullet bullet-dot"></span>',
-                    ),
-                    array(
-                        'title'  => 'System Log',
-                        'path'   => 'log/system',
-                        'bullet' => '<span class="bullet bullet-dot"></span>',
-                    ),
-                ),
-            ),
         ),
     ),
 );
