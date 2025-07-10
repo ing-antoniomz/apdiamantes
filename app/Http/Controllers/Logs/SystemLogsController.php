@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Logs;
 
-use App\DataTables\Logs\SystemLogsDataTable;
 use App\Http\Controllers\Controller;
-use Jackiedo\LogReader\LogReader;
+use Spatie\Activitylog\Models\Activity;
+use App\DataTables\Logs\SystemLogsDataTable;
 
 class SystemLogsController extends Controller
 {
@@ -15,6 +15,7 @@ class SystemLogsController extends Controller
      */
     public function index(SystemLogsDataTable $dataTable)
     {
+
         return $dataTable->render('pages.log.system.index');
     }
 }

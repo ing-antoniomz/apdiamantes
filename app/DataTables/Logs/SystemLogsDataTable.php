@@ -2,10 +2,11 @@
 
 namespace App\DataTables\Logs;
 
-use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\File;
 use Yajra\DataTables\Html\Column;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\File;
+use Spatie\Activitylog\Models\Activity;
 use Yajra\DataTables\Services\DataTable;
 
 class SystemLogsDataTable extends DataTable
@@ -63,29 +64,12 @@ class SystemLogsDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param  LogReader  $model
      *
      * @return Collection
      */
-    /* public function query(LogReader $model)
-    {
-        $data = collect();
-
-        $model->setLogPath(storage_path('logs'));
-
-        try {
-            $data = $model->get()->merge($data);
-        } catch (UnableToRetrieveLogFilesException $exception) {
-        }
-
-        $data = $data->map(function ($a) {
-            return (collect($a))->only(['id', 'date', 'environment', 'level', 'file_path', 'context']);
-        });
-
-        return $data;
-    } */
     public function query()
     {
+
         $logsPath = storage_path('logs');
         $files = File::files($logsPath);
         $data = collect();
@@ -133,6 +117,19 @@ class SystemLogsDataTable extends DataTable
             }
         }
 
+        $activity = activity('logs')
+        ->causedBy(auth()->user())
+        ->withProperties([
+            'accion' => 'consultar_log_sistema',
+            'ip' => request()->ip(),
+            'user_agent' => request()->userAgent(),
+            'fecha' => now()->toDateTimeString(),
+        ])
+        ->useLog('logs')
+        ->tap(function (Activity $activity) {
+            $activity->event = 'accessed'; // <- Aquí llenas la columna `event`
+        })
+        ->log('Consultó el log del sistema');
         return $data;
     }
 

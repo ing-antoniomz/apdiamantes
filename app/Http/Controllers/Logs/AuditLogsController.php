@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Logs;
 
-use App\DataTables\Logs\AuditLogsDataTable;
 use App\Http\Controllers\Controller;
-use Spatie\Activitylog\Models\Activity;
+use App\DataTables\Logs\AuditLogsDataTable;
 
 class AuditLogsController extends Controller
 {
@@ -15,21 +14,7 @@ class AuditLogsController extends Controller
      */
     public function index(AuditLogsDataTable $dataTable)
     {
+
         return $dataTable->render('pages.log.audit.index');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $activity = Activity::find($id);
-
-        // Delete from db
-        $activity->delete();
     }
 }

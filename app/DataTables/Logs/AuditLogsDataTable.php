@@ -59,6 +59,19 @@ class AuditLogsDataTable extends DataTable
      */
     public function query(Activity $model)
     {
+        $activity = activity('logs')
+        ->causedBy(auth()->user())
+        ->withProperties([
+            'accion' => 'consultar_log_auditoria',
+            'ip' => request()->ip(),
+            'user_agent' => request()->userAgent(),
+            'fecha' => now()->toDateTimeString(),
+        ])
+        ->useLog('logs')
+        ->tap(function (Activity $activity) {
+            $activity->event = 'accessed'; // <- Aquí llenas la columna `event`
+        })
+        ->log('Consultó el log de auditoria');
         return $model->newQuery();
     }
 

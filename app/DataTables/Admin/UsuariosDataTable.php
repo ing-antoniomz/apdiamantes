@@ -96,6 +96,29 @@ class UsuariosDataTable extends DataTable
      */
     public function html()
     {
+        $buttons = [
+            [
+                'extend' => 'excel',
+                'text' => '<i class="fas fa-file-excel fs-1 text-success"></i>',
+                'className' => 'btn-light btn-active-light-success text-white',
+                'filename' => 'APDiamantes_Usuarios_' . date('Ymd'),
+                'exportOptions' => [
+                    'columns' => ':not(:last-child)' // Excluye la columna de acciones
+                ]
+            ]
+        ];
+        // Solo agregar el botón de agregar usuario si el usuario tiene el permiso
+        if (auth()->user()->can('admin_users_create')) {
+            $buttons[] = [
+                'text' => '<i class="fas fa-plus fs-1"></i> ' . __('Add User'),
+                'className' => 'btn-light btn-active-light-success text-white',
+                'attr' => [
+                    'id' => 'add-user-btn',
+                    'name' => 'add-user-btn'
+                ]
+            ];
+        }
+
         return $this->builder()
             ->setTableId('admin-users-table')
             ->columns($this->getColumns())
@@ -112,25 +135,7 @@ class UsuariosDataTable extends DataTable
                 'dom' => '<"row align-items-center"<"col-sm-12 col-md-6"B><"col-sm-12 col-md-6"f>>' .
                     '<"row"<"col-sm-12"tr>>' .
                     '<"row"<"col-sm-12 col-md-6 d-flex align-items-center"li><"col-sm-12 col-md-6 d-flex justify-content-end"p>>',
-                'buttons' => [
-                    [
-                        'extend' => 'excel',
-                        'text' => '<i class="fas fa-file-excel fs-1 text-success"></i>',
-                        'className' => 'btn-light btn-active-light-success text-white',
-                        'filename' => 'APDiamantes_Usuarios_' . date('Ymd'),
-                        'exportOptions' => [
-                            'columns' => ':not(:last-child)' // Excluye la columna de acciones
-                        ]
-                    ],
-                    [
-                        'text' => '<i class="fas fa-plus fs-1"></i> '.__('Add User'),
-                        'className' => 'btn-light btn-active-light-success text-white',
-                        'attr' => [
-                            'id' => 'add-user-btn', // Agregar el ID al botón
-                            'name' => 'add-user-btn'
-                        ]
-                    ]
-                ],
+                'buttons' => $buttons,
                 'drawCallback' => 'function() { KTMenu.createInstances(); }',
             ])
             ->addTableClass('align-middle table-row-dashed fs-6 gy-5');

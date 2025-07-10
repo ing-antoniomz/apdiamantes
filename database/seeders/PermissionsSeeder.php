@@ -165,6 +165,17 @@ class PermissionsSeeder extends Seeder
             'name'        => 'admin_users_activate',
             'descripcion' => 'Permite activar usuarios',
         ],
+
+        //admin listado de logs
+        [
+            'name'        => 'admin_logs_audit_list',
+            'descripcion' => 'Permite ver el listado de logs de auditoria',
+        ],
+        [
+            'name'        => 'admin_logs_system_list',
+            'descripcion' => 'Permite ver el listado de logs del sistema',
+        ],
+
     ];
 }
 }
