@@ -23,9 +23,6 @@ use App\Http\Controllers\Documentation\LayoutBuilderController;
 //rutas de autenticacion
 require __DIR__ . '/auth.php';
 
-//rutas de administracion
-require __DIR__ . '/admin.php';
-
 //funcion de paginas de metronic
 $menu = theme()->getMenu();
 array_walk($menu, function ($val) {
@@ -45,6 +42,11 @@ array_walk($menu, function ($val) {
         }
     }
 });
+
+//rutas de administracion
+require __DIR__ . '/admin.php';
+
+
 
 //rutas autenticadas
 Route::middleware('auth')->group(function () {

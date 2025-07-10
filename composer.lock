@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8332b7ab9461222eb6e085f418b5f4e6",
+    "content-hash": "1a7a0e1b7cfd4f382a25d99f426845d8",
     "packages": [
         {
             "name": "anlutro/l4-settings",
@@ -4600,16 +4600,16 @@
         },
         {
             "name": "spatie/laravel-permission",
-            "version": "6.17.0",
+            "version": "6.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-permission.git",
-                "reference": "02ada8f638b643713fa2fb543384738e27346ddb"
+                "reference": "31c05679102c73f3b0d05790d2400182745a5615"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/02ada8f638b643713fa2fb543384738e27346ddb",
-                "reference": "02ada8f638b643713fa2fb543384738e27346ddb",
+                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/31c05679102c73f3b0d05790d2400182745a5615",
+                "reference": "31c05679102c73f3b0d05790d2400182745a5615",
                 "shasum": ""
             },
             "require": {
@@ -4671,7 +4671,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-permission/issues",
-                "source": "https://github.com/spatie/laravel-permission/tree/6.17.0"
+                "source": "https://github.com/spatie/laravel-permission/tree/6.20.0"
             },
             "funding": [
                 {
@@ -4679,7 +4679,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-04-08T15:06:14+00:00"
+            "time": "2025-06-05T07:33:07+00:00"
         },
         {
             "name": "symfony/clock",
@@ -10239,10 +10239,10 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "platform": {},
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
 }

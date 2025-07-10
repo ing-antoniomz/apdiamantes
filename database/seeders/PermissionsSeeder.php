@@ -147,6 +147,24 @@ class PermissionsSeeder extends Seeder
             'name'        => 'menu_faq',
             'descripcion' => 'Permite ver el menu de preguntas frecuentes',
         ],
+
+        //admin listado de usuarios
+        [
+            'name'        => 'admin_users_list',
+            'descripcion' => 'Permite ver el listado de usuarios',
+        ],
+        [
+            'name'        => 'admin_users_create',
+            'descripcion' => 'Permite crear usuarios',
+        ],
+        [
+            'name'        => 'admin_users_update',
+            'descripcion' => 'Permite actualizar usuarios',
+        ],
+        [
+            'name'        => 'admin_users_activate',
+            'descripcion' => 'Permite activar usuarios',
+        ],
     ];
 }
 }
