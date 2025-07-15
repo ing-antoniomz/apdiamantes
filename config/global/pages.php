@@ -42,6 +42,26 @@ return array(
                 ),
             ),
         ),
+        'grupos'  => array(
+            'title'  => 'Grupos',
+            'description' => '',
+            'layout'      => array(
+                'page-title' => array(
+                    'description' => false,
+                    'breadcrumb'  => true,
+                ),
+            ),
+            'assets' => array(
+                'custom' => array(
+                    'css' => array(
+                        'plugins/custom/datatables/datatables.bundle.css',
+                    ),
+                    'js'  => array(
+                        'plugins/custom/datatables/datatables.bundle.js',
+                    ),
+                ),
+            ),
+        ),
         'log' => array(
             'auditoria'  => array(
                 'title'  => 'Log de Auditoria',

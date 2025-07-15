@@ -387,18 +387,9 @@ return array(
                     ),
                     array(
                         'title'      => 'Grupos',
-                        'path'       => '#',
+                        'path'       => 'admin/grupos',
                         'bullet'     => '<span class="bullet bullet-dot"></span>',
                         'permission' => ['submenu_admin_grupos'],
-                        'attributes' => array(
-                            'link' => array(
-                                "title"             => "Proximamnete",
-                                "data-bs-toggle"    => "tooltip",
-                                "data-bs-trigger"   => "hover",
-                                "data-bs-dismiss"   => "click",
-                                "data-bs-placement" => "right",
-                            ),
-                        ),
                     ),
                     array(
                         'title'      => 'Niveles',

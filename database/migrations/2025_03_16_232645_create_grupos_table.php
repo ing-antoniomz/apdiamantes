@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name', 30);
             $table->integer('creador_id');
             $table->text('descripcion');
+            $table->text('imagen');
             $table->boolean('status');
             $table->timestamps();
             $table->foreign('creador_id')->references('id')->on('users')->onDelete('cascade');

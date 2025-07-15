@@ -43,6 +43,7 @@ class UsersSeeder extends Seeder
         $grupo1 = Grupo::create([
             'name' => 'Grupo Alpha',
             'descripcion' => 'Grupo de desarrollo',
+            'imagen' => 'perrito_coin.svg',
             'creador_id' => 1,
             'status' => true,
         ]);
@@ -182,6 +183,7 @@ class UsersSeeder extends Seeder
         $grupo2 = Grupo::create([
             'name' => 'Grupo Beta',
             'descripcion' => 'Grupo de diseño',
+            'imagen' => 'dogecoin.svg',
             'creador_id' => 8,
             'status' => true,
         ]);

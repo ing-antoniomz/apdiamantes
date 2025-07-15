@@ -166,6 +166,20 @@ class PermissionsSeeder extends Seeder
             'descripcion' => 'Permite activar usuarios',
         ],
 
+        //admin listado de grupos
+        [
+            'name'        => 'admin_grupos_list',
+            'descripcion' => 'Permite ver el listado de grupos',
+        ],
+        [
+            'name'        => 'admin_grupos_create',
+            'descripcion' => 'Permite crear grupos',
+        ],
+        [
+            'name'        => 'admin_grupos_update',
+            'descripcion' => 'Permite actualizar grupos',
+        ],
+
         //admin listado de logs
         [
             'name'        => 'admin_logs_audit_list',
