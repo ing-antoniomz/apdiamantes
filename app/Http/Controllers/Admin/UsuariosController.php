@@ -22,7 +22,7 @@ class UsuariosController extends Controller
         $grupos = Grupo::all()->pluck('name', 'id');
         $niveles = Role::all()->pluck('name', 'id'); // Obtener los roles del sistema
 
-        return $dataTable->render('pages.admin.index', compact('grupos', 'niveles'));
+        return $dataTable->render('pages.admin.user.index', compact('grupos', 'niveles'));
     }
 
     /**

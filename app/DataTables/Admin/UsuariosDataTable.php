@@ -61,7 +61,7 @@ class UsuariosDataTable extends DataTable
                 $query->orderBy('status', $order);
             })
             ->addColumn('action', function (User $model) {
-                return view('pages.admin._action-menu', compact('model'));
+                return view('pages.admin.user._action-menu', compact('model'));
             });
     }
 
