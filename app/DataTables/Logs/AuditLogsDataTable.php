@@ -35,7 +35,7 @@ class AuditLogsDataTable extends DataTable
                 return $model->subject->user()->first()->user;
             })
             ->editColumn('causer_id', function (Activity $model) {
-                return $model->causer ? $model->causer->user : __('System');
+                return $model->causer ? $model->causer->user : '';
             })
             ->editColumn('properties', function (Activity $model) {
                 $content = $model->properties;

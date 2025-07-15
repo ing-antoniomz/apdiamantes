@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Logs;
 
 use App\Http\Controllers\Controller;
-use Spatie\Activitylog\Models\Activity;
 use App\DataTables\Logs\SystemLogsDataTable;
 
 class SystemLogsController extends Controller

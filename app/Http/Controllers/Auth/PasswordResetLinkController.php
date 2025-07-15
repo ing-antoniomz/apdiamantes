@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Spatie\Activitylog\Models\Activity;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\ValidationException;
 
@@ -30,22 +31,44 @@ class PasswordResetLinkController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|email',
-        ]);
+{
+    $request->validate([
+        'email' => 'required|email',
+    ]);
 
-        // We will send the password reset link to this user. Once we have attempted
-        // to send the link, we will examine the response then see the message we
-        // need to show to the user. Finally, we'll send out a proper response.
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
-        return $status == Password::RESET_LINK_SENT
-            ? back()->with('status', __($status))
-            : back()->withInput($request->only('email'))
-                ->withErrors(['email' => __($status)]);
+    // Intentamos enviar el link de restablecimiento
+    $status = Password::sendResetLink(
+        $request->only('email')
+    );
+
+    // Intentamos obtener el usuario por correo
+    $user = User::where('email', $request->email)->first();
+
+    // Creamos la actividad para el intento de restablecimiento
+    $activity = activity('auth')
+        ->withProperties([
+            'accion' => 'solicitud_reset_password',
+            'ip' => $request->ip(),
+            'user_agent' => $request->userAgent(),
+            'fecha' => now()->toDateTimeString(),
+            'correo_intentado' => $request->email,
+        ])
+        ->useLog('auth')
+        ->tap(function (Activity $activity) {
+            $activity->event = 'requested_password_reset';
+        });
+
+    if ($user) {
+        $activity->causedBy($user);
     }
+
+    $activity->log('Se solicitó el envío de correo para restablecer contraseña');
+
+    return $status == Password::RESET_LINK_SENT
+        ? back()->with('status', __($status))
+        : back()->withInput($request->only('email'))
+            ->withErrors(['email' => __($status)]);
+}
 
     /**
      * Handle an incoming api password reset link request.
