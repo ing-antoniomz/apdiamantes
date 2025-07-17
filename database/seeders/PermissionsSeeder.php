@@ -180,6 +180,20 @@ class PermissionsSeeder extends Seeder
             'descripcion' => 'Permite actualizar grupos',
         ],
 
+        //admin listado de niveles
+        [
+            'name'        => 'admin_niveles_list',
+            'descripcion' => 'Permite ver el listado de niveles',
+        ],
+        [
+            'name'        => 'admin_niveles_create',
+            'descripcion' => 'Permite crear niveles',
+        ],
+        [
+            'name'        => 'admin_niveles_update',
+            'descripcion' => 'Permite actualizar nivels',
+        ],
+
         //admin listado de logs
         [
             'name'        => 'admin_logs_audit_list',

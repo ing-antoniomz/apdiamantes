@@ -393,23 +393,14 @@ return array(
                     ),
                     array(
                         'title'      => 'Niveles',
-                        'path'       => '#',
+                        'path'       => 'admin/niveles',
                         'bullet'     => '<span class="bullet bullet-dot"></span>',
                         'permission' => ['submenu_admin_niveles'],
-                        'attributes' => array(
-                            'link' => array(
-                                "title"             => "Proximamnete",
-                                "data-bs-toggle"    => "tooltip",
-                                "data-bs-trigger"   => "hover",
-                                "data-bs-dismiss"   => "click",
-                                "data-bs-placement" => "right",
-                            ),
-                        ),
                     ),
                     array(
-                        'title'  => 'Usuarios',
-                        'path'   => 'admin/users',
-                        'bullet' => '<span class="bullet bullet-dot"></span>',
+                        'title'      => 'Usuarios',
+                        'path'       => 'admin/users',
+                        'bullet'     => '<span class="bullet bullet-dot"></span>',
                         'permission' => ['submenu_admin_usuarios'],
                     ),
                 ),

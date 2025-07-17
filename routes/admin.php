@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\GruposController;
+use App\Http\Controllers\Admin\NivelesController;
 use App\Http\Controllers\Admin\UsuariosController;
 use App\Http\Controllers\Logs\AuditLogsController;
 use App\Http\Controllers\Logs\SystemLogsController;
@@ -32,6 +33,13 @@ Route::prefix('/admin')->middleware('auth')->name('admin.')->group(function () {
 
         Route::get('/', [GruposController::class, 'index'])
             ->middleware(['can:admin_grupos_list'])
+            ->name('index');
+    });
+    // administracion de niveles
+    Route::prefix('/niveles')->name('niveles.')->group(function () {
+
+        Route::get('/', [NivelesController::class, 'index'])
+            ->middleware(['can:admin_niveles_list'])
             ->name('index');
     });
 

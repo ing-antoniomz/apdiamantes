@@ -7,3 +7,7 @@ ssh-keygen -t ed25519 -C "ing.antoniomz@gmail.com"
 cat /root/.ssh/id_ed25519.pub 
 php artisan optimize:clear
 npm run watch --demo3
+php artisan migrate:fresh --seed
+npm run watch --demo3
+php artisan migrate:fresh --seed
+npm run watch --demo3
