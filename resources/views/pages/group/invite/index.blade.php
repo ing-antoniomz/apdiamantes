@@ -1,10 +1,10 @@
 @section('scripts')
-    <!--Vuejs Integration-->
-    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ mix('js/apps/invita_usuarios.js') }}"></script>
 @endsection
+
 <x-base-layout>
     <!--begin::Card-->
-    <div class="card">
+    <div class="card" id="invita-usuarios-app">
         <!--begin::Card body-->
         <div class="card-body pt-6 mx-5 mb-5 mt-8">
             <invita-usuarios-component

@@ -174,7 +174,9 @@ mix.webpackConfig({
 mix.scripts((glob.sync(`resources/assets/core/js/widgets/**/*.js`) || []), `public/${demo}/js/widgets.bundle.js`);
 
 //Vuejs 3
-mix.js('resources/js/app.js', 'public/js').vue();
+mix.js('resources/js/apps/invita_usuarios.js', 'public/js/apps').vue();
+mix.js('resources/js/apps/admin_usuarios.js', 'public/js/apps').vue();
+
 
 function getDemos(pathDemos) {
     // get possible demo from parameter command

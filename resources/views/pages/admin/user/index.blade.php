@@ -1,5 +1,5 @@
 @section('scripts')
-    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ mix('js/apps/admin_usuarios.js') }}"></script>
     {{ $dataTable->scripts() }}
 @endsection
 

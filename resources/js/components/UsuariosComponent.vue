@@ -829,6 +829,7 @@ export default {
         this.initValidator();
         this.onTipoPersonaChange();
         window.addEventListener('editar-usuario', (event) => {
+        //console.log(event);
             this.openEditUser(event.detail);
         });
         window.addEventListener('nuevo-usuario', (event) => {
