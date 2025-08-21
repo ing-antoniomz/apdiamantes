@@ -37,7 +37,7 @@ var adminUsers = function () {
                 e.preventDefault();
 
                 try {
-                    const userJson = e.target.getAttribute('data-user');
+                    const userJson = btn.getAttribute('data-user');
                     const userData = JSON.parse(userJson);
 
                     window.dispatchEvent(new CustomEvent('editar-usuario', { detail: userData }));

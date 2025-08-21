@@ -8,41 +8,16 @@ use App\Models\Grupo;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use App\Jobs\SendVerificationEmail;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class UserServices
 {
     /**
-     * Método estático para registrar un nuevo usuario en el sistema.
+     * Registra un nuevo usuario y su información asociada en el sistema.
      *
-     * @param array $data Datos necesarios para registrar al usuario. Incluye:
-     *  - string|null 'user' Nombre de usuario.
-     *  - string|null 'nombre' Nombre del usuario.
-     *  - string|null 'apellido_paterno' Apellido paterno.
-     *  - string|null 'apellido_materno' Apellido materno.
-     *  - string|null 'cuenta_ap' Cuenta asociada al usuario.
-     *  - string|null 'correo' Correo electrónico del usuario.
-     *  - UploadedFile|null 'avatar' Archivo del avatar del usuario.
-     *  - string|null 'telefono' Teléfono del usuario.
-     *  - string|null 'rfc' RFC del usuario.
-     *  - string|null 'company' Empresa asociada al usuario.
-     *  - string|null 'persona_autorizada' Persona autorizada.
-     *  - string|null 'beneficiario1' Primer beneficiario.
-     *  - string|null 'beneficiario2' Segundo beneficiario.
-     *  - string|null 'radioPersona' Tipo de persona (física o moral).
-     *  - string|null 'cosolicitante' Co-solicitante.
-     *  - string|null 'cosolicitante_rfc' RFC del co-solicitante.
-     *  - string|null 'banco' Banco del usuario.
-     *  - string|null 'cuenta' Número de cuenta bancaria.
-     *  - string|null 'sucursal' Sucursal bancaria.
-     *  - string|null 'titular_cuenta' Titular de la cuenta bancaria.
-     *  - string|null 'direccion_fiscal_*' Datos de la dirección fiscal (calle, número, colonia, etc.).
-     *  - string|null 'direccion_envio_*' Datos de la dirección de envío (calle, número, colonia, etc.).
-     *  - string|null 'nivel' Rol que se asignará al usuario.
-     *  - string|null 'grupo' Grupo al que se asociará el usuario.
-     *  - string|null 'grupo_rol' Rol del usuario dentro del grupo.
-     *
-     * @return User El usuario creado.
+     * @param array $data Datos del usuario y sus archivos relacionados.
+     * @return User Usuario creado.
      *
      * @throws HttpException Si ocurre un error durante el registro.
      */
@@ -51,27 +26,11 @@ class UserServices
         try {
             DB::beginTransaction();
 
-            // Procesar archivos si se proporcionan
-            $avatarPath = null;
-            $inscripcionPath = null;
-            $credencialElectorPath = null;
-            $comprobanteDomicilioPath = null;
-
-            if (isset($data['avatar']) && $data['avatar'] instanceof UploadedFile) {
-                $avatarPath = $data['avatar']->store('avatars', 'public');
-            }
-
-            if (isset($data['inscripcion']) && $data['inscripcion'] instanceof UploadedFile) {
-                $inscripcionPath = $data['inscripcion']->store('inscripciones', 'public');
-            }
-
-            if (isset($data['ine']) && $data['ine'] instanceof UploadedFile) {
-                $credencialElectorPath = $data['ine']->store('credenciales', 'public');
-            }
-
-            if (isset($data['comprobante_domicilio']) && $data['comprobante_domicilio'] instanceof UploadedFile) {
-                $comprobanteDomicilioPath = $data['comprobante_domicilio']->store('comprobantes', 'public');
-            }
+            // Manejo de archivos con helper
+            $avatarPath = self::storeFile($data['avatar'] ?? null, 'avatars');
+            $inscripcionPath = self::storeFile($data['inscripcion'] ?? null, 'inscripciones');
+            $credencialElectorPath = self::storeFile($data['ine'] ?? null, 'credenciales');
+            $comprobanteDomicilioPath = self::storeFile($data['comprobante_domicilio'] ?? null, 'comprobantes');
 
             // Crear usuario
             $user = User::create([
@@ -80,8 +39,10 @@ class UserServices
                 'apellido_paterno' => $data['apellido_paterno'] ?? null,
                 'apellido_materno' => $data['apellido_materno'] ?? null,
                 'cuenta_ap' => $data['cuenta_apdiamantes'] ?? null,
-                'status' => isset($data['estatus']) ? true : false,
-                'password' => Hash::make('APDiamantes2025'),
+                'status' => !empty($data['estatus']),
+                'password' => isset($data['password'])
+                    ? Hash::make($data['password'])
+                    : Hash::make('APDiamantes123'),
                 'email' => $data['correo'] ?? null,
             ]);
 
@@ -116,10 +77,10 @@ class UserServices
                 'estado_envios' => $data['direccion_envio_estado'] ?? null,
                 'cp_envios' => $data['direccion_envio_codigo_postal'] ?? null,
                 'telefono_envios' => $data['direccion_envio_telefono_fiscal'] ?? null,
-                'avatar' => $avatarPath ?? null,
-                'inscripcion' => $inscripcionPath ?? null,
-                'credencial_elector' => $credencialElectorPath ?? null,
-                'comprobante_domicilio' => $comprobanteDomicilioPath ?? null,
+                'avatar' => $avatarPath,
+                'inscripcion' => $inscripcionPath,
+                'credencial_elector' => $credencialElectorPath,
+                'comprobante_domicilio' => $comprobanteDomicilioPath,
             ]);
 
             // Asignar rol
@@ -130,24 +91,34 @@ class UserServices
             // Asignar grupo
             if (!empty($data['grupo'])) {
                 $grupo = Grupo::where('name', $data['grupo'])->first();
-
                 if ($grupo) {
                     $user->grupos()->attach($grupo->id, [
-                        'rol' => $data['posicion'] ?? null, // o lo que venga en $data['rol']
+                        'rol' => $data['posicion'] ?? null,
                         'fecha_ingreso' => now(),
                     ]);
                 }
             }
 
             DB::commit();
-
             return $user;
+
         } catch (\Throwable $e) {
             DB::rollBack();
-
-            \Log::error('US-001 - Registrar usuario | '. __METHOD__. " Archivo: " . $e->getFile() . ' Linea: '. $e->getLine() . PHP_EOL. '-------> '.$e->getMessage() . PHP_EOL . $e->getTraceAsString());
+            \Log::error('US-001 - Registrar usuario | ' . __METHOD__ . " Archivo: " . $e->getFile() . ' Linea: ' . $e->getLine() . PHP_EOL . '-------> ' . $e->getMessage() . PHP_EOL . $e->getTraceAsString());
             throw new HttpException(500, 'US-001 - Error al registrar el usuario');
         }
+    }
+
+    /**
+     * Almacena un archivo en la carpeta especificada si es válido.
+     *
+     * @param UploadedFile|null $file   Archivo a almacenar.
+     * @param string            $folder Carpeta de destino.
+     * @return string|null Ruta del archivo almacenado o null si no se guardó.
+     */
+    private static function storeFile($file, string $folder): ?string
+    {
+        return ($file instanceof UploadedFile) ? $file->store($folder, 'public') : null;
     }
 
     /**
@@ -213,4 +184,149 @@ class UserServices
             ];
         }
     }
+
+    /**
+    * Actualiza la información de un usuario y sus datos relacionados, incluyendo archivos, roles y grupos.
+    *
+    * @param string $username  Nombre de usuario (campo 'user') para identificar el registro.
+    * @param array  $data      Datos a actualizar (puede incluir campos del usuario, info relacionada, archivos, rol, grupo, etc.).
+    * @return User
+    *
+    * @throws HttpException Si ocurre un error durante la transacción.
+    */
+    public static function updateUsuario(string $username, array $data): User
+    {
+        try {
+            DB::beginTransaction();
+
+            // Buscar usuario principal
+            $user = User::where('user', $username)->firstOrFail();
+
+            // Manejo de archivos
+            // Manejo de avatar
+            if (!empty($data['avatar_remove'])) {
+                // Si se solicita eliminar el avatar
+                if (!empty($user->info->avatar) && \Storage::disk('public')->exists($user->info->avatar)) {
+                    \Storage::disk('public')->delete($user->info->avatar);
+                }
+                $avatarPath = null;
+            } else {
+                $avatarPath = self::handleFileUpdate($user->info->avatar ?? null, $data['avatar'] ?? null, 'avatars');
+            }
+            $inscripcionPath          = self::handleFileUpdate($user->info->inscripcion ?? null, $data['inscripcion'] ?? null, 'inscripciones');
+            $credencialElectorPath    = self::handleFileUpdate($user->info->credencial_elector ?? null, $data['ine'] ?? null, 'credenciales');
+            $comprobanteDomicilioPath = self::handleFileUpdate($user->info->comprobante_domicilio ?? null, $data['comprobante_domicilio'] ?? null, 'comprobantes');
+
+            // Actualizar usuario principal (dispara eventos)
+            $user->fill([
+                'user'             => $data['user'] ?? $user->user,
+                'nombre'           => $data['nombre'] ?? $user->nombre,
+                'apellido_paterno' => $data['apellido_paterno'] ?? $user->apellido_paterno,
+                'apellido_materno' => $data['apellido_materno'] ?? $user->apellido_materno,
+                'cuenta_ap'        => $data['cuenta_apdiamantes'] ?? $user->cuenta_ap,
+                'status'           => isset($data['estatus']) ? (bool)$data['estatus'] : $user->status,
+                'email'            => $data['correo'] ?? $user->email,
+            ]);
+            if (!empty($data['password'])) {
+                $user->password = Hash::make($data['password']);
+            }
+            $user->save(); // <- importante para que Spatie registre
+
+            // Actualizar info relacionado (relación)
+            $info = $user->info;
+            $info->fill([
+                'phone'                  => $data['telefono'] ?? $info->phone,
+                'rfc'                    => $data['rfc'] ?? $info->rfc,
+                'company'                => $data['company'] ?? $info->company,
+                'persona_autorizada'     => $data['persona_autorizada'] ?? $info->persona_autorizada,
+                'beneficiario1'          => $data['beneficiario1'] ?? $info->beneficiario1,
+                'beneficiario2'          => $data['beneficiario2'] ?? $info->beneficiario2,
+                'beneficiario1_parentesco'=> $data['parentescoBeneficiario1'] ?? $info->beneficiario1_parentesco,
+                'beneficiario2_parentesco'=> $data['parentescoBeneficiario2'] ?? $info->beneficiario2_parentesco,
+                'tipo_persona'           => $data['radioPersona'] ?? $info->tipo_persona,
+                'cosolicitante'          => $data['cosolicitante'] ?? $info->cosolicitante,
+                'cosolicitante_rfc'      => $data['cosolicitante_rfc'] ?? $info->cosolicitante_rfc,
+                'banco'                  => $data['banco'] ?? $info->banco,
+                'cuenta'                 => $data['cuenta'] ?? $info->cuenta,
+                'sucursal'               => $data['sucursal'] ?? $info->sucursal,
+                'titular_cuenta'         => $data['titular_cuenta'] ?? $info->titular_cuenta,
+                'calle_fiscal'           => $data['direccion_fiscal_calle'] ?? $info->calle_fiscal,
+                'numero_fiscal'          => $data['direccion_fiscal_numero'] ?? $info->numero_fiscal,
+                'colonia_fiscal'         => $data['direccion_fiscal_colonia'] ?? $info->colonia_fiscal,
+                'ciudad_fiscal'          => $data['direccion_fiscal_ciudad'] ?? $info->ciudad_fiscal,
+                'estado_fiscal'          => $data['direccion_fiscal_estado'] ?? $info->estado_fiscal,
+                'cp_fiscal'              => $data['direccion_fiscal_codigo_postal'] ?? $info->cp_fiscal,
+                'telefono_fiscal'        => $data['direccion_fiscal_telefono_fiscal'] ?? $info->telefono_fiscal,
+                'calle_envios'           => $data['direccion_envio_calle'] ?? $info->calle_envios,
+                'numero_envios'          => $data['direccion_envio_numero'] ?? $info->numero_envios,
+                'colonia_envios'         => $data['direccion_envio_colonia'] ?? $info->colonia_envios,
+                'ciudad_envios'          => $data['direccion_envio_ciudad'] ?? $info->ciudad_envios,
+                'estado_envios'          => $data['direccion_envio_estado'] ?? $info->estado_envios,
+                'cp_envios'              => $data['direccion_envio_codigo_postal'] ?? $info->cp_envios,
+                'telefono_envios'        => $data['direccion_envio_telefono_fiscal'] ?? $info->telefono_envios,
+                'avatar'                 => $avatarPath,
+                'inscripcion'            => $inscripcionPath,
+                'credencial_elector'     => $credencialElectorPath,
+                'comprobante_domicilio'  => $comprobanteDomicilioPath,
+            ]);
+            $info->save(); // <- actualiza info sin afectar los eventos en User
+
+            // Roles
+            if (!empty($data['nivel'])) {
+                $user->syncRoles([$data['nivel']]);
+            }
+
+            // Grupos
+            if (!empty($data['grupo'])) {
+                $grupo = Grupo::where('name', $data['grupo'])->first();
+                if ($grupo) {
+                    $user->grupos()->sync([
+                        $grupo->id => [
+                            'rol'           => $data['posicion'] ?? null,
+                            'fecha_ingreso' => now(),
+                        ]
+                    ]);
+                }
+            }
+
+            DB::commit();
+            return $user;
+
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            \Log::error(
+                'US-002 - Actualizar usuario | ' . __METHOD__ .
+                " Archivo: " . $e->getFile() . ' Línea: ' . $e->getLine() .
+                PHP_EOL . '-------> ' . $e->getMessage() .
+                PHP_EOL . $e->getTraceAsString()
+            );
+            throw new HttpException(500, 'US-002 - Error al actualizar el usuario');
+        }
+    }
+
+
+    /**
+     * Maneja la actualización de un archivo: elimina el anterior y guarda el nuevo.
+     *
+     * @param string|null       $oldPath   Ruta del archivo anterior en el disco (puede ser null si no existe).
+     * @param UploadedFile|null $newFile   Nuevo archivo recibido en la solicitud (puede ser null si no se actualiza).
+     * @param string            $folder    Carpeta donde se guardará el archivo.
+     * @return string|null      Ruta del nuevo archivo o la ruta anterior si no se actualiza.
+     */
+    private static function handleFileUpdate(?string $oldPath, $newFile, string $folder): ?string
+    {
+        // Si se recibe un nuevo archivo
+        if ($newFile instanceof UploadedFile) {
+            // Si existe un archivo previo, eliminarlo del disco
+            if ($oldPath && Storage::disk('public')->exists($oldPath)) {
+                Storage::disk('public')->delete($oldPath);
+            }
+            // Guardar nuevo archivo y devolver su ruta
+            return $newFile->store($folder, 'public');
+        }
+
+        // Si no hay nuevo archivo, conservar la ruta anterior
+        return $oldPath;
+    }
+
 }

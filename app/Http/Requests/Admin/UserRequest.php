@@ -4,7 +4,6 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Validation\Rule;
 
 class UserRequest extends FormRequest
 {
@@ -45,6 +44,18 @@ class UserRequest extends FormRequest
             'nombre' => ['required', 'string', 'min:3', 'max:30'], // Validación para el nombre
             'apellido_paterno' => ['required', 'string', 'min:3', 'max:30'], // Validación para el apellido paterno
             'apellido_materno' => ['required', 'string', 'min:3', 'max:30'], // Validación para el apellido materno
+            'password' => [
+                'nullable',
+                'string',
+                'min:8',
+                'max:30',
+                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/'
+            ],
+            'confirm_password' => [
+                'nullable',
+                'string',
+                'same:password',
+            ],
             'rfc' => ['required', 'regex:/^([A-ZÑ&]{3,4})\d{6}(?:[A-Z\d]{3})?$/', 'min:12', 'max:13','unique:user_infos,rfc'], // Validación para el RFC
             'beneficiario1' => ['required', 'string'], // Validación para el primer beneficiario
             'beneficiario2' => ['nullable', 'string', 'min:3', 'max:60'], // Validación para el segundo beneficiario

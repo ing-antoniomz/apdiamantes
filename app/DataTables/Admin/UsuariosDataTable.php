@@ -61,7 +61,9 @@ class UsuariosDataTable extends DataTable
                 $query->orderBy('status', $order);
             })
             ->addColumn('action', function (User $model) {
-                return view('pages.admin.user._action-menu', compact('model'));
+                $userInfo = $model->getFullUserInfo();
+                //dd($userInfo);
+                return view('pages.admin.user._action-menu', compact('userInfo'));
             });
     }
 
@@ -110,7 +112,7 @@ class UsuariosDataTable extends DataTable
         // Solo agregar el botón de agregar usuario si el usuario tiene el permiso
         if (auth()->user()->can('admin_users_create')) {
             $buttons[] = [
-                'text' => '<i class="fas fa-plus fs-1"></i> ' . __('Add User'),
+                'text' => '<i class="fas fa-plus fs-1 text-success"></i> ' . __('Add User'),
                 'className' => 'btn-light btn-active-light-success text-white',
                 'attr' => [
                     'id' => 'add-user-btn',

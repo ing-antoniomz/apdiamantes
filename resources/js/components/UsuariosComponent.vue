@@ -20,7 +20,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <form ref="formRef" name="userForm" id="userForm" @submit.prevent="enviarFormulario" novalidate enctype="multipart/form-data">
+                    <form ref="formRef" name="userForm" id="userForm" @submit.prevent="enviarFormulario" novalidate>
 
                         <!-- informacion del usuario -->
                         <div class="row align-items-center mb-2 mb-lg-6">
@@ -81,6 +81,39 @@
                             </div>
                         </div>
 
+                        <!-- Password-->
+                        <div class="row mb-0 mb-lg-3">
+                            <label for="user" class="col-lg-1 col-form-label fw-bold fs-6 user-select-none text-start text-lg-end d-flex align-items-center mb-lg-5 mb-0 me-4">
+                                <span class="me-1 mb-4 d-flex align-items-start" data-bs-toggle="tooltip" title="8 caracteres, 1 mayúscula, 1 minúscula y 1 número">
+                                    <i class="fa-sharp-duotone fa-solid fa-circle-question text-gray-500 fs-6"></i>
+                                </span>
+                                <span>Contraseña</span>
+                            </label>
+                            <div class="col-lg-3 fv-row">
+                                <input
+                                    type="text"
+                                    v-model="form.password"
+                                    class="form-control form-control-lg"
+                                    id="password"
+                                    name="password"
+                                    placeholder=""
+                                />
+                            </div>
+                            <label for="correo"  class="col-lg-2 col-form-label fw-bold fs-6 user-select-none text-start text-lg-end d-flex align-items-center mb-lg-5 mb-0">
+                                <span >Confirmar Contraseña</span>
+                            </label>
+                            <div class="col-lg-3 fv-row">
+                                <input
+                                    type="email"
+                                    v-model="form.confirm_password"
+                                    class="form-control form-control-lg"
+                                    name="confirm_password"
+                                    id="confirm_password"
+                                    placeholder=""
+                                />
+                            </div>
+                        </div>
+
                         <!-- Nombre completo -->
                         <div class="row mb-1">
                             <div class="col-lg-10">
@@ -129,7 +162,7 @@
                                         <input
                                             type="text"
                                             v-model="form.rfc"
-                                            @input="form.rfc = form.rfc.toUpperCase()"
+                                            @input="toUppercase($event)"
                                             name="rfc"
                                             id="rfc"
                                             class="form-control form-control-lg mb-3 mb-lg-0"
@@ -141,7 +174,7 @@
                                         <input
                                             type="text"
                                             v-model="form.company"
-                                            @input="form.company = form.company.toUpperCase()"
+                                            @input="toUppercase($event)"
                                             name="company"
                                             id="company"
                                             class="form-control form-control-lg mb-3 mb-lg-0"
@@ -200,7 +233,7 @@
                                         <input
                                             type="text"
                                             v-model="form.cuenta_apdiamantes"
-                                            @input="form.cuenta_apdiamantes = form.cuenta_apdiamantes.toUpperCase()"
+                                             @input="toUppercase($event)"
                                             name="cuenta_apdiamantes"
                                             id="cuenta_apdiamantes"
                                             class="form-control form-control-lg  mb-3 mb-lg-0"
@@ -284,39 +317,66 @@
 
                                 <!--begin::Image input-->
                                 <div class="pt-8">
-                                    <div class="image-input image-input-outline image-input-empty" data-kt-image-input="true" :style="{ backgroundImage: `url(${avatarUrl})` }">
-                                        <!--begin::Preview existing avatar-->
-                                        <div class="image-input-wrapper w-125px h-125px" style="background-image: none">
+                                    <div
+                                        class="image-input image-input-outline"
+                                        :class="{ 'image-input-empty': !form.avatar }"
+                                        data-kt-image-input="true"
+                                        :style="{ backgroundImage: `url(${avatarUrl})` }"
+                                        style="position: relative;"
+                                    >
+                                        <!-- Preview -->
+                                        <div
+                                            class="image-input-wrapper w-125px h-125px"
+                                            :style="{
+                                                backgroundImage: form.avatar ? `url('${form.avatar}')` : 'none',
+                                                backgroundSize: 'cover',
+                                                backgroundPosition: 'center',
+                                                backgroundRepeat: 'no-repeat'
+                                            }"
+                                            >
                                         </div>
-                                        <!--end::Preview existing avatar-->
 
-                                        <!--begin::Label-->
-                                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                            data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Subir Foto">
-                                            <i class="bi bi-pencil-fill fs-7"></i>
-
-                                            <!--begin::Inputs-->
-                                            <input type="file" name="avatar" accept=".png, .jpg, .jpeg" @change="handleFileUpload" />
-                                            <input type="hidden" name="avatar_remove" />
-                                            <!--end::Inputs-->
+                                        <!-- Subir foto -->
+                                        <label
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="change"
+                                            data-bs-toggle="tooltip"
+                                            title="Subir Foto"
+                                        >
+                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                        <input type="file" name="avatar" accept=".png, .jpg, .jpeg" @change="handleFileUpload" />
+                                        <input type="hidden" name="avatar_remove" v-model="form.avatar_remove" />
                                         </label>
-                                        <!--end::Label-->
 
-                                        <!--begin::Cancel-->
-                                        <span class="btn btn-icon btn-circle btn-active-color-danger w-25px h-25px bg-body shadow"
-                                            data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
+                                        <!-- Cancelar avatar -->
+                                        <span
+                                            v-if="form.avatar"
+                                            @click="cancelAvatar"
+                                            class="btn btn-icon btn-circle btn-active-color-danger w-25px h-25px bg-body shadow"
+                                            style="position: absolute;
+                                                bottom: 4px;
+                                                right: 4px;
+                                                z-index: 2;
+                                                transform: translate(60%, 60%);"
+                                            data-bs-toggle="tooltip"
+                                            title="Cancelar avatar"
+                                            >
                                             <i class="bi bi-x fs-2"></i>
                                         </span>
-                                        <!--end::Cancel-->
 
-                                        <!--begin::Remove-->
-                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                            data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+                                        <!-- Quitar avatar -->
+                                        <span
+                                            v-else
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="remove"
+                                            data-bs-toggle="tooltip"
+                                            title="Quitar avatar"
+                                            >
                                             <i class="bi bi-x fs-2"></i>
                                         </span>
-                                        <!--end::Remove-->
                                     </div>
                                 </div>
+
                                 <!--end::Image input-->
                                 <!--begin::Hint-->
                                 <div class="form-text user-select-none text-center">Tipos Permitidos: png, jpg, jpeg.</div>
@@ -371,28 +431,74 @@
 
                         <!-- Archivos a subir -->
                         <div class="row mb-6 mt-0 mt-lg-3">
-                            <div class="col-lg-4 fv-row d-flex flex-column justify-content-center align-items-center">
-                                <label for="inscripcion" class="form-label fw-bold fs-6 user-select-none text-center d-block mb-5 required">Inscripción</label>
+                            <div class="col-lg-4 fv-row text-center">
+                                <template v-if="form.inscripcion">
+                                    <a
+                                    :href="storageUrl(form.inscripcion)"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="mb-2 d-inline-block fs-7 fw-semibold link-secondary"
+                                    style="text-decoration: underline;"
+                                    >
+                                    Ver inscripción actual
+                                    <i class="fas fa-external-link-alt ms-1"></i>
+                                    </a>
+                                </template>
+
+                                <label for="inscripcion" class="form-label fw-bold fs-6 user-select-none d-block mb-5" >
+                                    Inscripción
+                                </label>
+
                                 <input
                                     type="file"
-                                    name="inscripcion"
                                     id="inscripcion"
+                                    name="inscripcion"
                                     class="form-control form-control-lg"
                                     accept=".pdf, .jpg, .jpeg"
                                 />
-                            </div>
-                            <div class="col-lg-4 fv-row">
-                                <label for="ine" class="form-label fw-bold fs-6 user-select-none text-center d-block mb-5 required">INE</label>
+                                </div>
+
+                            <div class="col-lg-4 fv-row text-center">
+                                <template v-if="form.ine">
+                                    <a
+                                    :href="storageUrl(form.ine)"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="mb-2 d-inline-block fs-7 fw-semibold link-secondary"
+                                    style="text-decoration: underline;"
+                                    >
+                                    Ver INE actual
+                                    <i class="fas fa-external-link-alt ms-1"></i>
+                                    </a>
+                                </template>
+                                <label for="ine" class="form-label fw-bold fs-6 user-select-none d-block mb-5" >
+                                    INE
+                                </label>
                                 <input
                                     type="file"
-                                    name="ine"
                                     id="ine"
+                                    name="ine"
                                     class="form-control form-control-lg"
                                     accept=".pdf, .jpg, .jpeg"
                                 />
-                            </div>
-                            <div class="col-lg-4 fv-row">
-                                <label for="comprobante_domicilio" class="form-label fw-bold fs-6 user-select-none text-center d-block mb-5 required">Comprobante Domicilio</label>
+                                </div>
+
+                            <div class="col-lg-4 fv-row text-center">
+                                <template v-if="form.comprobante_domicilio">
+                                    <a
+                                    :href="storageUrl(form.comprobante_domicilio)"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="mb-2 d-inline-block fs-7 fw-semibold link-secondary"
+                                    style="text-decoration: underline;"
+                                    >
+                                    Ver comprobante actual
+                                    <i class="fas fa-external-link-alt ms-1"></i>
+                                    </a>
+                                </template>
+                                <label for="comprobante_domicilio" class="form-label fw-bold fs-6 user-select-none d-block mb-5 ">
+                                    Comprobante Domicilio
+                                </label>
                                 <input
                                     type="file"
                                     name="comprobante_domicilio"
@@ -483,7 +589,7 @@
                                 <input
                                     type="text"
                                     v-model="form.cuenta"
-                                    @input="form.cuenta = form.cuenta.toUpperCase()"
+                                     @input="toUppercase($event)"
                                     name="cuenta"
                                     id="cuenta"
                                     class="form-control form-control-lg  mb-3 mb-lg-0"
@@ -719,6 +825,7 @@
 
                         </div>
 
+                        <!-- Botones -->
                         <div class="row mb-6">
                             <div class="col-lg-12 fv-row text-end">
                                 <button type="button" class="btn btn-light btn-active-light-danger text-white me-5" data-bs-dismiss="modal">Cerrar</button>
@@ -732,16 +839,6 @@
 
                     </form>
                 </div>
-
-                <!-- <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                    <submit-button-component
-                        :is-submitting="isSubmitting"
-                        :label="isSubmitting ? 'Por favor Espera' : 'Invitar'"
-                        :disabled="isSubmitting"
-                        :form="userForm"
-                    />
-                </div> -->
             </div>
         </div>
     </div>
@@ -752,10 +849,6 @@
 export default {
     name: "AgregaEditaUsuariosComponent",
     props: {
-        ruta: {
-            type: String,
-            required: true,
-        },
         grupos: {
             type: Object,
             required: true
@@ -775,10 +868,13 @@ export default {
                 nombre: "",
                 apellido_paterno: "",
                 apellido_materno: "",
+                password: "",
+                confirm_password: "",
                 radioPersona: "",
                 estatus: "",
                 rfc: "",
                 avatar: "",
+                avatar_remove: false, // Marca si el usuario canceló el avatar
                 company: "",
                 persona_autorizada: "",
                 cuenta_apdiamantes: "",
@@ -823,6 +919,7 @@ export default {
             tipoPersona: 'FISICA', // 'moral' o 'fisica'
             isSubmitting: false, // Estado para manejar el indicador de carga
             validator: null,
+            ruta:'',
         };
     },
     mounted() {
@@ -861,6 +958,27 @@ export default {
         }
     },
     methods: {
+        toUppercase(event) {
+            const el = event.target;
+            const start = el.selectionStart;
+            const end = el.selectionEnd;
+
+            // Convierte a mayúsculas sin perder cursor
+            el.value = el.value.toUpperCase();
+
+            // Actualiza el v-model correspondiente
+            const modelName = el.getAttribute('v-model') || el.name;
+            if (modelName && this.form.hasOwnProperty(modelName)) {
+            this.form[modelName] = el.value;
+            }
+
+            // Restaurar posición del cursor
+            el.setSelectionRange(start, end);
+        },
+        storageUrl(path) {
+            // Ajusta esta función si tu app está en subcarpeta o dominio diferente
+            return `/storage/${path}`;
+        },
         initValidator() {
             const form = this.$refs.formRef;
             this.validator = FormValidation.formValidation(form, {
@@ -927,6 +1045,29 @@ export default {
                                 min: 3,
                                 max: 30,
                                 message: "El apellido materno debe tener entre 3 y 30 caracteres",
+                            },
+                        },
+                    },
+                    password: {
+                        validators: {
+                            stringLength: {
+                                min: 8,
+                                max: 30,
+                                message: "La contraseña debe tener entre 8 y 30 caracteres",
+                            },
+                            regexp: {
+                                regexp: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
+                                message: "La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número",
+                            },
+                        },
+                    },
+                    confirm_password: {
+                        validators: {
+                            identical: {
+                                compare: function () {
+                                    return this.$refs.formRef.querySelector('[name="password"]').value;
+                                },
+                                message: "Las contraseñas no coinciden",
                             },
                         },
                     },
@@ -1045,9 +1186,7 @@ export default {
                     },
                     inscripcion: {
                         validators: {
-                            notEmpty: {
-                                message: 'Sube una inscripción'
-                            },
+
                             file: {
                                 extension: 'jpg,jpeg,pdf',
                                 type: 'image/jpeg,image/jpg,document/pdf',
@@ -1058,9 +1197,7 @@ export default {
                     },
                     ine: {
                         validators: {
-                            notEmpty: {
-                                message: 'Sube una INE'
-                            },
+
                             file: {
                                 extension: 'jpg,jpeg,pdf',
                                 type: 'image/jpeg,image/jpg,document/pdf',
@@ -1071,9 +1208,7 @@ export default {
                     },
                     comprobante_domicilio: {
                         validators: {
-                            notEmpty: {
-                                message: 'Sube un compobante de domicilio'
-                            },
+
                             file: {
                                 extension: 'jpg,jpeg,pdf',
                                 type: 'image/jpeg,image/jpg,document/pdf',
@@ -1318,12 +1453,23 @@ export default {
             }
             if (result === "Valid") {
                 this.isSubmitting = true; // Activar el indicador de carga
+
+                //Bloquear todos los inputs del formulario
+                const inputs = form.querySelectorAll('input, select, textarea, button');
+                inputs.forEach(input => input.disabled = true);
                 try {
-                    const response = await axios.post(this.ruta, formData,{
-                            headers: {
-                                'Content-Type': 'multipart/form-data',
-                            },
-                        }); // Enviar datos
+                    let response;  // Declarar antes
+
+                    if(this.modoEdicion == false){
+                        response = await axios.post(this.ruta, formData, {
+                            headers: { 'Content-Type': 'multipart/form-data' },
+                        });
+                    } else {
+                        formData.append('_method', 'PATCH'); // o 'PUT'
+                        response = await axios.post(this.ruta, formData);
+                    }
+
+                    // Aquí response ya está definido y accesible
                     Swal.fire({
                         text: response.data.message,
                         icon: "success",
@@ -1332,75 +1478,33 @@ export default {
                         customClass: {
                             confirmButton: "btn btn-light btn-active-color-white",
                         },
-                    });
-                    this.form = {
-                        nombre: "",
-                        apellido_paterno: "",
-                        apellido_materno: "",
-                        radioPersona: "",
-                        estatus: "",
-                        rfc: "",
-                        avatar: "",
-                        company: "",
-                        persona_autorizada: "",
-                        cuenta_apdiamantes: "",
-                        user: "",
-                        correo: "",
-                        telefono: "",
-                        beneficiario1: "",
-                        beneficiario2: "",
-                        cosolicitante: "",
-                        cosolicitante_rfc: "",
-                        banco: "",
-                        cuenta: "",
-                        sucursal: "",
-                        titular_cuenta: "",
-                        direccion_fiscal_calle: "",
-                        direccion_fiscal_numero: "",
-                        direccion_fiscal_colonia: "",
-                        direccion_fiscal_ciudad: "",
-                        direccion_fiscal_estado: "",
-                        direccion_fiscal_codigo_postal: "",
-                        direccion_fiscal_telefono_fiscal: "",
-                        direccion_envio_calle: "",
-                        direccion_envio_numero: "",
-                        direccion_envio_colonia: "",
-                        direccion_envio_ciudad: "",
-                        direccion_envio_estado: "",
-                        direccion_envio_codigo_postal: "",
-                        direccion_envio_telefono_fiscal: "",
-                        nivel: "",
-                        parentescoBeneficiario1: "",
-                        parentescoBeneficiario2: "",
-                        posicion: "",
-                        grupo: "",
-                        inscripcion: "",
-                        ine: "",
-                        comprobante_domicilio: "",
-                    };
-                    this.usarMismaDireccion = false;
-                    this.validator.resetForm(true); // Limpiar validaciones
+                        allowOutsideClick: true, // Permite cerrar al hacer clic fuera
+                        willClose: () => {
+                            // Cerrar el modal userModal
+                            const modalInstance = bootstrap.Modal.getInstance(document.getElementById('userModal'));
+                            if (modalInstance) {
+                                modalInstance.hide();
+                            }
 
-                    // Restablecer la imagen del avatar
-                    const imageInput = document.querySelector('[data-kt-image-input="true"]');
-                    if (imageInput) {
-                        const cancelButton = imageInput.querySelector('[data-kt-image-input-action="cancel"]');
-                        if (cancelButton) {
-                            cancelButton.click(); // Simula el clic en el botón de cancelar
+                            // Recargar DataTable
+                            const table = $('#admin-users-table').DataTable();
+                            if (table) {
+                                table.ajax.reload(null, false); // false para mantener la página actual
+                            }
+
+
                         }
-                    }
-                    this.file = null;
+                    });
 
-                    // Cerrar el modal userModal
-                    const modalInstance = bootstrap.Modal.getInstance(document.getElementById('userModal'));
-                    if (modalInstance) {
-                        modalInstance.hide();
-                    }
+                    // El resto de tu código para resetear formulario...
+
                 } catch (error) {
                     this.$handleError(error);
                 } finally {
-                    this.isSubmitting = false; // Desactivar el indicador de carga
+                    inputs.forEach(input => input.disabled = false);
+                    this.isSubmitting = false;
                 }
+
             } else {
                 Swal.fire({
                     text: "Revisa bien los datos ingresados.",
@@ -1426,13 +1530,48 @@ export default {
                 this.validator.enableValidator('cosolicitante_rfc');
             }
         },
+        cancelAvatar() {
+            // Elimina la imagen actual
+            this.form.avatar = null;
+
+            // También podrías resetear el input file si es necesario
+            const inputFile = document.querySelector('input[name="avatar"]');
+            if (inputFile) {
+            inputFile.value = '';
+            }
+
+            // Si usas un campo hidden para marcar que se eliminó el avatar
+            this.form.avatar_remove = true;
+        },
         handleFileUpload(event) {
             const file = event.target.files[0];
-            this.file = file instanceof File ? file : null;
+
+            // Validación: solo si es un archivo válido
+            if (file instanceof File) {
+                this.file = file;
+
+                // Previsualización con URL temporal
+                this.form.avatar = URL.createObjectURL(file);
+
+                // Aseguramos que no se marque como eliminado
+                this.form.avatar_remove = false;
+            } else {
+                this.file = null;
+                this.form.avatar = null;
+            }
         },
         openEditUser(usuario) {
             this.form = usuario;
+            this.tipoPersona = usuario.radioPersona || 'FISICA'; // Ajustar el radio
+            this.onTipoPersonaChange(); // Activar/desactivar validadores según el tipo
             this.modoEdicion = true;
+            this.usarMismaDireccion = false;
+            this.ruta = `/admin/users/${usuario.user}`; // Ajustar la ruta para edición
+            // Limpiar validaciones previas si existe el validador
+            if (this.validator) {
+                this.validator.resetForm(true); // true para limpiar también los errores y el estado de validación
+            }
+
             // ejemplo: abrir modal
             $('#userModal').modal('show'); // si usas Bootstrap
         },
@@ -1441,6 +1580,8 @@ export default {
                 nombre: "",
                 apellido_paterno: "",
                 apellido_materno: "",
+                password: "",
+                confirm_password: "",
                 radioPersona: "",
                 estatus: "",
                 rfc: "",
@@ -1483,6 +1624,12 @@ export default {
                 comprobante_domicilio: "",
             };
             this.modoEdicion = false;
+            this.usarMismaDireccion = false;
+            this.ruta = '/admin/users'; // Ajustar la ruta para creación
+            // Limpiar validaciones previas si existe el validador
+            if (this.validator) {
+                this.validator.resetForm(true); // true para limpiar también los errores y el estado de validación
+            }
             // ejemplo: abrir modal
             $('#userModal').modal('show'); // si usas Bootstrap
         },

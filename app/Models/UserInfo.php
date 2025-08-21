@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Core\Traits\SpatieLogsActivity;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
 use Spatie\Activitylog\Models\Activity;
 
 class UserInfo extends Model
@@ -69,29 +68,6 @@ class UserInfo extends Model
         'credencial_elector',
         'comprobante_domicilio',
     ];
-
-    /**
-     * Prepare proper error handling for url attribute
-     *
-     * @return string
-     */
-    public function getAvatarUrlAttribute()
-    {
-        // if file avatar exist in storage folder
-        $avatar = public_path(Storage::url($this->avatar));
-        if (is_file($avatar) && file_exists($avatar)) {
-            // get avatar url from storage
-            return Storage::url($this->avatar);
-        }
-
-        // check if the avatar is an external url, eg. image from google
-        if (filter_var($this->avatar, FILTER_VALIDATE_URL)) {
-            return $this->avatar;
-        }
-
-        // no avatar, return blank avatar
-        return asset(theme()->getMediaUrlPath().'avatars/blank.png');
-    }
 
     /**
      * User info relation to user model

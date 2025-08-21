@@ -1,9 +1,9 @@
 @php
-    $nav = array(
-        array('title' => __('Resumen'), 'view' => 'cuenta/resumen'),
-        array('title' => __('Ajustes'), 'view' => 'cuenta/ajustes'),
-        // array('title' => 'Security', 'view' => ''),
-    );
+$nav = array(
+    array('title' => __('Resumen'), 'view' => 'cuenta/resumen'),
+    array('title' => __('Ajustes'), 'view' => 'cuenta/ajustes'),
+    // array('title' => 'Security', 'view' => ''),
+);
 @endphp
 
 <!--begin::Navbar-->
@@ -13,10 +13,23 @@
         <div class="d-flex flex-wrap flex-sm-nowrap mb-3 user-select-none">
             <!--begin: Pic-->
             <div class="me-7 mb-4">
-                <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-                    <img src="{{ auth()->user()->avatar_url }}" alt="image"/>
-                    <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div>
+                <div class="position-relative mx-auto"
+                    style="width: 100%; max-width: 160px; aspect-ratio: 1 / 1;">
+                    <img
+                        src="{{ auth()->user()->getAvatarUrlAttribute() === url('storage')
+    ? url('demo3/media/avatars/blank.png')
+    : (auth()->user()->getAvatarUrlAttribute() ?? asset('avatars/blank.png'))
+                            }}"
+                        alt="photo"
+                        class="w-100 h-100 "
+                        style="object-fit: cover; max-width: 160px; max-height: 160px; border-radius: 10%; border-radius: 10%;"
+                    />
+                    <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white"
+                        style="width: 20px; height: 20px;">
+                    </div>
                 </div>
+
+
             </div>
             <!--end::Pic-->
 
@@ -28,32 +41,32 @@
                     <div class="d-flex flex-column">
                         <!--begin::Name-->
                         <div class="d-flex align-items-center mb-2">
-                            <a href="#" class="text-gray-800 text-hover-primary fs-2 fw-bolder me-1">{{ auth()->user()->name }}</a>
-                            <a href="#">
-                                {!! theme()->getSvgIcon("icons/duotune/general/gen026.svg", "svg-icon-1 svg-icon-primary") !!}
-                            </a>
+                            <img src="{{ auth()->user()->rol_url }}" alt="imagen_nivel" class="me-2" style="max-height: 40px;">
 
-                            <a href="#" class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3" data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">{{ __('Upgrade to Pro') }}</a>
+                            <span class="text-gray-800 text-hover-primary fs-2 fw-bolder me-1">
+                                {{ auth()->user()->name }}
+                            </span>
+
+                            <span class="badge fw-bolder ms-2 fs-8 py-2 px-3 text-gray-800 bg-light-info border border-info rounded-pill">
+                                {{ auth()->user()->roles->first()?->name  }}
+                            </span>
                         </div>
                         <!--end::Name-->
 
                         <!--begin::Info-->
                         <div class="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
-                            <a href="#" class="d-flex align-items-center text-gray-600 text-hover-primary me-5 mb-2">
-                                {!! theme()->getSvgIcon("icons/duotune/communication/com013.svg", "svg-icon-4 me-1 text-light") !!}
-                                {{ auth()->user()->roles->pluck('name')->first() }}
-                            </a>
-                            <a href="#" class="d-flex align-items-center text-gray-600 text-hover-primary me-5 mb-2">
-                                {!! theme()->getSvgIcon("icons/duotune/general/gen018.svg", "svg-icon-4 me-1 text-light") !!}
-                                {{ $info->ciudad_fiscal }}, {{ $info->estado_fiscal }}
-                            </a>
-                            <a href="#" class="d-flex align-items-center text-gray-600 text-hover-primary mb-2">
-                                {!! theme()->getSvgIcon("icons/duotune/communication/com011.svg", "svg-icon-4 me-1") !!}
-                                {{ auth()->user()->email }}
-                            </a>
+                            <span class="d-flex align-items-center text-gray-600 text-hover-primary me-5 mb-2">
+                                <img src="{{ auth()->user()->grupo_url }}" alt="imagen_nivel" class="me-2" style="max-height: 30px;">
+                                {{ auth()->user()->grupos()->first()?->name }} | {{ auth()->user()->grupos()->first()?->pivot->rol }}
+                            </span>
+                            <span class="d-flex align-items-center text-gray-600 text-hover-primary mb-2">
+                                {!! theme()->getSvgIcon("icons/duotune/communication/com013.svg", "svg-icon-1 me-2") !!}
+                                {{ auth()->user()->cuenta_ap }}
+                            </span>
                         </div>
                         <!--end::Info-->
                     </div>
+
                     <!--end::User-->
 
                     <!--begin::Actions-->

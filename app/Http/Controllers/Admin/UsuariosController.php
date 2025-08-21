@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\User;
 use App\Models\Grupo;
-use Illuminate\Http\Request;
 use App\Services\UserServices;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequest;
 use App\DataTables\Admin\UsuariosDataTable;
+use App\Http\Requests\Admin\UserUpdateRequest;
 
 class UsuariosController extends Controller
 {
@@ -44,9 +43,18 @@ class UsuariosController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserUpdateRequest $request, string $username)
     {
-        //
+        //Editamos el usuario, asignándole su rol y grupo
+        $user = UserServices::updateUsuario($username,$request->validated());
+
+        if ($user) {
+            return response()->json(['message' => "El usuario {$user->user} ha sido editado."], 201);
+        }
+
+        // Retornamos un error si no se pudo crear el usuario
+        return response()->json(['error' => 'No se pudo editar el usuario.'], 500);
+
     }
 
     /**

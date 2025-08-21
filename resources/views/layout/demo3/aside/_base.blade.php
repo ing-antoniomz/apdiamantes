@@ -35,20 +35,34 @@
             <!--begin::Wrapper-->
             <div class="d-flex align-items-center">
                 <!--begin::Avatar-->
-                <div class="symbol symbol-circle symbol-40px">
-                    <img src="{{ auth()->user()->getAvatarUrlAttribute() }}" alt="photo"/>
+                <div class="symbol symbol-circle symbol-60px">
+                    <img
+                        src="{{ auth()->user()->getAvatarUrlAttribute() === url('storage')
+                            ? url('demo3/media/avatars/blank.png')
+                            : auth()->user()->getAvatarUrlAttribute()
+                            ?? asset('avatars/blank.png')
+                        }}"
+                        alt="photo"
+                    />
                 </div>
                 <!--end::Avatar-->
 
                 <!--begin::User info-->
                 <div class="ms-2">
-                    <!--begin::Name-->
-                    <a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bolder lh-1">{{ auth()->user()->name }}</a>
-                    <!--end::Name-->
-
-                    <!--begin::Major-->
-                    <span class="text-muted fw-bold mt-2 d-block fs-7 lh-1">Nivel<i class="ms-2 fas fa-solid fa-certificate"></i><i class="ms-2 fas fa-solid fa-ribbon"></i><i class="ms-2 fas fa-solid fa-otter"></i></span>
-                    <!--end::Major-->
+                    <!-- Nombre del usuario -->
+                    <div class="d-block fw-bolder fs-6 text-gray-800 text-hover-primary">
+                        {{ auth()->user()->name }}
+                    </div>
+                    <!-- Rol del usuario -->
+                    <div class="d-flex align-items-center mt-1 fs-7 text-muted fw-bold">
+                        <span>{{ auth()->user()->roles()->first()->name }}</span>
+                    </div>
+                    <!-- Grupo del usuario -->
+                    <div class="d-flex align-items-center mt-1 fs-7 text-muted fw-bold">
+                        <img src="{{ auth()->user()->rol_url }}" alt="imagen_rol" class="img-fluid rounded me-1" style="max-height: 30px;">
+                        <img src="{{ auth()->user()->grupo_url }}" alt="imagen_grupo" class="img-fluid rounded me-1" style="max-height: 30px;">
+                        <span>{{ auth()->user()->grupos()->first()?->name }}</span>
+                    </div>
                 </div>
                 <!--end::User info-->
             </div>
@@ -60,11 +74,11 @@
                     {!! theme()->getSvgIcon("icons/duotune/coding/cod001.svg", "svg-icon-1") !!}
                 </div>
                 {{ theme()->getView('partials/topbar/_user-menu', array(
-                    "language-menu-placement" => "right-end",
-                    "language-menu-flip" => "{default: 'top', lg: ''}",
-                    "subscription-menu-placement" => "right-end",
-                    "subscription-menu-flip" => "{default: 'bottom', lg: ''}"
-                )) }}
+    "language-menu-placement" => "right-end",
+    "language-menu-flip" => "{default: 'top', lg: ''}",
+    "subscription-menu-placement" => "right-end",
+    "subscription-menu-flip" => "{default: 'bottom', lg: ''}"
+)) }}
             </div>
             <!--end::User menu-->
         </div>

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Notifications\VerifyEmail;
 use Spatie\Permission\Traits\HasRoles;
 use App\Core\Traits\SpatieLogsActivity;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Activitylog\Models\Activity;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\CustomResetPassword;
@@ -102,10 +103,106 @@ class User extends Authenticatable implements MustVerifyEmail
     {
 
         if ($this->info) {
-            return asset($this->info->avatar);
+            return  asset(Storage::url($this->info->avatar));
         }
 
-        return asset(theme()->getMediaUrlPath().'avatars/blank.png');
+        return null;
+    }
+    /**
+     * Prepare proper error handling for role url attribute
+     *
+     * @return string
+     */
+    public function getRolUrlAttribute()
+    {
+
+         $role = $this->roles()->first(); // Trae el primer rol del usuario
+
+        if ($role && $role->imagen) {
+            return asset(Storage::url($role->imagen));
+        }
+
+        return null;
+    }
+
+    /**
+     * Prepare proper error handling for role url attribute
+     *
+     * @return string
+     */
+    public function getGrupoUrlAttribute()
+    {
+
+         $grupo = $this->grupos()->first(); // Trae el primer rol del usuario
+
+        if ($grupo && $grupo->imagen) {
+            return asset(Storage::url($grupo->imagen));
+        }
+
+        return null;
+    }
+
+    public function getFullUserInfo()
+    {
+        $info = $this->info;
+
+        $grupoNombre = '';
+        $rolNombre = '';
+
+        if ($this->grupos && $this->grupos->isNotEmpty()) {
+            // Tomar el primer grupo (puedes adaptar si necesitas múltiples)
+            $grupo = $this->grupos->first();
+            $grupoNombre = $grupo->name ?? '';
+            $rolNombre = $grupo->pivot->rol ?? '';
+        }
+         // Rol de Spatie (solo el primero)
+        $rolSpatie = $this->getRoleNames()->first() ?? '';
+
+        return [
+                'nombre' => $this->nombre ?? '',
+                'apellido_paterno' => $this->apellido_paterno ?? '',
+                'apellido_materno' => $this->apellido_materno ?? '',
+                'radioPersona' => $info->tipo_persona ?? '',
+                'estatus' => $this->status ?? '',
+                'rfc' => $info->rfc ?? '',
+                'avatar' => url($this->getAvatarUrlAttribute()) ?? '',
+                'company' => $info->company ?? '',
+                'persona_autorizada' => $info->persona_autorizada ?? '',
+                'cuenta_apdiamantes' => $this->cuenta_ap ?? '',
+                'user' => $this->user ?? '',
+                'correo' => $this->email ?? '',
+                'telefono' => $info->phone ?? '',
+                'beneficiario1' => $info->beneficiario1 ?? '',
+                'beneficiario2' => $info->beneficiario2 ?? '',
+                'cosolicitante' => $info->cosolicitante ?? '',
+                'cosolicitante_rfc' => $info->cosolicitante_rfc ?? '',
+                'banco' => $info->banco ?? '',
+                'cuenta' => $info->cuenta ?? '',
+                'sucursal' => $info->sucursal ?? '',
+                'titular_cuenta' => $info->titular_cuenta ?? '',
+                'direccion_fiscal_calle' => $info->calle_fiscal ?? '',
+                'direccion_fiscal_numero' => $info->numero_fiscal ?? '',
+                'direccion_fiscal_colonia' => $info->colonia_fiscal ?? '',
+                'direccion_fiscal_ciudad' => $info->ciudad_fiscal ?? '',
+                'direccion_fiscal_estado' => $info->estado_fiscal ?? '',
+                'direccion_fiscal_codigo_postal' => $info->cp_fiscal ?? '',
+                'direccion_fiscal_telefono_fiscal' => $info->telefono_fiscal ?? '',
+                'direccion_envio_calle' => $info->calle_envios ?? '',
+                'direccion_envio_numero' => $info->numero_envios ?? '',
+                'direccion_envio_colonia' => $info->colonia_envios ?? '',
+                'direccion_envio_ciudad' => $info->ciudad_envios ?? '',
+                'direccion_envio_estado' => $info->estado_envios ?? '',
+                'direccion_envio_codigo_postal' => $info->cp_envios ?? '',
+                'direccion_envio_telefono_fiscal' => $info->telefono_envios ?? '',
+                'nivel' => $rolSpatie, // Completar si tienes esta relación o lógica
+                'parentescoBeneficiario1' => $info->beneficiario1_parentesco ?? '',
+                'parentescoBeneficiario2' => $info->beneficiario2_parentesco ?? '',
+                'posicion' => $rolNombre, // rol desde tabla pivote
+                'grupo' => $grupoNombre,  // nombre del grupo
+                'inscripcion' => $info->inscripcion ?? '',
+                'ine' => $info->credencial_elector ?? '',
+                'comprobante_domicilio' => $info->comprobante_domicilio ?? '',
+        ];
     }
     /**
      * Send a password reset notification to the user.

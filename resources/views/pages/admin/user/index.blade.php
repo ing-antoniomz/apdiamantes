@@ -6,7 +6,7 @@
 <x-base-layout>
 
     <!--begin::Card-->
-    <div class="card">
+    <div class="card" id="admin-usuarios-app">
         <!--begin::Card body-->
         <div class="card-body pt-6">
             <!--begin::Table-->
@@ -14,14 +14,12 @@
             <!--end::Table-->
         </div>
         <!--end::Card body-->
+        <usuarios-component :grupos='{{ $grupos }}' :niveles='{{ $niveles }}'
+            :avatarUrl="'{{ asset('demo3/media/avatars/blank.png') }}'">
+        </usuarios-component>
     </div>
     <!--end::Card-->
 
-    <usuarios-component
-        :ruta="'{{ route("admin.users.store") }}'"
-        :grupos='{{ $grupos }}'
-        :niveles='{{ $niveles }}'
-        :avatarUrl="'{{ asset('demo3/media/avatars/blank.png') }}'">
-    </usuarios-component>
+
 
 </x-base-layout>

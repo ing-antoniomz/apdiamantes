@@ -15,8 +15,6 @@
     <div id="kt_account_profile_details" class="collapse">
         <!--begin::Form-->
         <form id="kt_account_profile_details_form" class="form" method="POST" action="" enctype="multipart/form-data">
-        @csrf
-        @method('PUT')
         <!--begin::Card body-->
             <div class="card-body border-top p-9">
 
@@ -60,7 +58,7 @@
                         </div>
                         <!--end::Input group-->
 
-                        @if ($info->tipo_persona == 'Moral')
+                        @if ($info->tipo_persona == 'MORAL')
                             <!--begin::Input group-->
                             <div class="row mb-6 ">
                                 <!--begin::Label-->
@@ -142,7 +140,7 @@
 
                                 <!--begin::Label-->
                                 <label for="cosolicitante_rfc" class="col-lg-1 col-form-label text-center fw-bold fs-6 user-select-none">{{
-                                    __('RFC')}}</label>
+        __('RFC')}}</label>
                                 <!--end::Label-->
 
                                 <!--begin::Col-->
@@ -154,6 +152,60 @@
                             </div>
                             <!--end::Input group-->
                         @endif
+
+                        <!-- Nivel, Posición y Grupo -->
+                        <div class="row mb-6 mt-0 mt-lg-3">
+                            <!-- Nivel -->
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-4 fv-row d-flex align-items-center justify-content-center gap-2">
+                                <img src="{{ auth()->user()->rol_url }}" alt="imagen_nivel" class="img-fluid rounded" style="max-height: 40px;">
+                                <span class="fw-bold mb-0">{{ auth()->user()->roles->first()?->name }}</span>
+                            </div>
+                            <!-- Grupo -->
+                            <div class="col-lg-4 fv-row d-flex align-items-center justify-content-center gap-2">
+                                <img src="{{ auth()->user()->grupo_url }}" alt="grupo_imagen" class="img-fluid rounded"
+                                    style="max-height: 40px;">
+                                <span class="fw-bold mb-0">
+                                    {{ auth()->user()->grupos()->first()?->name }} :
+                                    {{ auth()->user()->grupos()->first()?->pivot->rol }}
+                                </span>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                        <!-- Archivos a subir -->
+                        <div class="row mb-6 mt-0 mt-lg-3">
+                            <!-- Inscripción -->
+                            <div class="col-lg-4 fv-row text-center">
+                                @if(!empty($info->inscripcion))
+                                    <a href="{{ Storage::url($info->inscripcion) }}" target="_blank" rel="noopener noreferrer"
+                                        class="mb-2 d-inline-block fs-7 fw-semibold link-secondary" style="text-decoration: underline;">
+                                        Ver inscripción actual
+                                        <i class="fas fa-external-link-alt ms-1"></i>
+                                    </a>
+                                @endif
+                            </div>
+                            <!-- INE -->
+                            <div class="col-lg-4 fv-row text-center">
+                                @if(!empty($info->credencial_elector))
+                                    <a href="{{ Storage::url($info->credencial_elector) }}" target="_blank" rel="noopener noreferrer"
+                                        class="mb-2 d-inline-block fs-7 fw-semibold link-secondary" style="text-decoration: underline;">
+                                        Ver INE actual
+                                        <i class="fas fa-external-link-alt ms-1"></i>
+                                    </a>
+                                @endif
+                            </div>
+                            <!-- Comprobante domicilio -->
+                            <div class="col-lg-4 fv-row text-center">
+                                @if(!empty($info->comprobante_domicilio))
+                                    <a href="{{ Storage::url($info->comprobante_domicilio) }}" target="_blank" rel="noopener noreferrer"
+                                        class="mb-2 d-inline-block fs-7 fw-semibold link-secondary" style="text-decoration: underline;">
+                                        Ver comprobante actual
+                                        <i class="fas fa-external-link-alt ms-1"></i>
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+
                         <!--begin::Divider-->
                         <div class="row align-items-center">
                             <div class="col px-0">
@@ -166,6 +218,7 @@
                                 <hr class="m-0">
                             </div>
                         </div>
+
                         <!--end::Divider-->
                         <!--begin::Input group-->
                         <div class="row mt-3 mb-6">
@@ -198,7 +251,12 @@
                         <div class="pb-4 d-flex justify-content-center align-items-center">
                             <div class="image-input image-input-outline {{ isset($info) && $info->avatar ? '' : 'image-input-empty' }}" data-kt-image-input="true" style="background-image: url({{ asset(theme()->getMediaUrlPath() . 'avatars/blank.png') }})">
                                 <!--begin::Preview existing avatar-->
-                                <div class="image-input-wrapper w-125px h-125px" style="background-image: {{ isset($info) && $info->avatar ? 'url('.asset($info->avatar).')' : 'none' }};">
+                                <div class="image-input-wrapper w-125px h-125px" style="background-image: url('{{ auth()->user()->getAvatarUrlAttribute() === url('storage')
+    ? url('demo3/media/avatars/blank.png')
+    : (auth()->user()->getAvatarUrlAttribute() ?? asset('avatars/blank.png')) }}');
+                                    background-size: cover;
+                                    background-position: center;
+                                    background-repeat: no-repeat;">
                                 </div>
                                 <!--end::Preview existing avatar-->
 
@@ -229,11 +287,7 @@
                                 <!--end::Remove-->
                             </div>
                         </div>
-                        <!--end::Image input-->
-                        <!--begin::Hint-->
-                        {{-- <div class="form-text user-select-none">{{ __('Allowed file types') }}: png, jpg, jpeg.</div> --}}
-                        <!--end::Hint-->
-                        <p class="text-white text-center fw-bold">{{ $info->membresia }}</p>
+                        <p class="text-white text-center fw-bold">{{ auth()->user()->cuenta_ap }}</p>
                         <hr class="my-4 mx-4">
                         <p class="text-white text-center small">{{ auth()->user()->user }}</p>
                         <p class="text-white text-center small">{{ auth()->user()->email }}</p>
@@ -266,21 +320,19 @@
                         <!--begin::Input group-->
                         <div class="row mt-3 mb-6">
                             <div class="col-lg-5">
-                                <label for="calle_fiscal" class="form-label fw-bold fs-6 user-select-none text-center d-block">{{ __("Street")
-                                    }}</label>
+                                <label for="calle_fiscal" class="form-label fw-bold fs-6 user-select-none text-center d-block">{{ __("Street")}}</label>
                                 <input type="text" name="calle_fiscal" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
                                     placeholder="Calle" value="{{ old('calle_fiscal', $info->calle_fiscal ?? '') }}" readonly />
                             </div>
                             <div class="col-lg-2">
-                                <label for="numero_fiscal" class="form-label fw-bold fs-6 user-select-none text-center d-block">{{ __("Number")
-                                    }}</label>
+                                <label for="numero_fiscal" class="form-label fw-bold fs-6 user-select-none text-center d-block">{{ __("Number")}}</label>
                                 <input type="text" name="numero_fiscal" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
                                     placeholder="Numero" value="{{ old('numero_fiscal', $info->numero_fiscal ?? '') }}" readonly />
                             </div>
                             <div class="col-lg-5">
-                                <label for="colonia_fiscal" class="form-label fw-bold fs-6 user-select-none text-center d-block">{{
-                                    __("Neighborhood")
-                                    }}</label>
+                                <label for="colonia_fiscal" class="form-label fw-bold fs-6 user-select-none text-center d-block">
+                                {{__("Neighborhood")}}
+                                </label>
                                 <input type="text" name="colonia_fiscal" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
                                     placeholder="Colonia" value="{{ old('colonia_fiscal', $info->colonia_fiscal ?? '') }}" readonly />
                             </div>
@@ -377,15 +429,6 @@
                 </div>
             </div>
             <!--end::Card body-->
-
-            <!--begin::Actions-->
-            {{-- <div class="card-footer d-flex justify-content-end py-6 px-9">
-                <button type="reset" class="btn btn-bg-dark btn-active-light-warning btn-active-color-white btn-color-gray-100 me-2">{{ __('Discard') }}</button>
-                <button type="submit" class="btn btn-bg-dark btn-active-light-primary btn-active-color-white btn-color-gray-100" id="kt_account_profile_details_submit">
-                    @include('partials.general._button-indicator', ['label' => __('Save Changes')])
-                </button>
-            </div> --}}
-            <!--end::Actions-->
         </form>
         <!--end::Form-->
     </div>

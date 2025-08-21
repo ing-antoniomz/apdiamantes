@@ -235,7 +235,7 @@ class UsersSeeder extends Seeder
     private function addDummyInfo(Generator $faker, User $user,$data=null)
     {
         $dummyInfo = [
-            'avatar' => !empty($data['avatar']) ? $data['avatar'] : 'demo3/media/avatars/300-11.jpg',
+            'avatar' => !empty($data['avatar']) ? $data['avatar'] : 'avatars/300-11.jpg',
             'phone' => !empty($data['phone']) ? $data['phone'] : $faker->phoneNumber,
             'tipo_persona' => !empty($data['tipo_persona']) ? $data['tipo_persona'] : 'FISICA',
             'company' => !empty($data['company']) ? $data['company'] : $faker->company,
@@ -281,7 +281,7 @@ class UsersSeeder extends Seeder
     private function data():array
     {
         $data['apdiamantes'] = [
-            'avatar' => 'demo3/media/avatars/300-10.jpg',
+            'avatar' => 'avatars/300-10.jpg',
             'phone' => '55 2884 4586',
             'tipo_persona' => 'MORAL',
             'company' => 'AP Diamantes',
@@ -316,7 +316,7 @@ class UsersSeeder extends Seeder
             'comprobante_domicilio' => 'apdiamantes_comprobante_domicilio.jpg',
         ];
         $data['distribuidor'] = [
-            'avatar' => 'demo3/media/avatars/300-7.jpg',
+            'avatar' => 'avatars/300-7.jpg',
             'phone' => '55 9054 2387',
             'tipo_persona' => 'FISICA',
             'company' => 'AP Distribuidor',
@@ -351,7 +351,7 @@ class UsersSeeder extends Seeder
             'comprobante_domicilio' => 'distribuidor_comprobante_domicilio.jpg',
         ];
         $data['supervisor'] = [
-            'avatar' => 'demo3/media/avatars/300-3.jpg',
+            'avatar' => 'avatars/300-3.jpg',
             'phone' => '55 1234 5678',
             'tipo_persona' => 'MORAL',
             'company' => 'Supervisor Co.',
@@ -386,7 +386,7 @@ class UsersSeeder extends Seeder
             'comprobante_domicilio' => 'supervisor_comprobante_domicilio.jpg',
         ];
         $data['gerente'] = [
-            'avatar' => 'demo3/media/avatars/300-29.jpg',
+            'avatar' => 'avatars/300-29.jpg',
             'phone' => '55 2345 6789',
             'tipo_persona' => 'MORAL',
             'company' => 'Gerente Co.',
@@ -421,7 +421,7 @@ class UsersSeeder extends Seeder
             'comprobante_domicilio' => 'gerente_comprobante_domicilio.jpg',
         ];
         $data['director'] = [
-            'avatar' => 'demo3/media/avatars/300-18.jpg',
+            'avatar' => 'avatars/300-18.jpg',
             'phone' => '55 3456 7890',
             'tipo_persona' => 'MORAL',
             'company' => 'Director Co.',
@@ -456,7 +456,7 @@ class UsersSeeder extends Seeder
             'comprobante_domicilio' => 'director_comprobante_domicilio.jpg',
         ];
         $data['oro'] = [
-            'avatar' => 'demo3/media/avatars/300-22.jpg',
+            'avatar' => 'avatars/300-22.jpg',
             'phone' => '55 4567 8901',
             'tipo_persona' => 'MORAL',
             'company' => 'Oro Co.',
@@ -491,7 +491,7 @@ class UsersSeeder extends Seeder
             'comprobante_domicilio' => 'oro_comprobante_domicilio.jpg',
         ];
         $data['platino'] = [
-            'avatar' => 'demo3/media/avatars/300-8.jpg',
+            'avatar' => 'avatars/300-8.jpg',
             'phone' => '55 5678 9012',
             'tipo_persona' => 'MORAL',
             'company' => 'Platino Co.',
@@ -526,7 +526,7 @@ class UsersSeeder extends Seeder
             'comprobante_domicilio' => 'platino_comprobante_domicilio.jpg',
         ];
         $data['diamante'] = [
-            'avatar' => 'demo3/media/avatars/300-7.jpg',
+            'avatar' => 'avatars/300-7.jpg',
             'phone' => '55 6789 0123',
             'tipo_persona' => 'MORAL',
             'company' => 'Diamante Co.',
@@ -561,7 +561,7 @@ class UsersSeeder extends Seeder
             'comprobante_domicilio' => 'diamante_comprobante_domicilio.jpg',
         ];
         $data['diamante_int'] = [
-            'avatar' => 'demo3/media/avatars/300-1.jpg',
+            'avatar' => 'avatars/300-1.jpg',
             'phone' => '55 7890 1234',
             'tipo_persona' => 'MORAL',
             'company' => 'Diamante Internacional Co.',
@@ -596,7 +596,7 @@ class UsersSeeder extends Seeder
             'comprobante_domicilio' => 'diamante_int_comprobante_domicilio.jpg',
         ];
         $data['distribuidor2'] = [
-            'avatar' => 'demo3/media/avatars/300-7.jpg',
+            'avatar' => 'avatars/300-7.jpg',
             'phone' => '55 9054 2387',
             'tipo_persona' => 'FISICA',
             'company' => 'AP Distribuidor',

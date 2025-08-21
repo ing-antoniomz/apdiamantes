@@ -20,7 +20,7 @@ Route::prefix('/admin')->middleware('auth')->name('admin.')->group(function () {
             ->middleware(['can:admin_users_create'])
             ->name('store');
 
-        Route::put('/{user}', [UsuariosController::class, 'update'])
+        Route::match(['put', 'patch'],'/{username}', [UsuariosController::class, 'update'])
             ->middleware(['can:admin_users_update'])
             ->name('update');
 
