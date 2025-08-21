@@ -10,7 +10,8 @@
             <invita-usuarios-component
                 :ruta="'{{ route("grupo.invitar.store") }}'"
                 :grupo='@json(auth()->user()->grupos)'
-                :url-descarga-aviso="'{{ route('descargar.aviso') }}'">
+                :url-descarga-aviso="'{{ route('descargar.aviso') }}'"
+                :avatarUrl="'{{ asset('demo3/media/avatars/blank.png') }}'">
             </invita-usuarios-component>
         </div>
         <!--end::Card body-->

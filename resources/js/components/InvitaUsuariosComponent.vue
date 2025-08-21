@@ -121,7 +121,7 @@
                         <input
                             type="text"
                             v-model="form.rfc"
-                            @input="form.rfc = form.rfc.toUpperCase()"
+                            @input="toUppercase($event)"
                             name="rfc"
                             class="form-control form-control-lg mb-3 mb-lg-0"
                             placeholder="XXXX943101XDFRXN01"
@@ -132,7 +132,7 @@
                         <input
                             type="text"
                             v-model="form.company"
-                            @input="form.company = form.company.toUpperCase()"
+                            @input="toUppercase($event)"
                             name="company"
                             class="form-control form-control-lg mb-3 mb-lg-0"
                             placeholder="Compañia"
@@ -228,9 +228,11 @@
 
                 <!--begin::Image input-->
                 <div class="pt-8">
-                    <div class="image-input image-input-outline image-input-empty" data-kt-image-input="true" style="background-image: url('https://apdiamantes-local.com/demo3/media/avatars/blank.png')">
+                    <div class="image-input image-input-outline"
+                        data-kt-image-input="true"
+                        :style="`background-image: url(${avatarUrl})`">
                         <!--begin::Preview existing avatar-->
-                        <div class="image-input-wrapper w-125px h-125px" style="background-image: none">
+                        <div class="image-input-wrapper w-125px h-125px" :style="`background-image: url(${avatarUrl})`">
                         </div>
                         <!--end::Preview existing avatar-->
 
@@ -253,12 +255,7 @@
                         </span>
                         <!--end::Cancel-->
 
-                        <!--begin::Remove-->
-                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                            data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
-                            <i class="bi bi-x fs-2"></i>
-                        </span>
-                        <!--end::Remove-->
+
                     </div>
                 </div>
                 <!--end::Image input-->
@@ -367,7 +364,7 @@
                 <input
                     type="text"
                     v-model="form.cosolicitante_rfc"
-                    @input="form.cosolicitante_rfc = form.cosolicitante_rfc.toUpperCase()"
+                    @input="toUppercase($event)"
                     name="cosolicitante_rfc"
                     class="form-control form-control-lg"
                     placeholder="XXXX943101XDFRXN01"
@@ -409,7 +406,7 @@
                 <input
                     type="text"
                     v-model="form.cuenta"
-                    @input="form.cuenta = form.cuenta.toUpperCase()"
+                    @input="toUppercase($event)"
                     name="cuenta"
                     class="form-control form-control-lg  mb-3 mb-lg-0"
                     placeholder="Cuenta"
@@ -656,7 +653,11 @@ export default {
         urlDescargaAviso: {
             type: String,
             required: true,
-        }
+        },
+        avatarUrl: {
+            type: String,
+            default: 'http://localhost:8000/demo3/media/avatars/blank.png', // URL por defecto
+        },
     },
     data() {
         return {
@@ -736,6 +737,23 @@ export default {
         }
     },
     methods: {
+        toUppercase(event) {
+            const el = event.target;
+            const start = el.selectionStart;
+            const end = el.selectionEnd;
+
+            // Convierte a mayúsculas sin perder cursor
+            el.value = el.value.toUpperCase();
+
+            // Actualiza el v-model correspondiente
+            const modelName = el.getAttribute('v-model') || el.name;
+            if (modelName && this.form.hasOwnProperty(modelName)) {
+            this.form[modelName] = el.value;
+            }
+
+            // Restaurar posición del cursor
+            el.setSelectionRange(start, end);
+        },
         initValidator() {
             const form = this.$refs.formRef;
             this.validator = FormValidation.formValidation(form, {
