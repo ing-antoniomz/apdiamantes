@@ -213,8 +213,7 @@ return array(
         'assets' => array(
             'custom' => array(
                 'js' => array(
-                    'js/custom/authentication/sign-in/general.js',
-                    '../apdiamantes/js/contacto/index.js',
+                    '../apdiamantes/js/auth/login/index.js',
                 ),
             ),
             'vendors' => array(
@@ -235,8 +234,11 @@ return array(
         'assets' => array(
             'custom' => array(
                 'js' => array(
-                    'js/custom/authentication/password-reset/password-reset.js',
+                    '../apdiamantes/js/auth/password-reset/password-reset.js',
                 ),
+            ),
+            'vendors' => array(
+                'leaflet',
             ),
         ),
         'layout' => array(
@@ -244,6 +246,29 @@ return array(
                 'type' => 'blank', // Set blank layout
                 'body' => array(
                     'class' => theme()->isDarkMode() ? '' : 'bg-body',
+                ),
+            ),
+        ),
+    ),
+    'reset-password' => array(
+        '*' => array(
+            'title'  => 'Reset Password',
+            'assets' => array(
+                'custom' => array(
+                    'js' => array(
+                        '../apdiamantes/js/auth/password-reset/new-password.js',
+                    ),
+                ),
+                'vendors' => array(
+                    'leaflet',
+                ),
+            ),
+            'layout' => array(
+                'main' => array(
+                    'type' => 'blank', // Set blank layout
+                    'body' => array(
+                        'class' => theme()->isDarkMode() ? '' : 'bg-body',
+                    ),
                 ),
             ),
         ),

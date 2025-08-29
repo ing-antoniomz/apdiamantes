@@ -69,12 +69,4 @@
         <div></div>
     </form>
     <!--end::Signup Form-->
-
-    <script src="{{ assetCustom('js/custom/authentication/sign-up/general.js') }}" defer></script>
-    <style>
-        input[name="password"].is-invalid,
-        input[name="password"].is-valid {
-            background-image: none !important;
-        }
-    </style>
 </x-auth-layout>
