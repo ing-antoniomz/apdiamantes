@@ -244,6 +244,7 @@
     "/demo3/js/custom/widgets.js": "/demo3/js/custom/widgets.js",
     "/js/apps/invita_usuarios.js": "/js/apps/invita_usuarios.js",
     "/js/apps/admin_usuarios.js": "/js/apps/admin_usuarios.js",
+    "/js/apps/admin_niveles.js": "/js/apps/admin_niveles.js",
     "/demo3/plugins/global/plugins.bundle.css": "/demo3/plugins/global/plugins.bundle.css",
     "/demo3/plugins/custom/datatables/datatables.bundle.css": "/demo3/plugins/custom/datatables/datatables.bundle.css",
     "/demo3/plugins/custom/leaflet/leaflet.bundle.css": "/demo3/plugins/custom/leaflet/leaflet.bundle.css",
@@ -257,6 +258,7 @@
     "/demo3/plugins/custom/cropper/cropper.bundle.css": "/demo3/plugins/custom/cropper/cropper.bundle.css",
     "/demo3/css/style.bundle.css": "/demo3/css/style.bundle.css",
     "/demo3/plugins/global/plugins-custom.bundle.css": "/demo3/plugins/global/plugins-custom.bundle.css",
+    "/apdiamantes/js/admin/niveles.js": "/apdiamantes/js/admin/niveles.js",
     "/apdiamantes/js/admin/users.js": "/apdiamantes/js/admin/users.js",
     "/apdiamantes/js/contacto/index.js": "/apdiamantes/js/contacto/index.js",
     "/apdiamantes/media/apdiamantes-dark.svg": "/apdiamantes/media/apdiamantes-dark.svg",
@@ -265,6 +267,7 @@
     "/apdiamantes/media/fondo_1.jpg": "/apdiamantes/media/fondo_1.jpg",
     "/apdiamantes/media/logo.jpeg": "/apdiamantes/media/logo.jpeg",
     "/apdiamantes/media/logo.jpg": "/apdiamantes/media/logo.jpg",
+    "/apdiamantes/media/logo_blanco.svg": "/apdiamantes/media/logo_blanco.svg",
     "/apdiamantes/media/logo_blanco_2.png": "/apdiamantes/media/logo_blanco_2.png",
     "/apdiamantes/media/logo_negro.ico": "/apdiamantes/media/logo_negro.ico",
     "/apdiamantes/media/logo_negro.png": "/apdiamantes/media/logo_negro.png",
@@ -2298,6 +2301,5 @@
     "/demo3/plugins/custom/flatpickr/flatpickr.bundle.js": "/demo3/plugins/custom/flatpickr/flatpickr.bundle.js",
     "/demo3/plugins/custom/formrepeater/formrepeater.bundle.js": "/demo3/plugins/custom/formrepeater/formrepeater.bundle.js",
     "/demo3/plugins/custom/fullcalendar/fullcalendar.bundle.js": "/demo3/plugins/custom/fullcalendar/fullcalendar.bundle.js",
-    "/demo3/js/widgets.bundle.js": "/demo3/js/widgets.bundle.js",
-    "/apdiamantes/media/logo_blanco.svg": "/apdiamantes/media/logo_blanco.svg"
+    "/demo3/js/widgets.bundle.js": "/demo3/js/widgets.bundle.js"
 }

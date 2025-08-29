@@ -77,6 +77,7 @@ return array(
                         'plugins/custom/datatables/datatables.bundle.css',
                     ),
                     'js'  => array(
+                        '../apdiamantes/js/admin/niveles.js',
                         'plugins/custom/datatables/datatables.bundle.js',
                     ),
                 ),

@@ -35,7 +35,7 @@ class CreatePermissionTables extends Migration
             $table->string('name');
             $table->text('descripcion');
             $table->integer('volumen');
-            $table->text('imagen');
+            $table->text('imagen')->nullable();
             $table->boolean('status')->default(true);
             $table->string('guard_name')->default('web');
             $table->timestamps();

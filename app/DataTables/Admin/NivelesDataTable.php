@@ -3,6 +3,7 @@ namespace App\DataTables\Admin;
 
 use Yajra\DataTables\Html\Column;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Services\DataTable;
 
 class NivelesDataTable extends DataTable
@@ -29,24 +30,24 @@ class NivelesDataTable extends DataTable
             })
             ->editColumn('imagen', function (Role $model) {
                 if ($model->imagen) {
-                    $url = asset('demo3/media/svg/shapes/' . $model->imagen);
+                    $url = asset(Storage::url($model->imagen));
                     return '<img src="' . $url . '" alt="Logo" class="h-40px" style="object-fit:contain;max-width:60px;">';
                 }
                 return '-';
             })
             ->editColumn('status', function (Role $model) {
                 // HTML para la vista
-                   $html = $model->status
-                   ? '<span class="badge badge-light-success">'.__('Active').'</span>'
-                   : '<span class="badge badge-light-danger">'.__('Inactive').'</span>';
+                    $html = $model->status
+                    ? '<span class="badge badge-light-success">'.__('Active').'</span>'
+                    : '<span class="badge badge-light-danger">'.__('Inactive').'</span>';
 
                // Exportar como texto limpio (sin HTML)
-               if (request()->has('action') && request('action') === 'export') {
-                   return $model->status ? __('Active') : __('Inactive');
-               }
+                if (request()->has('action') && request('action') === 'export') {
+                    return $model->status ? __('Active') : __('Inactive');
+                }
 
-               return $html;
-           })
+                return $html;
+            })
             ->addColumn('action', function ($grupo) {
                 return view('pages.admin.nivel._action-menu', compact('grupo'));
             });
@@ -60,7 +61,10 @@ class NivelesDataTable extends DataTable
      */
     public function query(Role $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()
+            ->select(
+                columns: ['roles.id','roles.name', 'roles.descripcion', 'roles.volumen', 'roles.imagen', 'roles.status'] // puedes cambiar 'name' por tu campo real
+            );
     }
 
     /**
@@ -75,7 +79,7 @@ class NivelesDataTable extends DataTable
                 'extend' => 'excel',
                 'text' => '<i class="fas fa-file-excel fs-1 text-success"></i>',
                 'className' => 'btn-light btn-active-light-success text-white',
-                'filename' => 'Niveles_' . date('Ymd_His'),
+                'filename' => 'APDiamantes_Niveles_' . date('Ymd_His'),
                 'exportOptions' => [
                     'columns' => ':not(:last-child)'
                 ]
@@ -83,20 +87,20 @@ class NivelesDataTable extends DataTable
         ];
         if (auth()->user()->can('admin_niveles_create')) {
             $buttons[] = [
-                'text' => '<i class="fas fa-plus fs-1"></i> ' . __('Add Level'),
+                'text' => '<i class="fas fa-plus fs-1 text-success"></i> ' . __('Add Level'),
                 'className' => 'btn-light btn-active-light-success text-white',
                 'attr' => [
-                    'id' => 'add-grupo-btn',
-                    'name' => 'add-grupo-btn'
+                    'id' => 'add-nivel-btn',
+                    'name' => 'add-nivel-btn'
                 ]
             ];
         }
         return $this->builder()
-            ->setTableId('niveles-table')
+            ->setTableId('admin-niveles-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->stateSave(true)
-            ->orderBy(0)
+            ->orderBy(1)
             ->responsive()
             ->autoWidth(false)
             ->parameters([

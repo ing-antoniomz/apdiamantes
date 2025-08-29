@@ -37,7 +37,7 @@ class UsuariosController extends Controller
         }
 
         // Retornamos un error si no se pudo crear el usuario
-        return response()->json(['error' => 'No se pudo crear el usuario.'], 500);
+        return response()->json(['message' => 'No se pudo crear el usuario.'], 500);
     }
 
     /**
@@ -53,7 +53,7 @@ class UsuariosController extends Controller
         }
 
         // Retornamos un error si no se pudo crear el usuario
-        return response()->json(['error' => 'No se pudo editar el usuario.'], 500);
+        return response()->json(['message' => 'No se pudo editar el usuario.'], 500);
 
     }
 
@@ -61,7 +61,7 @@ class UsuariosController extends Controller
      * Envia Correo de activacion de usuario
      * @param  string  $username
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function activate(string $username)
     {

@@ -8,22 +8,17 @@ use App\Http\Controllers\Logs\AuditLogsController;
 use App\Http\Controllers\Logs\SystemLogsController;
 
 Route::prefix('/admin')->middleware('auth')->name('admin.')->group(function () {
-
     // administracion de usuarios
     Route::prefix('/users')->name('users.')->group(function () {
-
         Route::get('/', [UsuariosController::class, 'index'])
             ->middleware(['can:admin_users_list'])
             ->name('index');
-
         Route::post('/', [UsuariosController::class, 'store'])
             ->middleware(['can:admin_users_create'])
             ->name('store');
-
         Route::match(['put', 'patch'],'/{username}', [UsuariosController::class, 'update'])
             ->middleware(['can:admin_users_update'])
             ->name('update');
-
         Route::post('/{username}/activate', [UsuariosController::class, 'activate'])
             ->middleware(['can:admin_users_activate'])
             ->name('activate');
@@ -37,16 +32,25 @@ Route::prefix('/admin')->middleware('auth')->name('admin.')->group(function () {
     });
     // administracion de niveles
     Route::prefix('/niveles')->name('niveles.')->group(function () {
-
         Route::get('/', [NivelesController::class, 'index'])
             ->middleware(['can:admin_niveles_list'])
             ->name('index');
+        Route::post('/', [NivelesController::class, 'store'])
+            ->middleware(['can:admin_niveles_create'])
+            ->name('store');
+        Route::match(['put', 'patch'],'/{id}', [NivelesController::class, 'update'])
+            ->middleware(['can:admin_niveles_update'])
+            ->name('update');
     });
 
     // Logs pages
     Route::prefix('/log')->name('log.')->group(function () {
-        Route::get('sistema', [SystemLogsController::class,'index'])->middleware(['can:admin_logs_system_list'])->name('sistema.index');
-        Route::get('auditoria', [AuditLogsController::class,'index'])->middleware(['can:admin_logs_audit_list'])->name('auditoria.index');
+        Route::get('sistema', [SystemLogsController::class,'index'])
+            ->middleware(['can:admin_logs_system_list'])
+            ->name('sistema.index');
+        Route::get('auditoria', [AuditLogsController::class,'index'])
+            ->middleware(['can:admin_logs_audit_list'])
+            ->name('auditoria.index');
     });
 });
 

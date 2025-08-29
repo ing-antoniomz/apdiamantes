@@ -176,6 +176,7 @@ mix.scripts((glob.sync(`resources/assets/core/js/widgets/**/*.js`) || []), `publ
 //Vuejs 3
 mix.js('resources/js/apps/invita_usuarios.js', 'public/js/apps').vue();
 mix.js('resources/js/apps/admin_usuarios.js', 'public/js/apps').vue();
+mix.js('resources/js/apps/admin_niveles.js', 'public/js/apps').vue();
 
 
 function getDemos(pathDemos) {
@@ -188,7 +189,7 @@ function getDemos(pathDemos) {
         }
     });
     if (demos.length === 0) {
-        demos = ['demo1'];
+        demos = ['demo3'];
     }
     return demos;
 }
