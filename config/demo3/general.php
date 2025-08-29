@@ -4,9 +4,9 @@ return array(
     'assets' => array(
         'favicon' => '../apdiamantes/media/logo_negro.ico',
         'fonts'   => array(
-            'google' => array(
+            /* 'google' => array(
                 'Inter:300,400,500,600,700',
-            ),
+            ), */
         ),
         'css'     => array(
             'plugins/global/plugins.bundle.css',
@@ -16,7 +16,7 @@ return array(
         'js'      => array(
             'plugins/global/plugins.bundle.js',
             'js/scripts.bundle.js',
-            'js/custom/widgets.js',
+            /* 'js/custom/widgets.js', */
         ),
     ),
 

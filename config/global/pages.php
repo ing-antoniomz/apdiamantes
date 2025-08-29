@@ -148,10 +148,10 @@ return array(
                     'breadcrumb'  => false,
                 ),
             ),
-            'view'   => 'group/invite/index',
             'assets' => array(
                 'custom' => array(
                     'js' => array(
+                        '../apdiamantes/js/grupo/invita/index.js',
                     ),
                 ),
             ),

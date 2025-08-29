@@ -18,9 +18,6 @@ const fs = require('fs');
  |
  */
 
- //imagenes apdiamantes
- mix.copyDirectory('resources/assets/apdiamantes', 'public/apdiamantes');
-
 // arguments/params from the line command
 const args = getParameters();
 
@@ -173,12 +170,6 @@ mix.webpackConfig({
 
 mix.scripts((glob.sync(`resources/assets/core/js/widgets/**/*.js`) || []), `public/${demo}/js/widgets.bundle.js`);
 
-//Vuejs 3
-mix.js('resources/js/apps/invita_usuarios.js', 'public/js/apps').vue();
-mix.js('resources/js/apps/admin_usuarios.js', 'public/js/apps').vue();
-mix.js('resources/js/apps/admin_niveles.js', 'public/js/apps').vue();
-
-
 function getDemos(pathDemos) {
     // get possible demo from parameter command
     let demos = [];
@@ -211,3 +202,19 @@ function getParameters() {
 
     return args;
 }
+
+//media apdiamantes
+mix.copyDirectory('resources/assets/apdiamantes/media', 'public/apdiamantes/media');
+
+// JS personalizados
+const apdiamantesJsFiles = glob.sync('resources/assets/apdiamantes/js/scripts/**/*.js');
+
+apdiamantesJsFiles.forEach(file => {
+    const outFile = file.replace('resources/assets/apdiamantes/js/scripts', `public/apdiamantes/js`);
+    mix.js(file, outFile);
+});
+
+//Vuejs 3
+mix.js('resources/assets/apdiamantes/js/apps/grupo/invitar/index.js', 'public/apdiamantes/js/grupo/invita/').vue();
+mix.js('resources/js/apps/admin_usuarios.js', 'public/js/apps').vue();
+mix.js('resources/js/apps/admin_niveles.js', 'public/js/apps').vue();

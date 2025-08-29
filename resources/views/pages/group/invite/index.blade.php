@@ -1,7 +1,3 @@
-@section('scripts')
-    <script src="{{ mix('js/apps/invita_usuarios.js') }}"></script>
-@endsection
-
 <x-base-layout>
     <!--begin::Card-->
     <div class="card" id="invita-usuarios-app">
